@@ -1,12 +1,9 @@
 package net.maui.kidsboard;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class IconTextAdapter extends ArrayAdapter<String> {
 
@@ -32,7 +29,7 @@ public class IconTextAdapter extends ArrayAdapter<String> {
 		// TODO Auto-generated method stub
 		// return super.getView(position, convertView, parent);
 
-		LayoutInflater inflater = LayoutInflater.from(getContext());
+		//LayoutInflater inflater = LayoutInflater.from(getContext());
 		/*
 		View row = inflater.inflate(R.layout.row, parent, false);
 		TextView label = (TextView) row.findViewById(R.id.weekofday);
