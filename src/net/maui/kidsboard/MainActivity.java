@@ -1,12 +1,22 @@
 package net.maui.kidsboard;
 
+import net.maui.kidsboard.model.PaintModel;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+	//private static final String TAG = "net.maui.kidsboard";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,4 +32,50 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void openColorPicker(View v){
+		
+		final Dialog d = new Dialog(this);
+		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		d.setContentView(R.layout.color_pick);
+		Button b = (Button)d.findViewById(R.id.btnColorBlack);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorBlue);
+		setColorButtonClickListener(b,d);
+		b = (Button) d.findViewById(R.id.btnColorGreen);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorRed);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorDarkBlue);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorMagenta);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorOrange);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorYellow);
+		setColorButtonClickListener(b,d);
+		d.show();
+	}
+	private void setColorButtonClickListener(Button b, final Dialog d){
+		b.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				colorSelected(v);
+				d.dismiss();
+			}
+		});
+	}
+	
+	public void colorSelected(View v){
+		Drawable bgDrawable = v.getBackground();
+		if(bgDrawable instanceof ColorDrawable){
+			ColorDrawable btColor = (ColorDrawable) bgDrawable;
+			int color = btColor.getColor();
+//			String hexColor = String.format("#%06X", (0xFFFFFF & color));
+//			Log.i(this.getClass().getSimpleName(), "Selected color:"+hexColor);
+			PaintModel.getInstance().setColor(color);
+		}else{
+			Log.i(this.getClass().getSimpleName(), "Not a ColorDrawable instance");
+		}
+			
+	}
 }
