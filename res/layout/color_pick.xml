@@ -2,10 +2,10 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:orientation="horizontal"
+    android:layout_gravity="top|left"
     android:columnCount="2"
-    android:rowCount="4" >
+    android:orientation="horizontal"
+    android:rowCount="5" >
 
     <Button
         android:id="@+id/btnColorBlack"
@@ -30,6 +30,14 @@
     <Button
         android:id="@+id/btnColorMagenta"
         android:background="@color/magenta" />
+
+    <Button
+        android:id="@+id/btnColorWhite"
+        android:background="@color/white" />
+
+    <Button
+        android:id="@+id/btnColorCyan"
+        android:background="@color/cyan" />
 
     <Button
         android:id="@+id/btnColorOrange"

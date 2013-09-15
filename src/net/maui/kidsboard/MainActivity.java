@@ -12,7 +12,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends Activity {
 
@@ -23,6 +25,16 @@ public class MainActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.activity_main);
+		ImageButton button = (ImageButton)findViewById(R.id.btnColorPicker);
+        button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				openColorPicker(v);
+				
+			}
+		});
+
 	}
 
 	@Override
@@ -34,8 +46,9 @@ public class MainActivity extends Activity {
 
 	public void openColorPicker(View v){
 		
-		final Dialog d = new Dialog(this);
-		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		final Dialog d = new Dialog(this,R.style.ColorDialog);
+//		final Dialog d = new Dialog(this);
+//		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		d.setContentView(R.layout.color_pick);
 		Button b = (Button)d.findViewById(R.id.btnColorBlack);
 		setColorButtonClickListener(b,d);
@@ -52,6 +65,10 @@ public class MainActivity extends Activity {
 		b = (Button)d.findViewById(R.id.btnColorOrange);
 		setColorButtonClickListener(b,d);
 		b = (Button)d.findViewById(R.id.btnColorYellow);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorWhite);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorCyan);
 		setColorButtonClickListener(b,d);
 		d.show();
 	}

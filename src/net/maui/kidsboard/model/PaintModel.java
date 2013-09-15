@@ -16,7 +16,7 @@ public class PaintModel {
 	private Paint getDefaultPaint(){
 		Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
 		p.setStyle(Paint.Style.STROKE);
-		p.setStrokeWidth(3);
+		p.setStrokeWidth(5);
 		p.setColor(Color.BLACK);
 		return p;
 	}

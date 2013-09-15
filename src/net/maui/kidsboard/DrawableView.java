@@ -4,6 +4,7 @@ import net.maui.kidsboard.model.PaintModel;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -23,6 +24,7 @@ public class DrawableView extends View {
 
 	public DrawableView(Context context, AttributeSet attr) {
 		super(context, attr);
+		setBackgroundColor(Color.WHITE);
 	}
 
 	@Override
