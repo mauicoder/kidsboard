@@ -46,5 +46,13 @@
     <Button
         android:id="@+id/btnColorYellow"
         android:background="@color/yellow" />
+    
+    <Button
+        android:id="@+id/btnColorBrown"
+        android:background="@color/brown_bear" />
+    
+    <Button
+        android:id="@+id/btnColorCoffee"
+        android:background="@color/coffee" />
 
 </GridLayout>

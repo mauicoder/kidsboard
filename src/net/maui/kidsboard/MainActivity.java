@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.activity_main);
 		ImageButton button = (ImageButton)findViewById(R.id.btnColorPicker);
-		button.setBackgroundColor(PaintModel.getInstance().getPaint().getColor());//set default backgroud color
+		button.setBackgroundColor(PaintModel.getInstance().getPaint().getColor());//set default background color
         button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -66,6 +66,10 @@ public class MainActivity extends Activity {
 		b = (Button)d.findViewById(R.id.btnColorWhite);
 		setColorButtonClickListener(b,d);
 		b = (Button)d.findViewById(R.id.btnColorCyan);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorBrown);
+		setColorButtonClickListener(b,d);
+		b = (Button)d.findViewById(R.id.btnColorCoffee);
 		setColorButtonClickListener(b,d);
 		d.show();
 	}
