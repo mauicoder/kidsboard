@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -26,6 +24,7 @@ public class MainActivity extends Activity {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.activity_main);
 		ImageButton button = (ImageButton)findViewById(R.id.btnColorPicker);
+		button.setBackgroundColor(PaintModel.getInstance().getPaint().getColor());//set default backgroud color
         button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -47,8 +46,6 @@ public class MainActivity extends Activity {
 	public void openColorPicker(View v){
 		
 		final Dialog d = new Dialog(this,R.style.ColorDialog);
-//		final Dialog d = new Dialog(this);
-//		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		d.setContentView(R.layout.color_pick);
 		Button b = (Button)d.findViewById(R.id.btnColorBlack);
 		setColorButtonClickListener(b,d);
@@ -87,9 +84,9 @@ public class MainActivity extends Activity {
 		if(bgDrawable instanceof ColorDrawable){
 			ColorDrawable btColor = (ColorDrawable) bgDrawable;
 			int color = btColor.getColor();
-//			String hexColor = String.format("#%06X", (0xFFFFFF & color));
-//			Log.i(this.getClass().getSimpleName(), "Selected color:"+hexColor);
 			PaintModel.getInstance().setColor(color);
+			ImageButton button = (ImageButton)findViewById(R.id.btnColorPicker);
+			button.setBackgroundColor(color);
 		}else{
 			Log.i(this.getClass().getSimpleName(), "Not a ColorDrawable instance");
 		}
