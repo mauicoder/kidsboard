@@ -2,12 +2,12 @@
 <resources>
 
     <color name="white">#fff</color>
-    <color name="cyan">#00FFFF</color>
+    <color name="cyan">#0FF</color>
     <color name="black">#000</color>
     <color name="blue">#00f</color>
     <color name="red">#f00</color>
     <color name="green">#0F0</color>
-    <color name="orange">#FFA500</color>
+    <color name="orange">#F60</color>
     <color name="yellow">#FF0</color>
     <color name="magenta">#F0F</color>
     <color name="dark_blue">#0000A0</color>
