@@ -3,11 +3,16 @@ bin
 gen
 
 # Gradle files
-.gradle/
+.gradle
+/build
 build/
 
 # Intellij
 *.iml
-.idea/workspace.xml
-.idea/libraries
+/.idea/workspace.xml
+/.idea/misc.xml
+/.idea/libraries
 
+/local.properties
+.DS_Store
+/captures
