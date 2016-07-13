@@ -1,3 +1,13 @@
 bin
 /gen
 gen
+
+# Gradle files
+.gradle/
+build/
+
+# Intellij
+*.iml
+.idea/workspace.xml
+.idea/libraries
+
