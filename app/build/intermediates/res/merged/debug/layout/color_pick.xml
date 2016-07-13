@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top|left"
+    android:columnCount="2"
+    android:orientation="horizontal"
+    android:rowCount="5" >
+
+    <Button
+        android:id="@+id/btnColorBlack"
+        android:background="@color/black" />
+
+    <Button
+        android:id="@+id/btnColorBlue"
+        android:background="@color/blue" />
+
+    <Button
+        android:id="@+id/btnColorRed"
+        android:background="@color/red" />
+
+    <Button
+        android:id="@+id/btnColorGreen"
+        android:background="@color/green" />
+
+    <Button
+        android:id="@+id/btnColorDarkBlue"
+        android:background="@color/dark_blue" />
+
+    <Button
+        android:id="@+id/btnColorMagenta"
+        android:background="@color/magenta" />
+
+    <Button
+        android:id="@+id/btnColorWhite"
+        android:background="@color/white" />
+
+    <Button
+        android:id="@+id/btnColorCyan"
+        android:background="@color/cyan" />
+
+    <Button
+        android:id="@+id/btnColorOrange"
+        android:background="@color/orange" />
+
+    <Button
+        android:id="@+id/btnColorYellow"
+        android:background="@color/yellow" />
+    
+    <Button
+        android:id="@+id/btnColorBrown"
+        android:background="@color/brown_bear" />
+    
+    <Button
+        android:id="@+id/btnColorCoffee"
+        android:background="@color/coffee" />
+
+</GridLayout>

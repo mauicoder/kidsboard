@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\lobosco\\AndroidStudioProjects\\kidsboard\\app\\build\\intermediates\\res\\merged\\debug\\anim\\outgoing.xml",
+        "source": "C:\\Users\\lobosco\\AndroidStudioProjects\\kidsboard\\app\\src\\main\\res\\anim\\outgoing.xml"
+    },
+    {
+        "merged": "C:\\Users\\lobosco\\AndroidStudioProjects\\kidsboard\\app\\build\\intermediates\\res\\merged\\debug\\anim\\incoming.xml",
+        "source": "C:\\Users\\lobosco\\AndroidStudioProjects\\kidsboard\\app\\src\\main\\res\\anim\\incoming.xml"
+    }
+]

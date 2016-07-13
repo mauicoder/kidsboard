@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ash_gray">#666362</color>
+    <color name="black">#000</color>
+    <color name="blue">#00f</color>
+    <color name="brown_bear">#835C3B</color>
+    <color name="coffee">#6F4E37</color>
+    <color name="cyan">#0FF</color>
+    <color name="dark_blue">#0000A0</color>
+    <color name="green">#0F0</color>
+    <color name="magenta">#F0F</color>
+    <color name="orange">#F60</color>
+    <color name="red">#f00</color>
+    <color name="white">#fff</color>
+    <color name="yellow">#FF0</color>
+    <dimen name="activity_horizontal_margin">5dp</dimen>
+    <dimen name="activity_vertical_margin">5dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">KidsBoard</string>
+    <string name="color_btn_label">color</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="ColorDialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowAnimationStyle">@style/ColorDialogAnimation</item>
+        <item name="android:windowNoTitle">true</item>
+<!--         <item name="android:background">@android:color/transparent</item> -->
+<!--         <item name="android:windowFullscreen">false</item> -->
+    </style>
+    <style name="ColorDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/incoming</item>
+        <item name="android:windowExitAnimation">@anim/outgoing</item>
+    </style>
+</resources>
