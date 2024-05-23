@@ -9,9 +9,7 @@ build/
 
 # Intellij
 *.iml
-/.idea/workspace.xml
-/.idea/misc.xml
-/.idea/libraries
+/.idea/
 
 /local.properties
 .DS_Store
