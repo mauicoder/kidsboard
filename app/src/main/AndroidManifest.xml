@@ -10,7 +10,6 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="net.maui.kidsboard.MainActivity"
-            android:theme="@android:style/Theme.Holo.Light"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

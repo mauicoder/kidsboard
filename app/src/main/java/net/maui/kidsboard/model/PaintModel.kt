@@ -1,71 +1,49 @@
-package net.maui.kidsboard.model;
+package net.maui.kidsboard.model
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.Color
+import android.graphics.Paint
 
-public class PaintModel {
+class PaintModel internal constructor(
+    private val paintFactory: () -> Paint = { Paint(Paint.ANTI_ALIAS_FLAG) }
+) {
+    var color: Int = Color.BLACK
+        private set
 
-	private static PaintModel instance = new PaintModel();
-	
-	private volatile Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	
-	private float mPhase = 3;
-	
-	public static PaintModel getInstance(){
-		return instance;
-	}
-	
-	private Paint getDefaultPaint(){
-		Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-		p.setStyle(Paint.Style.STROKE);
-		//p.setPathEffect(new PathDashPathEffect(makePathDash(), 12, mPhase, PathDashPathEffect.Style.MORPH));
-		//p.setPathEffect(new CornerPathEffect(10));
-		//p.setPathEffect(new DashPathEffect(new float[] {10,10}, 0)); 
-		p.setStrokeWidth(5);
-		p.setColor(Color.BLACK);
-		return p;
-	}
-	
-	private static Path makePathDash() {
-        Path p = new Path();
-        p.moveTo(-6, 4);
-        p.lineTo(6,4);
-        p.lineTo(6,3);
-        p.lineTo(-6, 3);
-        p.close();
-        p.moveTo(-6, -4);
-        p.lineTo(6,-4);
-        p.lineTo(6,-3);
-        p.lineTo(-6, -3);
-        return p;
+    var strokeWidth: Float = DEFAULT_STROKE_WIDTH
+        private set
+
+    private var _paint: Paint? = null
+    val paint: Paint
+        get() {
+            val p = _paint ?: paintFactory().also { _paint = it }
+            p.style = Paint.Style.STROKE
+            p.strokeWidth = strokeWidth
+            p.color = color
+            return p
+        }
+
+    companion object {
+        const val DEFAULT_STROKE_WIDTH = 5f
+        const val ERASER_STROKE_WIDTH = 15f
+
+        @JvmStatic
+        val instance: PaintModel by lazy { PaintModel() }
+
+        fun createForTesting(paintFactory: () -> Paint): PaintModel = PaintModel(paintFactory)
     }
-	
-	public Paint setDefaultPaint(){
-		setPaint(getDefaultPaint());
-		return getPaint();
-	}
-	
-	private PaintModel(){
-		setPaint(getDefaultPaint());
-	}
 
-	public Paint getPaint() {
-		return paint;
-	}
+    fun setDefaultPaint(): Paint {
+        color = Color.BLACK
+        strokeWidth = DEFAULT_STROKE_WIDTH
+        return paint
+    }
 
-	public void setPaint(Paint paint) {
-		this.paint = paint;
-	}
-	
-	public void setColor(int color){
-		paint.setColor(color);
-		setStrokeWidth(color);
-	}
-	private void setStrokeWidth(int color){
-		if (color == Color.WHITE) {
-			paint.setStrokeWidth(15);
-		} else
-			paint.setStrokeWidth(5);
-	}
+    fun setColor(newColor: Int) {
+        color = newColor
+        strokeWidth = if (newColor == Color.WHITE) ERASER_STROKE_WIDTH else DEFAULT_STROKE_WIDTH
+        _paint?.let {
+            it.color = newColor
+            it.strokeWidth = strokeWidth
+        }
+    }
 }

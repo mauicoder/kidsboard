@@ -1,87 +1,87 @@
-package net.maui.kidsboard;
+package net.maui.kidsboard
 
-import net.maui.kidsboard.model.PaintModel;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Rect
+import android.util.AttributeSet
+import android.view.MotionEvent
+import android.view.View
+import net.maui.kidsboard.model.PaintModel
 
-public class DrawableView extends View {
-	private static final String TAG = "DrawableView";
-	private float oldX, oldY, curX, curY = -1;
-	private boolean draw = false;
-	private PaintModel pm = PaintModel.getInstance();
-	
-	private Bitmap bm;
-	private Canvas c;
-	private Rect rect;
+class DrawableView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
-	public DrawableView(Context context, AttributeSet attr) {
-		super(context, attr);
-		setBackgroundColor(Color.WHITE);
-	}
+    private var oldX: Float = 0f
+    private var oldY: Float = 0f
+    private var curX: Float = -1f
+    private var curY: Float = -1f
+    private var draw: Boolean = false
+    private val pm: PaintModel = PaintModel.instance
 
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        if (bm != null) {
-            bm.recycle();
-        }
-        c= new Canvas();
-        bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        c.setBitmap(bm);
-        rect = new Rect(0,0,bm.getWidth(),bm.getHeight());
-        c.drawRect(rect, pm.getPaint());
+    private var bitmap: Bitmap? = null
+    private var bufferCanvas: Canvas? = null
+    private var boundsRect: Rect = Rect()
+
+    init {
+        setBackgroundColor(Color.WHITE)
     }
-	
-	@Override
-	protected void onDraw(Canvas canvas) {
-		if (draw) {
-			// Do the draw
-			Paint p = pm.getPaint();
-			c.drawLine(oldX, oldY, curX, curY, p);
-			// Store Position
-			storePosition();
-		}
-		canvas.drawBitmap(bm, rect, rect, null);
-	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		super.onTouchEvent(event);
-		curX = event.getX();
-		curY = event.getY();
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        if (w > 0 && h > 0) {
+            bitmap?.recycle()
+            val newBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(newBitmap)
+            val rect = Rect(0, 0, w, h)
+            canvas.drawRect(rect, pm.paint)
 
-		int action = event.getAction();
-		switch (action) {
-		case MotionEvent.ACTION_UP:
-//			Log.i(TAG, "ACTION_UP");
-			draw = false;
-			break;
-		case MotionEvent.ACTION_DOWN:
-			storePosition();
-			draw = false;
-//			Log.i(TAG, "ACTION_DOWN");
-			break;
-		case MotionEvent.ACTION_MOVE:
-//			Log.i(TAG, "ACTION_MOVE");
-			// Draw
-			draw = true;
-			break;
-		default:
-			Log.i(TAG, "Default:" + action);
-		}
-		invalidate();//invalidate to make onDraw be called
-		return true;
-	}
-	
-	private void storePosition() {
-		oldX = curX;
-		oldY = curY;
-	}
+            bitmap = newBitmap
+            bufferCanvas = canvas
+            boundsRect = rect
+        }
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        val bCanvas = bufferCanvas
+        val bmp = bitmap
+        if (draw && bCanvas != null) {
+            bCanvas.drawLine(oldX, oldY, curX, curY, pm.paint)
+            storePosition()
+        }
+        if (bmp != null) {
+            canvas.drawBitmap(bmp, boundsRect, boundsRect, null)
+        }
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        super.onTouchEvent(event)
+        curX = event.x
+        curY = event.y
+
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                storePosition()
+                draw = false
+            }
+            MotionEvent.ACTION_MOVE -> {
+                draw = true
+            }
+            MotionEvent.ACTION_UP -> {
+                draw = false
+            }
+        }
+        invalidate()
+        return true
+    }
+
+    private fun storePosition() {
+        oldX = curX
+        oldY = curY
+    }
 }
