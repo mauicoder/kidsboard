@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -341,5 +342,86 @@ class DrawingViewModelTest {
         viewModel.confirmClearCanvas()
         assertTrue(viewModel.uiState.value.activeStrokes.isEmpty())
         assertTrue(viewModel.uiState.value.elements.isEmpty())
+    }
+
+    @Test
+    fun testCanvasRotationScalesStrokesAndStampsPreservingAspectFit() {
+        // Initial Portrait size: 1000 x 2000
+        viewModel.updateCanvasSize(IntSize(1000, 2000))
+
+        // Draw a stroke centered at (500, 1000) with strokeWidth = 20f
+        viewModel.selectBrushSize(BrushSize(label = "Test", strokeWidth = 20f, previewSizeDp = 10.dp, stampSize = 100f))
+        viewModel.startStroke(Offset(500f, 1000f))
+        viewModel.finishStroke()
+
+        // Add a stamp centered at (500, 1000) with stampSize = 100f
+        viewModel.selectStamp("⭐")
+        viewModel.addStamp(Offset(500f, 1000f))
+
+        assertEquals(2, viewModel.uiState.value.elements.size)
+
+        // Rotate to Landscape: 2000 x 1000
+        // scaleX = 2000/1000 = 2.0, scaleY = 1000/2000 = 0.5 -> scale = 0.5
+        // offsetX = (2000 - 1000 * 0.5) / 2 = 750f
+        // offsetY = (1000 - 2000 * 0.5) / 2 = 0f
+        viewModel.updateCanvasSize(IntSize(2000, 1000))
+
+        val state = viewModel.uiState.value
+        assertEquals(IntSize(2000, 1000), state.canvasSize)
+
+        val stroke = state.elements[0] as DrawingStroke
+        val stamp = state.elements[1] as DrawingStamp
+
+        // New coordinates: x = 500 * 0.5 + 750 = 1000f, y = 1000 * 0.5 + 0 = 500f (exact center of 2000x1000!)
+        assertEquals(1000f, stroke.points[0].x, 0.01f)
+        assertEquals(500f, stroke.points[0].y, 0.01f)
+        assertEquals(10f, stroke.strokeWidth, 0.01f)
+
+        assertEquals(1000f, stamp.position.x, 0.01f)
+        assertEquals(500f, stamp.position.y, 0.01f)
+        assertEquals(50f, stamp.size, 0.01f)
+
+        // Rotate back to Portrait: 1000 x 2000
+        viewModel.updateCanvasSize(IntSize(1000, 2000))
+        val returnedState = viewModel.uiState.value
+        val returnedStroke = returnedState.elements[0] as DrawingStroke
+        val returnedStamp = returnedState.elements[1] as DrawingStamp
+
+        assertEquals(500f, returnedStroke.points[0].x, 0.01f)
+        assertEquals(1000f, returnedStroke.points[0].y, 0.01f)
+        assertEquals(20f, returnedStroke.strokeWidth, 0.01f)
+
+        assertEquals(500f, returnedStamp.position.x, 0.01f)
+        assertEquals(1000f, returnedStamp.position.y, 0.01f)
+        assertEquals(100f, returnedStamp.size, 0.01f)
+    }
+
+    @Test
+    fun testCanvasRotationTransformsRedoStack() {
+        // Initial Portrait size: 1000 x 2000
+        viewModel.updateCanvasSize(IntSize(1000, 2000))
+
+        viewModel.selectBrushSize(BrushSize(label = "Test", strokeWidth = 20f, previewSizeDp = 10.dp, stampSize = 100f))
+        viewModel.startStroke(Offset(500f, 1000f))
+        viewModel.finishStroke()
+
+        // Undo into redo stack
+        viewModel.undo()
+        assertEquals(1, viewModel.uiState.value.redoElements.size)
+        assertEquals(0, viewModel.uiState.value.elements.size)
+
+        // Rotate to Landscape
+        viewModel.updateCanvasSize(IntSize(2000, 1000))
+
+        // Redo in Landscape
+        viewModel.redo()
+        val state = viewModel.uiState.value
+        assertEquals(1, state.elements.size)
+        val stroke = state.elements[0] as DrawingStroke
+
+        // Must be scaled and centered in Landscape coordinate space
+        assertEquals(1000f, stroke.points[0].x, 0.01f)
+        assertEquals(500f, stroke.points[0].y, 0.01f)
+        assertEquals(10f, stroke.strokeWidth, 0.01f)
     }
 }

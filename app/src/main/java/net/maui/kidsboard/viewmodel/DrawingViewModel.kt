@@ -47,7 +47,11 @@ data class DrawingUiState(
     val isStampPickerOpen: Boolean = false,
     val isClearConfirmOpen: Boolean = false,
     val isSaving: Boolean = false,
-    val canvasSize: IntSize = IntSize.Zero
+    val canvasSize: IntSize = IntSize.Zero,
+    val contentWidth: Float = 0f,
+    val contentHeight: Float = 0f,
+    val contentOffsetX: Float = 0f,
+    val contentOffsetY: Float = 0f
 ) {
     val canUndo: Boolean get() = elements.isNotEmpty()
     val canRedo: Boolean get() = redoElements.isNotEmpty()
@@ -73,9 +77,84 @@ class DrawingViewModel(
     private val _saveEvents = MutableSharedFlow<SaveEvent>()
     val saveEvents: SharedFlow<SaveEvent> = _saveEvents.asSharedFlow()
 
-    fun updateCanvasSize(size: IntSize) {
-        if (size.width > 0 && size.height > 0) {
-            _uiState.update { it.copy(canvasSize = size) }
+    fun updateCanvasSize(newSize: IntSize) {
+        if (newSize.width <= 0 || newSize.height <= 0) return
+
+        _uiState.update { state ->
+            val oldSize = state.canvasSize
+            if (oldSize.width <= 0 || oldSize.height <= 0 || oldSize == newSize) {
+                return@update state.copy(
+                    canvasSize = newSize,
+                    contentWidth = if (state.contentWidth <= 0f) newSize.width.toFloat() else state.contentWidth,
+                    contentHeight = if (state.contentHeight <= 0f) newSize.height.toFloat() else state.contentHeight
+                )
+            }
+
+            if (state.elements.isEmpty() && state.redoElements.isEmpty() && state.activeStrokes.isEmpty()) {
+                return@update state.copy(
+                    canvasSize = newSize,
+                    contentWidth = newSize.width.toFloat(),
+                    contentHeight = newSize.height.toFloat(),
+                    contentOffsetX = 0f,
+                    contentOffsetY = 0f
+                )
+            }
+
+            val allElements = state.elements + state.redoElements + state.activeStrokes.values
+            val elementsBounds = getElementsBounds(allElements)
+            val baseWidth = if (state.contentWidth > 0f) state.contentWidth else oldSize.width.toFloat()
+            val baseHeight = if (state.contentHeight > 0f) state.contentHeight else oldSize.height.toFloat()
+            val baseLeft = state.contentOffsetX
+            val baseTop = state.contentOffsetY
+            val baseRight = baseLeft + baseWidth
+            val baseBottom = baseTop + baseHeight
+
+            val currentLeft = elementsBounds?.let { minOf(baseLeft, it.left) } ?: baseLeft
+            val currentRight = elementsBounds?.let { maxOf(baseRight, it.right) } ?: baseRight
+            val currentTop = elementsBounds?.let { minOf(baseTop, it.top) } ?: baseTop
+            val currentBottom = elementsBounds?.let { maxOf(baseBottom, it.bottom) } ?: baseBottom
+
+            val currentWidth = maxOf(1f, currentRight - currentLeft)
+            val currentHeight = maxOf(1f, currentBottom - currentTop)
+
+            val scaleX = newSize.width.toFloat() / currentWidth
+            val scaleY = newSize.height.toFloat() / currentHeight
+            val scale = minOf(scaleX, scaleY)
+
+            val newContentWidth = currentWidth * scale
+            val newContentHeight = currentHeight * scale
+            val newOffsetX = (newSize.width - newContentWidth) / 2f
+            val newOffsetY = (newSize.height - newContentHeight) / 2f
+
+            fun CanvasElement.transform(): CanvasElement = when (this) {
+                is DrawingStroke -> copy(
+                    points = points.map { p ->
+                        Offset((p.x - currentLeft) * scale + newOffsetX, (p.y - currentTop) * scale + newOffsetY)
+                    },
+                    strokeWidth = strokeWidth * scale
+                )
+                is DrawingStamp -> copy(
+                    position = Offset((position.x - currentLeft) * scale + newOffsetX, (position.y - currentTop) * scale + newOffsetY),
+                    size = size * scale
+                )
+            }
+
+            val transformedElements = state.elements.map { it.transform() }
+            val transformedRedo = state.redoElements.map { it.transform() }
+            val transformedActive = state.activeStrokes.mapValues { (_, stroke) ->
+                stroke.transform() as DrawingStroke
+            }
+
+            state.copy(
+                elements = transformedElements,
+                redoElements = transformedRedo,
+                activeStrokes = transformedActive,
+                canvasSize = newSize,
+                contentWidth = newContentWidth,
+                contentHeight = newContentHeight,
+                contentOffsetX = newOffsetX,
+                contentOffsetY = newOffsetY
+            )
         }
     }
 
@@ -176,6 +255,10 @@ class DrawingViewModel(
                 elements = emptyList(),
                 redoElements = emptyList(),
                 activeStrokes = emptyMap(),
+                contentWidth = state.canvasSize.width.toFloat(),
+                contentHeight = state.canvasSize.height.toFloat(),
+                contentOffsetX = 0f,
+                contentOffsetY = 0f,
                 isClearConfirmOpen = false
             )
         }
@@ -292,5 +375,38 @@ class DrawingViewModel(
                 onFailure = { error -> _saveEvents.emit(SaveEvent.Error(error.localizedMessage ?: "Failed to save")) }
             )
         }
+    }
+
+    private data class ElementBounds(val left: Float, val top: Float, val right: Float, val bottom: Float)
+
+    private fun getElementsBounds(elements: Collection<CanvasElement>): ElementBounds? {
+        if (elements.isEmpty()) return null
+        var minX = Float.MAX_VALUE
+        var maxX = -Float.MAX_VALUE
+        var minY = Float.MAX_VALUE
+        var maxY = -Float.MAX_VALUE
+        var hasPoints = false
+
+        for (element in elements) {
+            when (element) {
+                is DrawingStroke -> {
+                    for (point in element.points) {
+                        minX = minOf(minX, point.x)
+                        maxX = maxOf(maxX, point.x)
+                        minY = minOf(minY, point.y)
+                        maxY = maxOf(maxY, point.y)
+                        hasPoints = true
+                    }
+                }
+                is DrawingStamp -> {
+                    minX = minOf(minX, element.position.x)
+                    maxX = maxOf(maxX, element.position.x)
+                    minY = minOf(minY, element.position.y)
+                    maxY = maxOf(maxY, element.position.y)
+                    hasPoints = true
+                }
+            }
+        }
+        return if (hasPoints) ElementBounds(minX, minY, maxX, maxY) else null
     }
 }
