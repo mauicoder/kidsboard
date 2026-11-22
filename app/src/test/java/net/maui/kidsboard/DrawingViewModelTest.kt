@@ -592,4 +592,41 @@ class DrawingViewModelTest {
             assertTrue("Step at $dist should be smooth, max delta was $maxDelta", maxDelta <= 8)
         }
     }
+
+    @Test
+    fun testSelectFullRainbowStamp() {
+        viewModel.selectStamp(StampRepository.FULL_RAINBOW)
+
+        val state = viewModel.uiState.value
+        assertEquals(StampRepository.FULL_RAINBOW, state.selectedStamp)
+        assertEquals(DrawingTool.STAMP, state.activeTool)
+        assertFalse(state.isStampPickerOpen)
+    }
+
+    @Test
+    fun testAddFullRainbowStamp() = runTest {
+        viewModel.selectStamp(StampRepository.FULL_RAINBOW)
+        viewModel.addStamp(Offset(200f, 300f))
+
+        val state = viewModel.uiState.value
+        assertEquals(1, state.elements.size)
+        val stamp = state.elements.first() as DrawingStamp
+        assertEquals(StampRepository.FULL_RAINBOW, stamp.emoji)
+        assertEquals(200f, stamp.position.x, 0.01f)
+        assertEquals(300f, stamp.position.y, 0.01f)
+
+        // Verify save flow with full rainbow stamp
+        val mockContext = mock(Context::class.java)
+        var receivedEvent: SaveEvent? = null
+        val job = launch {
+            receivedEvent = viewModel.saveEvents.first()
+        }
+
+        viewModel.saveDrawing(mockContext)
+        advanceUntilIdle()
+
+        assertNotNull(receivedEvent)
+        assertTrue(receivedEvent is SaveEvent.Success)
+        job.cancel()
+    }
 }

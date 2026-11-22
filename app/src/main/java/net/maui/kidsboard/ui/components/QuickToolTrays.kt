@@ -40,12 +40,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.PaletteColor
+import net.maui.kidsboard.model.StampRepository
 
 val WarmDeskBackground = Color(0xFFF9F6F0)
 val WarmDeskSurface = Color(0xFFF2ECE1)
 val WarmDeskBorder = Color(0x18000000)
 
-val QuickStampsList = listOf("⭐", "❤️", "🌈", "✨", "🎈", "🐶", "🐱", "🚀", "🍦", "🌸")
+val QuickStampsList = listOf("⭐", "❤️", StampRepository.FULL_RAINBOW, "🌈", "✨", "🎈", "🐶", "🐱", "🚀", "🍦", "🌸")
 
 @Composable
 fun QuickColorSwatch(
@@ -238,13 +239,20 @@ fun QuickStickerChip(
             .clip(RoundedCornerShape(12.dp))
             .background(background)
             .border(borderStroke, RoundedCornerShape(12.dp))
-            .clickable(onClick = onClick),
+            .clickable(onClick = onClick)
+            .semantics {
+                contentDescription = if (emoji == StampRepository.FULL_RAINBOW) "Full Rainbow stamp" else "$emoji stamp"
+            },
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = emoji,
-            fontSize = 22.sp
-        )
+        if (emoji == StampRepository.FULL_RAINBOW) {
+            FullRainbowStickerIcon(modifier = Modifier.size(28.dp))
+        } else {
+            Text(
+                text = emoji,
+                fontSize = 22.sp
+            )
+        }
     }
 }
 

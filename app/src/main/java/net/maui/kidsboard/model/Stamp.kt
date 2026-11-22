@@ -9,10 +9,12 @@ data class StampCategory(
 )
 
 object StampRepository {
+    const val FULL_RAINBOW: String = "FULL_RAINBOW"
+
     val categories: List<StampCategory> = listOf(
         StampCategory(
             title = "Favorites ⭐",
-            stamps = listOf("⭐", "❤️", "🌈", "✨", "🎈", "👑")
+            stamps = listOf("⭐", "❤️", FULL_RAINBOW, "🌈", "✨", "🎈", "👑")
         ),
         StampCategory(
             title = "Animals 🐾",
@@ -20,7 +22,7 @@ object StampRepository {
         ),
         StampCategory(
             title = "Fun & Treats 🍦",
-            stamps = listOf("🌸", "☀️", "🌙", "🍀", "🦋", "🍦", "🍕", "🍎")
+            stamps = listOf(FULL_RAINBOW, "🌸", "☀️", "🌙", "🍀", "🦋", "🍦", "🍕", "🍎")
         ),
         StampCategory(
             title = "Vehicles & Art 🚀",

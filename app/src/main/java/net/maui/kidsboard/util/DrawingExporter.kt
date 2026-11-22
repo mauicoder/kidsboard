@@ -18,6 +18,8 @@ import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
+import net.maui.kidsboard.model.StampRepository
+import net.maui.kidsboard.ui.components.FullRainbowStickerRenderer
 
 open class DrawingExporter {
 
@@ -141,9 +143,18 @@ open class DrawingExporter {
                     canvas.drawPath(path, strokePaint)
                 }
                 is DrawingStamp -> {
-                    stampPaint.textSize = element.size
-                    val yPos = element.position.y - (stampPaint.descent() + stampPaint.ascent()) / 2f
-                    canvas.drawText(element.emoji, element.position.x, yPos, stampPaint)
+                    if (element.emoji == StampRepository.FULL_RAINBOW) {
+                        FullRainbowStickerRenderer.drawFullRainbowToCanvas(
+                            canvas,
+                            element.position.x,
+                            element.position.y,
+                            element.size
+                        )
+                    } else {
+                        stampPaint.textSize = element.size
+                        val yPos = element.position.y - (stampPaint.descent() + stampPaint.ascent()) / 2f
+                        canvas.drawText(element.emoji, element.position.x, yPos, stampPaint)
+                    }
                 }
             }
         }

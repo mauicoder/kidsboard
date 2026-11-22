@@ -93,10 +93,14 @@ fun StampPickerDialog(
                                         .clickable { onStampSelected(stamp) },
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Text(
-                                        text = stamp,
-                                        fontSize = 28.sp
-                                    )
+                                    if (stamp == StampRepository.FULL_RAINBOW) {
+                                        FullRainbowStickerIcon(modifier = Modifier.size(36.dp))
+                                    } else {
+                                        Text(
+                                            text = stamp,
+                                            fontSize = 28.sp
+                                        )
+                                    }
                                 }
                             }
                         }

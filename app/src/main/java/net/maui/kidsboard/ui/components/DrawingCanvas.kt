@@ -27,6 +27,7 @@ import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
+import net.maui.kidsboard.model.StampRepository
 
 @Composable
 fun DrawingCanvas(
@@ -132,10 +133,16 @@ fun DrawingCanvas(
 }
 
 private fun DrawScope.drawStamp(stamp: DrawingStamp, paint: Paint) {
-    paint.textSize = stamp.size
-    val yPos = stamp.position.y - (paint.descent() + paint.ascent()) / 2f
-    drawIntoCanvas { canvas ->
-        canvas.nativeCanvas.drawText(stamp.emoji, stamp.position.x, yPos, paint)
+    if (stamp.emoji == StampRepository.FULL_RAINBOW) {
+        with(FullRainbowStickerRenderer) {
+            drawFullRainbow(stamp.position, stamp.size)
+        }
+    } else {
+        paint.textSize = stamp.size
+        val yPos = stamp.position.y - (paint.descent() + paint.ascent()) / 2f
+        drawIntoCanvas { canvas ->
+            canvas.nativeCanvas.drawText(stamp.emoji, stamp.position.x, yPos, paint)
+        }
     }
 }
 
