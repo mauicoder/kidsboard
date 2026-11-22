@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
@@ -30,15 +31,19 @@ fun DrawingBoardSheet(
     onFinishAllStrokes: () -> Unit,
     onAddStamp: (Offset) -> Unit,
     onSizeChanged: (IntSize) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    background: CanvasBackground = CanvasBackground.PlainWhite
 ) {
+    val surfaceColor = if (background.isDark) Color(0xFF1E2621) else Color.White
+    val borderColor = if (background.isDark) Color(0xFF333E37) else WarmDeskBorder
+
     Surface(
         modifier = modifier
             .size(paperSize)
             .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
             .clip(RoundedCornerShape(20.dp))
-            .border(BorderStroke(1.5.dp, WarmDeskBorder), RoundedCornerShape(20.dp)),
-        color = Color.White
+            .border(BorderStroke(1.5.dp, borderColor), RoundedCornerShape(20.dp)),
+        color = surfaceColor
     ) {
         DrawingCanvas(
             elements = elements,
@@ -49,7 +54,8 @@ fun DrawingBoardSheet(
             onFinishStroke = onFinishStroke,
             onFinishAllStrokes = onFinishAllStrokes,
             onAddStamp = onAddStamp,
-            onSizeChanged = onSizeChanged
+            onSizeChanged = onSizeChanged,
+            background = background
         )
     }
 }

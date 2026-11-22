@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import net.maui.kidsboard.data.SoundPreferences
 import net.maui.kidsboard.model.BrushSize
+import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
@@ -52,9 +53,11 @@ data class DrawingUiState(
     val isColorPickerOpen: Boolean = false,
     val isBrushSizePickerOpen: Boolean = false,
     val isStampPickerOpen: Boolean = false,
+    val isBackgroundPickerOpen: Boolean = false,
     val isClearConfirmOpen: Boolean = false,
     val isSaving: Boolean = false,
     val isSoundEnabled: Boolean = true,
+    val selectedBackground: CanvasBackground = CanvasBackground.PlainWhite,
     val canvasSize: IntSize = IntSize.Zero,
     val contentWidth: Float = 0f,
     val contentHeight: Float = 0f,
@@ -247,6 +250,44 @@ class DrawingViewModel(
         _uiState.update { it.copy(isStampPickerOpen = false) }
     }
 
+    fun openBackgroundPicker() {
+        _uiState.update { it.copy(isBackgroundPickerOpen = true) }
+    }
+
+    fun closeBackgroundPicker() {
+        _uiState.update { it.copy(isBackgroundPickerOpen = false) }
+    }
+
+    fun selectBackground(background: CanvasBackground) {
+        val currentBg = _uiState.value.selectedBackground
+        if (currentBg == background) {
+            _uiState.update { it.copy(isBackgroundPickerOpen = false) }
+            return
+        }
+
+        var newColor = _uiState.value.selectedColor
+        val isRainbow = _uiState.value.isRainbow
+
+        // Smart contrast handling
+        if (background.isDark && !currentBg.isDark) {
+            if (newColor == ColorPalette.Black && !isRainbow) {
+                newColor = ColorPalette.White
+            }
+        } else if (!background.isDark && currentBg.isDark) {
+            if (newColor == ColorPalette.White && !isRainbow) {
+                newColor = ColorPalette.Black
+            }
+        }
+
+        _uiState.update {
+            it.copy(
+                selectedBackground = background,
+                selectedColor = newColor,
+                isBackgroundPickerOpen = false
+            )
+        }
+    }
+
     fun requestClearCanvas() {
         val state = _uiState.value
         if (state.elements.isNotEmpty() || state.activeStrokes.isNotEmpty()) {
@@ -277,7 +318,7 @@ class DrawingViewModel(
         val state = _uiState.value
         val stroke = DrawingStroke(
             points = listOf(point),
-            color = if (state.isEraser) Color.White else state.selectedColor,
+            color = if (state.isEraser) state.selectedBackground.baseColor else state.selectedColor,
             strokeWidth = state.strokeWidth,
             isEraser = state.isEraser,
             isRainbow = state.isRainbow
@@ -363,7 +404,7 @@ class DrawingViewModel(
 
     fun saveDrawing(context: Context) {
         val state = _uiState.value
-        if (state.isSaving || (state.elements.isEmpty() && state.activeStrokes.isEmpty())) return
+        if (state.isSaving || (state.elements.isEmpty() && state.activeStrokes.isEmpty() && state.selectedBackground == CanvasBackground.PlainWhite)) return
 
         val width = if (state.canvasSize.width > 0) state.canvasSize.width else 1080
         val height = if (state.canvasSize.height > 0) state.canvasSize.height else 1920
@@ -375,7 +416,8 @@ class DrawingViewModel(
                 context = context,
                 elements = state.elements,
                 width = width,
-                height = height
+                height = height,
+                background = state.selectedBackground
             )
 
             _uiState.update { it.copy(isSaving = false) }

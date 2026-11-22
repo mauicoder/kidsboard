@@ -44,10 +44,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
 import net.maui.kidsboard.audio.KidsSoundManager
+import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.model.StampRepository
 import net.maui.kidsboard.ui.components.BrushSizeActionButton
 import net.maui.kidsboard.ui.components.BrushSizePickerDialog
+import net.maui.kidsboard.ui.components.CanvasBackgroundPickerDialog
+import net.maui.kidsboard.ui.components.CanvasStyleActionButton
 import net.maui.kidsboard.ui.components.ChunkyActionButton
 import net.maui.kidsboard.ui.components.ClearConfirmDialog
 import net.maui.kidsboard.ui.components.ColorPickerDialog
@@ -226,7 +229,8 @@ fun KidsBoardScreen(
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 viewModel.addStamp(position)
                             },
-                            onSizeChanged = viewModel::updateCanvasSize
+                            onSizeChanged = viewModel::updateCanvasSize,
+                            background = uiState.selectedBackground
                         )
                     }
 
@@ -279,6 +283,21 @@ fun KidsBoardScreen(
                                         )
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                        CanvasStyleActionButton(
+                                            onClick = {
+                                                soundManager.playClick()
+                                                viewModel.openBackgroundPicker()
+                                            }
+                                        )
+                                        SoundActionButton(
+                                            isSoundEnabled = uiState.isSoundEnabled,
+                                            onClick = {
+                                                viewModel.toggleSound()
+                                                soundManager.playClick()
+                                            }
+                                        )
+                                    }
+                                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                         ChunkyActionButton(
                                             icon = Icons.Default.Delete,
                                             contentDescription = "Clear Canvas",
@@ -295,7 +314,7 @@ fun KidsBoardScreen(
                                                 soundManager.playClick()
                                                 viewModel.saveDrawing(context)
                                             },
-                                            enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
+                                            enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null || uiState.selectedBackground != CanvasBackground.PlainWhite)
                                         )
                                     }
                                 }
@@ -358,6 +377,12 @@ fun KidsBoardScreen(
                                         viewModel.openBrushSizePicker()
                                     }
                                 )
+                                CanvasStyleActionButton(
+                                    onClick = {
+                                        soundManager.playClick()
+                                        viewModel.openBackgroundPicker()
+                                    }
+                                )
                                 SoundActionButton(
                                     isSoundEnabled = uiState.isSoundEnabled,
                                     onClick = {
@@ -415,7 +440,7 @@ fun KidsBoardScreen(
                                         soundManager.playClick()
                                         viewModel.saveDrawing(context)
                                     },
-                                    enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
+                                    enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null || uiState.selectedBackground != CanvasBackground.PlainWhite)
                                 )
                             }
                         }
@@ -457,7 +482,8 @@ fun KidsBoardScreen(
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 viewModel.addStamp(position)
                             },
-                            onSizeChanged = viewModel::updateCanvasSize
+                            onSizeChanged = viewModel::updateCanvasSize,
+                            background = uiState.selectedBackground
                         )
                     }
 
@@ -558,6 +584,21 @@ fun KidsBoardScreen(
                     onDismiss = {
                         soundManager.playClick()
                         viewModel.closeStampPicker()
+                    }
+                )
+            }
+
+            if (uiState.isBackgroundPickerOpen) {
+                CanvasBackgroundPickerDialog(
+                    selectedBackground = uiState.selectedBackground,
+                    onBackgroundSelected = { bg ->
+                        soundManager.playClick()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        viewModel.selectBackground(bg)
+                    },
+                    onDismiss = {
+                        soundManager.playClick()
+                        viewModel.closeBackgroundPicker()
                     }
                 )
             }

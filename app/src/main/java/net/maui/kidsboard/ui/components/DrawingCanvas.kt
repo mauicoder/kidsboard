@@ -22,11 +22,13 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
+import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
+import net.maui.kidsboard.ui.components.background.CanvasBackgroundRenderer
 import net.maui.kidsboard.ui.components.sticker.StickerRegistry
 import net.maui.kidsboard.util.RainbowStrokeGeometry
 
@@ -42,7 +44,7 @@ fun DrawingCanvas(
     onAddStamp: (Offset) -> Unit,
     modifier: Modifier = Modifier,
     onSizeChanged: (IntSize) -> Unit = {},
-    backgroundColor: Color = Color.White
+    background: CanvasBackground = CanvasBackground.PlainWhite
 ) {
     val stampPaint = remember {
         Paint().apply {
@@ -55,7 +57,6 @@ fun DrawingCanvas(
         modifier = modifier
             .fillMaxSize()
             .clipToBounds()
-            .background(backgroundColor)
             .onSizeChanged { size ->
                 onSizeChanged(size)
             }
@@ -118,6 +119,11 @@ fun DrawingCanvas(
                 }
             }
     ) {
+        // Draw background paper style and coloring template outlines
+        CanvasBackgroundRenderer.run {
+            drawCanvasBackground(background)
+        }
+
         // Draw committed elements in chronological order
         elements.forEach { element ->
             when (element) {

@@ -16,6 +16,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import net.maui.kidsboard.model.BrushSize
+import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
@@ -47,12 +48,18 @@ class DrawingViewModelTest {
 
     class FakeDrawingExporter : DrawingExporter() {
         var exportResult: Result<Uri> = Result.success(mock(Uri::class.java))
+        var lastExportedBackground: CanvasBackground? = null
+
         override fun exportToGallery(
             context: Context,
             elements: List<CanvasElement>,
             width: Int,
-            height: Int
-        ): Result<Uri> = exportResult
+            height: Int,
+            background: CanvasBackground
+        ): Result<Uri> {
+            lastExportedBackground = background
+            return exportResult
+        }
     }
 
     @Before
@@ -649,6 +656,82 @@ class DrawingViewModelTest {
 
         assertNotNull(receivedEvent)
         assertTrue(receivedEvent is SaveEvent.Success)
+        job.cancel()
+    }
+
+    @Test
+    fun testDefaultUiStateBackground() {
+        val state = viewModel.uiState.value
+        assertEquals(CanvasBackground.PlainWhite, state.selectedBackground)
+        assertFalse(state.isBackgroundPickerOpen)
+    }
+
+    @Test
+    fun testOpenAndCloseBackgroundPicker() {
+        assertFalse(viewModel.uiState.value.isBackgroundPickerOpen)
+        viewModel.openBackgroundPicker()
+        assertTrue(viewModel.uiState.value.isBackgroundPickerOpen)
+        viewModel.closeBackgroundPicker()
+        assertFalse(viewModel.uiState.value.isBackgroundPickerOpen)
+    }
+
+    @Test
+    fun testSelectBackgroundSmartContrast() {
+        // Initially PlainWhite with Black color
+        assertEquals(CanvasBackground.PlainWhite, viewModel.uiState.value.selectedBackground)
+        assertEquals(ColorPalette.Black, viewModel.uiState.value.selectedColor)
+
+        // Switching to Chalkboard auto-switches Black -> White
+        viewModel.selectBackground(CanvasBackground.Chalkboard)
+        assertEquals(CanvasBackground.Chalkboard, viewModel.uiState.value.selectedBackground)
+        assertEquals(ColorPalette.White, viewModel.uiState.value.selectedColor)
+
+        // Switching back to PlainWhite auto-switches White -> Black
+        viewModel.selectBackground(CanvasBackground.PlainWhite)
+        assertEquals(CanvasBackground.PlainWhite, viewModel.uiState.value.selectedBackground)
+        assertEquals(ColorPalette.Black, viewModel.uiState.value.selectedColor)
+
+        // If user manually chose Red, switching backgrounds should NOT alter Red
+        viewModel.selectColor(PaletteColor(ColorPalette.Red, "Red"))
+        viewModel.selectBackground(CanvasBackground.Chalkboard)
+        assertEquals(ColorPalette.Red, viewModel.uiState.value.selectedColor)
+
+        // If user is using Rainbow mode, switching backgrounds should keep Rainbow
+        viewModel.selectColor(ColorPalette.Rainbow)
+        assertTrue(viewModel.uiState.value.isRainbow)
+        viewModel.selectBackground(CanvasBackground.PlainWhite)
+        assertTrue(viewModel.uiState.value.isRainbow)
+    }
+
+    @Test
+    fun testClearCanvasPreservesBackground() {
+        viewModel.selectBackground(CanvasBackground.CuteBear)
+        assertEquals(CanvasBackground.CuteBear, viewModel.uiState.value.selectedBackground)
+
+        viewModel.addStamp(Offset(50f, 50f))
+        assertEquals(1, viewModel.uiState.value.elements.size)
+
+        viewModel.confirmClearCanvas()
+        assertTrue(viewModel.uiState.value.elements.isEmpty())
+        assertEquals(CanvasBackground.CuteBear, viewModel.uiState.value.selectedBackground)
+    }
+
+    @Test
+    fun testSaveColoringTemplateWithoutUserStrokes() = runTest {
+        viewModel.selectBackground(CanvasBackground.CuteBear)
+        val mockContext = mock(Context::class.java)
+
+        var receivedEvent: SaveEvent? = null
+        val job = launch {
+            receivedEvent = viewModel.saveEvents.first()
+        }
+
+        viewModel.saveDrawing(mockContext)
+        advanceUntilIdle()
+
+        assertNotNull(receivedEvent)
+        assertTrue(receivedEvent is SaveEvent.Success)
+        assertEquals(CanvasBackground.CuteBear, fakeExporter.lastExportedBackground)
         job.cancel()
     }
 }

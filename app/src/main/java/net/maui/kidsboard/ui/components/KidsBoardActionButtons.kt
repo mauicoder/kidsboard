@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.filled.AutoStories
 import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CircularProgressIndicator
@@ -155,5 +156,19 @@ fun SoundActionButton(
         onClick = onClick,
         modifier = modifier,
         tint = if (isSoundEnabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
+    )
+}
+
+@Composable
+fun CanvasStyleActionButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    ChunkyActionButton(
+        icon = Icons.Default.AutoStories,
+        contentDescription = "Canvas & Coloring Pages",
+        onClick = onClick,
+        modifier = modifier,
+        tint = MaterialTheme.colorScheme.primary
     )
 }

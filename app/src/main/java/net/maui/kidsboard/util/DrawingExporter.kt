@@ -14,10 +14,12 @@ import android.os.Environment
 import android.provider.MediaStore
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.toArgb
+import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
+import net.maui.kidsboard.ui.components.background.CanvasBackgroundRenderer
 import net.maui.kidsboard.ui.components.sticker.StickerRegistry
 
 open class DrawingExporter {
@@ -26,12 +28,24 @@ open class DrawingExporter {
         elements: List<CanvasElement>,
         width: Int,
         height: Int
+    ): Bitmap = renderToBitmap(elements, width, height, CanvasBackground.PlainWhite)
+
+    open fun renderToBitmap(
+        elements: List<CanvasElement>,
+        width: Int,
+        height: Int,
+        background: CanvasBackground
     ): Bitmap {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
-        // Fill background with white
-        canvas.drawColor(AndroidColor.WHITE)
+        // Render background paper and coloring outlines
+        CanvasBackgroundRenderer.drawToAndroidCanvas(
+            canvas = canvas,
+            background = background,
+            width = width.toFloat(),
+            height = height.toFloat()
+        )
 
         val strokePaint = Paint().apply {
             isAntiAlias = true
@@ -114,9 +128,17 @@ open class DrawingExporter {
         elements: List<CanvasElement>,
         width: Int,
         height: Int
+    ): Result<Uri> = exportToGallery(context, elements, width, height, CanvasBackground.PlainWhite)
+
+    open fun exportToGallery(
+        context: Context,
+        elements: List<CanvasElement>,
+        width: Int,
+        height: Int,
+        background: CanvasBackground
     ): Result<Uri> {
         return runCatching {
-            val bitmap = renderToBitmap(elements, width, height)
+            val bitmap = renderToBitmap(elements, width, height, background)
             val filename = "KidsBoard_${System.currentTimeMillis()}.png"
 
             val contentValues = ContentValues().apply {
