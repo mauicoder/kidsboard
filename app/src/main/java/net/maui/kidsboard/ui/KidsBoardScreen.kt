@@ -3,15 +3,18 @@ package net.maui.kidsboard.ui
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -22,7 +25,6 @@ import androidx.compose.material.icons.automirrored.filled.Redo
 import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -45,16 +47,23 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
+import net.maui.kidsboard.model.BrushSize
 import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.ui.components.BrushSizePickerDialog
+import net.maui.kidsboard.ui.components.ChunkyActionButton
 import net.maui.kidsboard.ui.components.ClearConfirmDialog
 import net.maui.kidsboard.ui.components.ColorPickerDialog
 import net.maui.kidsboard.ui.components.DrawingCanvas
+import net.maui.kidsboard.ui.components.QuickColorGrid
+import net.maui.kidsboard.ui.components.QuickColorRow
+import net.maui.kidsboard.ui.components.QuickStickerGrid
+import net.maui.kidsboard.ui.components.QuickStickerRow
 import net.maui.kidsboard.ui.components.StampPickerDialog
+import net.maui.kidsboard.ui.components.WarmDeskBackground
+import net.maui.kidsboard.ui.components.WarmDeskBorder
 import net.maui.kidsboard.util.DrawingExporter
 import net.maui.kidsboard.viewmodel.DrawingViewModel
 import net.maui.kidsboard.viewmodel.SaveEvent
@@ -72,7 +81,7 @@ fun KidsBoardScreen(
             when (event) {
                 is SaveEvent.Success -> {
                     val result = snackbarHostState.showSnackbar(
-                        message = "Drawing saved to Gallery! 🎨",
+                        message = "Drawing saved to Pictures! 🎨",
                         actionLabel = "Share",
                         duration = SnackbarDuration.Short
                     )
@@ -98,215 +107,282 @@ fun KidsBoardScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
-            contentAlignment = Alignment.Center
+                .background(WarmDeskBackground)
         ) {
-            val canvasSide = minOf(maxWidth, maxHeight)
+            val isLandscape = maxWidth > maxHeight
+            val shortestEdge = minOf(maxWidth, maxHeight)
+            val paperPadding = 12.dp
+            val paperSize = (shortestEdge - (paperPadding * 2)).coerceAtLeast(180.dp)
 
-            // Kid-friendly "Drawing Board" Paper Sheet
-            Surface(
-                modifier = Modifier
-                    .size(canvasSide)
-                    .padding(8.dp)
-                    .shadow(elevation = 6.dp, shape = RoundedCornerShape(16.dp))
-                    .clip(RoundedCornerShape(16.dp)),
-                color = Color.White
-            ) {
-                DrawingCanvas(
-                    elements = uiState.elements,
-                    activeStrokes = uiState.activeStrokes,
-                    activeTool = uiState.activeTool,
-                    onStartStroke = viewModel::startStroke,
-                    onAddPoint = viewModel::addPointToStroke,
-                    onFinishStroke = viewModel::finishStroke,
-                    onFinishAllStrokes = viewModel::finishAllStrokes,
-                    onAddStamp = viewModel::addStamp,
-                    onSizeChanged = viewModel::updateCanvasSize
-                )
-            }
-
-            // Split Top Floating Toolbar
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.TopCenter)
-                    .padding(WindowInsets.safeDrawing.asPaddingValues())
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top
-            ) {
-                // Left Pill: Drawing Tools (Color + Brush Size + Stamps)
-                Surface(
-                    shape = RoundedCornerShape(32.dp),
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
-                    tonalElevation = 6.dp,
-                    shadowElevation = 8.dp
+            if (isLandscape) {
+                // LANDSCAPE: Left Dock (Colors/Brush) | Center (1:1 Paper) | Right Dock (Actions/Stickers)
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    // Left Dock (Margins reclaimed for Colors & Brush)
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Left + WindowInsetsSides.Vertical).asPaddingValues())
+                            .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        // Color Swatch Button (Brush Mode)
-                        val displayColor = if (uiState.isEraser) Color.White else uiState.selectedColor
-                        val isBrushActive = uiState.activeTool == DrawingTool.BRUSH
-                        val brushBorder = if (isBrushActive) {
-                            BorderStroke(2.5.dp, MaterialTheme.colorScheme.primary)
-                        } else {
-                            BorderStroke(1.5.dp, Color(0x33000000))
-                        }
-
-                        Box(
-                            modifier = Modifier
-                                .size(44.dp)
-                                .clip(CircleShape)
-                                .background(displayColor)
-                                .border(brushBorder, CircleShape)
-                                .clickable {
-                                    if (!isBrushActive) {
-                                        viewModel.selectTool(DrawingTool.BRUSH)
-                                    } else {
-                                        viewModel.openColorPicker()
-                                    }
-                                },
-                            contentAlignment = Alignment.Center
+                        Surface(
+                            shape = RoundedCornerShape(24.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                            tonalElevation = 4.dp,
+                            shadowElevation = 6.dp,
+                            modifier = Modifier.fillMaxHeight()
                         ) {
-                            val iconColor = if (uiState.isEraser || displayColor == Color.White || displayColor == Color(0xFFFFFF00) || displayColor == Color(0xFF00FFFF)) {
-                                Color.Black
-                            } else {
-                                Color.White
-                            }
-                            Icon(
-                                imageVector = Icons.Default.Palette,
-                                contentDescription = "Choose Color",
-                                tint = iconColor,
-                                modifier = Modifier.size(22.dp)
-                            )
-                        }
-
-                        // Brush / Stamp Size Button
-                        IconButton(
-                            onClick = viewModel::openBrushSizePicker
-                        ) {
-                            Box(
-                                modifier = Modifier.size(36.dp),
-                                contentAlignment = Alignment.Center
+                            Column(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 10.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Brush,
-                                    contentDescription = "Brush & Stamp Size",
-                                    tint = MaterialTheme.colorScheme.onSurface
+                                BrushSizeActionButton(
+                                    brushSize = uiState.selectedBrushSize,
+                                    selectedColor = uiState.selectedColor,
+                                    isEraser = uiState.isEraser,
+                                    onClick = viewModel::openBrushSizePicker
                                 )
-                                // Active brush size dot indicator
-                                Box(
-                                    modifier = Modifier
-                                        .align(Alignment.BottomEnd)
-                                        .size(10.dp)
-                                        .clip(CircleShape)
-                                        .background(displayColor)
-                                        .border(BorderStroke(1.dp, Color(0x33000000)), CircleShape)
+
+                                QuickColorGrid(
+                                    selectedColor = uiState.selectedColor,
+                                    isEraser = uiState.isEraser,
+                                    onColorSelected = viewModel::selectColor,
+                                    onOpenFullPicker = viewModel::openColorPicker,
+                                    modifier = Modifier.weight(1f, fill = false)
                                 )
                             }
                         }
+                    }
 
-                        // Stamp Tool Button
-                        val isStampActive = uiState.activeTool == DrawingTool.STAMP
-                        val stampBackground = if (isStampActive) {
-                            MaterialTheme.colorScheme.primaryContainer
-                        } else {
-                            Color.Transparent
-                        }
-                        val stampBorder = if (isStampActive) {
-                            BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
-                        } else {
-                            BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                        }
-
-                        Box(
+                    // Center: 1:1 Square Drawing Board Paper
+                    Box(
+                        modifier = Modifier.size(shortestEdge),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Surface(
                             modifier = Modifier
-                                .size(44.dp)
-                                .clip(CircleShape)
-                                .background(stampBackground)
-                                .border(stampBorder, CircleShape)
-                                .clickable {
-                                    if (isStampActive) {
-                                        viewModel.openStampPicker()
-                                    } else {
-                                        viewModel.selectTool(DrawingTool.STAMP)
-                                        viewModel.openStampPicker()
-                                    }
-                                },
-                            contentAlignment = Alignment.Center
+                                .size(paperSize)
+                                .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
+                                .clip(RoundedCornerShape(20.dp))
+                                .border(BorderStroke(1.5.dp, WarmDeskBorder), RoundedCornerShape(20.dp)),
+                            color = Color.White
                         ) {
-                            androidx.compose.material3.Text(
-                                text = uiState.selectedStamp,
-                                fontSize = 22.sp
+                            DrawingCanvas(
+                                elements = uiState.elements,
+                                activeStrokes = uiState.activeStrokes,
+                                activeTool = uiState.activeTool,
+                                onStartStroke = viewModel::startStroke,
+                                onAddPoint = viewModel::addPointToStroke,
+                                onFinishStroke = viewModel::finishStroke,
+                                onFinishAllStrokes = viewModel::finishAllStrokes,
+                                onAddStamp = viewModel::addStamp,
+                                onSizeChanged = viewModel::updateCanvasSize
                             )
                         }
                     }
-                }
 
-                // Right Pill: Canvas Actions (Undo, Redo, Clear, Save/Share)
-                Surface(
-                    shape = RoundedCornerShape(32.dp),
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
-                    tonalElevation = 6.dp,
-                    shadowElevation = 8.dp
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    // Right Dock (Margins reclaimed for Actions & Stickers)
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Right + WindowInsetsSides.Vertical).asPaddingValues())
+                            .padding(start = 6.dp, end = 12.dp, top = 8.dp, bottom = 8.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        // Undo Button
-                        IconButton(
-                            onClick = viewModel::undo,
-                            enabled = uiState.canUndo
+                        Surface(
+                            shape = RoundedCornerShape(24.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                            tonalElevation = 4.dp,
+                            shadowElevation = 6.dp,
+                            modifier = Modifier.fillMaxHeight()
                         ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Undo,
-                                contentDescription = "Undo"
-                            )
-                        }
+                            Column(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 10.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                // Actions
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                        ChunkyActionButton(
+                                            icon = Icons.AutoMirrored.Filled.Undo,
+                                            contentDescription = "Undo",
+                                            onClick = viewModel::undo,
+                                            enabled = uiState.canUndo
+                                        )
+                                        ChunkyActionButton(
+                                            icon = Icons.AutoMirrored.Filled.Redo,
+                                            contentDescription = "Redo",
+                                            onClick = viewModel::redo,
+                                            enabled = uiState.canRedo
+                                        )
+                                    }
+                                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                        ChunkyActionButton(
+                                            icon = Icons.Default.Delete,
+                                            contentDescription = "Clear Canvas",
+                                            onClick = viewModel::requestClearCanvas,
+                                            enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null,
+                                            tint = MaterialTheme.colorScheme.error
+                                        )
+                                        SaveActionButton(
+                                            isSaving = uiState.isSaving,
+                                            onClick = { viewModel.saveDrawing(context) },
+                                            enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
+                                        )
+                                    }
+                                }
 
-                        // Redo Button
-                        IconButton(
-                            onClick = viewModel::redo,
-                            enabled = uiState.canRedo
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Redo,
-                                contentDescription = "Redo"
-                            )
-                        }
-
-                        // Clear Canvas Button
-                        IconButton(
-                            onClick = viewModel::requestClearCanvas,
-                            enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Delete,
-                                contentDescription = "Clear Canvas"
-                            )
-                        }
-
-                        // Save & Share Button
-                        IconButton(
-                            onClick = { viewModel.saveDrawing(context) },
-                            enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
-                        ) {
-                            if (uiState.isSaving) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(20.dp),
-                                    strokeWidth = 2.dp
-                                )
-                            } else {
-                                Icon(
-                                    imageVector = Icons.Default.Share,
-                                    contentDescription = "Save and Share Drawing"
+                                QuickStickerGrid(
+                                    selectedStamp = uiState.selectedStamp,
+                                    isStampActive = uiState.activeTool == DrawingTool.STAMP,
+                                    onStampSelected = viewModel::selectStamp,
+                                    onOpenFullPicker = viewModel::openStampPicker,
+                                    modifier = Modifier.weight(1f, fill = false)
                                 )
                             }
+                        }
+                    }
+                }
+            } else {
+                // PORTRAIT: Top Dock (Actions) | Center (1:1 Paper) | Bottom Dock (Colors & Stickers)
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // Top Dock (Actions & Brush Size)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal).asPaddingValues())
+                            .padding(horizontal = 12.dp, vertical = 6.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Surface(
+                            shape = RoundedCornerShape(32.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                            tonalElevation = 4.dp,
+                            shadowElevation = 4.dp
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                BrushSizeActionButton(
+                                    brushSize = uiState.selectedBrushSize,
+                                    selectedColor = uiState.selectedColor,
+                                    isEraser = uiState.isEraser,
+                                    onClick = viewModel::openBrushSizePicker
+                                )
+                                ChunkyActionButton(
+                                    icon = Icons.Default.Delete,
+                                    contentDescription = "Clear Canvas",
+                                    onClick = viewModel::requestClearCanvas,
+                                    enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null,
+                                    tint = MaterialTheme.colorScheme.error
+                                )
+                            }
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(32.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                            tonalElevation = 4.dp,
+                            shadowElevation = 4.dp
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                ChunkyActionButton(
+                                    icon = Icons.AutoMirrored.Filled.Undo,
+                                    contentDescription = "Undo",
+                                    onClick = viewModel::undo,
+                                    enabled = uiState.canUndo
+                                )
+                                ChunkyActionButton(
+                                    icon = Icons.AutoMirrored.Filled.Redo,
+                                    contentDescription = "Redo",
+                                    onClick = viewModel::redo,
+                                    enabled = uiState.canRedo
+                                )
+                                SaveActionButton(
+                                    isSaving = uiState.isSaving,
+                                    onClick = { viewModel.saveDrawing(context) },
+                                    enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
+                                )
+                            }
+                        }
+                    }
+
+                    // Center: 1:1 Square Drawing Board Paper
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Surface(
+                            modifier = Modifier
+                                .size(paperSize)
+                                .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
+                                .clip(RoundedCornerShape(20.dp))
+                                .border(BorderStroke(1.5.dp, WarmDeskBorder), RoundedCornerShape(20.dp)),
+                            color = Color.White
+                        ) {
+                            DrawingCanvas(
+                                elements = uiState.elements,
+                                activeStrokes = uiState.activeStrokes,
+                                activeTool = uiState.activeTool,
+                                onStartStroke = viewModel::startStroke,
+                                onAddPoint = viewModel::addPointToStroke,
+                                onFinishStroke = viewModel::finishStroke,
+                                onFinishAllStrokes = viewModel::finishAllStrokes,
+                                onAddStamp = viewModel::addStamp,
+                                onSizeChanged = viewModel::updateCanvasSize
+                            )
+                        }
+                    }
+
+                    // Bottom Dock (Margins reclaimed for Colors & Stickers Trays)
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal).asPaddingValues())
+                            .padding(horizontal = 12.dp, vertical = 6.dp),
+                        shape = RoundedCornerShape(24.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                        tonalElevation = 4.dp,
+                        shadowElevation = 6.dp
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            QuickColorRow(
+                                selectedColor = uiState.selectedColor,
+                                isEraser = uiState.isEraser,
+                                onColorSelected = viewModel::selectColor,
+                                onOpenFullPicker = viewModel::openColorPicker
+                            )
+                            QuickStickerRow(
+                                selectedStamp = uiState.selectedStamp,
+                                isStampActive = uiState.activeTool == DrawingTool.STAMP,
+                                onStampSelected = viewModel::selectStamp,
+                                onOpenFullPicker = viewModel::openStampPicker
+                            )
                         }
                     }
                 }
@@ -344,6 +420,85 @@ fun KidsBoardScreen(
                     onDismiss = viewModel::dismissClearConfirm
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun BrushSizeActionButton(
+    brushSize: BrushSize,
+    selectedColor: Color,
+    isEraser: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val displayColor = if (isEraser) Color.White else selectedColor
+    IconButton(
+        onClick = onClick,
+        modifier = modifier
+            .size(44.dp)
+            .clip(CircleShape)
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.95f))
+            .border(BorderStroke(1.dp, Color(0x1A000000)), CircleShape)
+    ) {
+        Box(
+            modifier = Modifier.size(36.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Brush,
+                contentDescription = "Brush & Stamp Size",
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.size(22.dp)
+            )
+            // Active brush size dot indicator
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .size(10.dp)
+                    .clip(CircleShape)
+                    .background(displayColor)
+                    .border(BorderStroke(1.dp, Color(0x33000000)), CircleShape)
+            )
+        }
+    }
+}
+
+@Composable
+fun SaveActionButton(
+    isSaving: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    IconButton(
+        onClick = onClick,
+        enabled = enabled && !isSaving,
+        modifier = modifier
+            .size(44.dp)
+            .clip(CircleShape)
+            .background(
+                if (enabled) MaterialTheme.colorScheme.primaryContainer
+                else MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+            )
+            .border(
+                BorderStroke(1.dp, if (enabled) MaterialTheme.colorScheme.primary.copy(alpha = 0.4f) else Color(0x1A000000)),
+                CircleShape
+            )
+    ) {
+        if (isSaving) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(20.dp),
+                strokeWidth = 2.5.dp,
+                color = MaterialTheme.colorScheme.primary
+            )
+        } else {
+            Icon(
+                imageVector = Icons.Default.Share,
+                contentDescription = "Save and Share Drawing",
+                tint = if (enabled) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                modifier = Modifier.size(22.dp)
+            )
         }
     }
 }
