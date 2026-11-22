@@ -12,8 +12,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.toArgb
 import net.maui.kidsboard.model.CanvasElement
+import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 
@@ -52,26 +54,68 @@ open class DrawingExporter {
 
                     if (element.isRainbow) {
                         if (points.size == 1) {
-                            strokePaint.color = AndroidColor.RED
+                            strokePaint.color = ColorPalette.rainbowColorIntAt(0f)
                             canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
                             continue
                         }
 
+                        val stepSize = maxOf(2f, minOf(6f, element.strokeWidth * 0.25f))
                         var cumulativeDist = 0f
-                        val cycleLength = 300f
-                        for (i in 1 until points.size) {
-                            val p0 = points[i - 1]
-                            val p1 = points[i]
-                            val dx = p1.x - p0.x
-                            val dy = p1.y - p0.y
-                            val dist = kotlin.math.hypot(dx, dy)
+                        var prevPoint = points[0]
 
-                            val hue = (cumulativeDist / cycleLength * 360f) % 360f
-                            strokePaint.color = AndroidColor.HSVToColor(floatArrayOf(hue, 1f, 1f))
-                            canvas.drawLine(p0.x, p0.y, p1.x, p1.y, strokePaint)
+                        fun drawCurve(start: Offset, control: Offset, end: Offset) {
+                            val l1 = kotlin.math.hypot(end.x - start.x, end.y - start.y)
+                            val l2 = kotlin.math.hypot(control.x - start.x, control.y - start.y) +
+                                    kotlin.math.hypot(end.x - control.x, end.y - control.y)
+                            val approxLength = (l1 + l2) / 2f
+                            val steps = maxOf(1, kotlin.math.ceil(approxLength / stepSize).toInt())
 
-                            cumulativeDist += dist
+                            for (s in 1..steps) {
+                                val t = s.toFloat() / steps
+                                val omt = 1f - t
+                                val x = omt * omt * start.x + 2f * omt * t * control.x + t * t * end.x
+                                val y = omt * omt * start.y + 2f * omt * t * control.y + t * t * end.y
+                                val currPoint = Offset(x, y)
+
+                                val segDist = kotlin.math.hypot(currPoint.x - prevPoint.x, currPoint.y - prevPoint.y)
+                                cumulativeDist += segDist
+                                strokePaint.color = ColorPalette.rainbowColorIntAt(cumulativeDist)
+
+                                canvas.drawLine(prevPoint.x, prevPoint.y, currPoint.x, currPoint.y, strokePaint)
+                                prevPoint = currPoint
+                            }
                         }
+
+                        val firstMid = Offset(
+                            (points[0].x + points[1].x) / 2f,
+                            (points[0].y + points[1].y) / 2f
+                        )
+                        drawCurve(points[0], points[0], firstMid)
+
+                        for (i in 1 until points.size - 1) {
+                            val p0 = points[i]
+                            val p1 = points[i + 1]
+                            val nextMid = Offset((p0.x + p1.x) / 2f, (p0.y + p1.y) / 2f)
+                            val prevMid = if (i == 1) firstMid else Offset(
+                                (points[i - 1].x + p0.x) / 2f,
+                                (points[i - 1].y + p0.y) / 2f
+                            )
+                            drawCurve(prevMid, p0, nextMid)
+                        }
+
+                        val lastMid = if (points.size == 2) {
+                            firstMid
+                        } else {
+                            Offset(
+                                (points[points.size - 2].x + points.last().x) / 2f,
+                                (points[points.size - 2].y + points.last().y) / 2f
+                            )
+                        }
+                        val finalControl = Offset(
+                            (lastMid.x + points.last().x) / 2f,
+                            (lastMid.y + points.last().y) / 2f
+                        )
+                        drawCurve(lastMid, finalControl, points.last())
                         continue
                     }
 
