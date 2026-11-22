@@ -127,7 +127,12 @@ fun KidsBoardScreen(
             val isLandscape = maxWidth > maxHeight
             val shortestEdge = minOf(maxWidth, maxHeight)
             val paperPadding = 12.dp
-            val paperSize = (shortestEdge - (paperPadding * 2)).coerceAtLeast(180.dp)
+            val maxVerticalPaper = (maxHeight - 270.dp).coerceAtLeast(180.dp)
+            val paperSize = if (isLandscape) {
+                (shortestEdge - (paperPadding * 2)).coerceAtLeast(180.dp)
+            } else {
+                minOf(shortestEdge - (paperPadding * 2), maxVerticalPaper)
+            }
 
             if (isLandscape) {
                 // LANDSCAPE: Left Dock (Colors/Brush/Sound) | Center (1:1 Paper) | Right Dock (Actions/Stickers)
@@ -360,7 +365,7 @@ fun KidsBoardScreen(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Top Dock (Actions, Brush Size & Sound)
+                    // Top Bar: Canvas Setup (Left) & Sound / Share (Right)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -380,16 +385,6 @@ fun KidsBoardScreen(
                                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                BrushSizeActionButton(
-                                    brushSize = uiState.selectedBrushSize,
-                                    selectedColor = uiState.selectedColor,
-                                    isEraser = uiState.isEraser,
-                                    isRainbow = uiState.isRainbow,
-                                    onClick = {
-                                        soundManager.playClick()
-                                        viewModel.openBrushSizePicker()
-                                    }
-                                )
                                 CanvasStyleActionButton(
                                     onClick = {
                                         soundManager.playClick()
@@ -406,23 +401,6 @@ fun KidsBoardScreen(
                                         }
                                     )
                                 }
-                                SoundActionButton(
-                                    isSoundEnabled = uiState.isSoundEnabled,
-                                    onClick = {
-                                        viewModel.toggleSound()
-                                        soundManager.playClick()
-                                    }
-                                )
-                                ChunkyActionButton(
-                                    icon = Icons.Default.Delete,
-                                    contentDescription = "Clear Canvas",
-                                    onClick = {
-                                        soundManager.playClick()
-                                        viewModel.requestClearCanvas()
-                                    },
-                                    enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null,
-                                    tint = MaterialTheme.colorScheme.error
-                                )
                             }
                         }
 
@@ -437,25 +415,12 @@ fun KidsBoardScreen(
                                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                ChunkyActionButton(
-                                    icon = Icons.AutoMirrored.Filled.Undo,
-                                    contentDescription = "Undo",
+                                SoundActionButton(
+                                    isSoundEnabled = uiState.isSoundEnabled,
                                     onClick = {
+                                        viewModel.toggleSound()
                                         soundManager.playClick()
-                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        viewModel.undo()
-                                    },
-                                    enabled = uiState.canUndo
-                                )
-                                ChunkyActionButton(
-                                    icon = Icons.AutoMirrored.Filled.Redo,
-                                    contentDescription = "Redo",
-                                    onClick = {
-                                        soundManager.playClick()
-                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        viewModel.redo()
-                                    },
-                                    enabled = uiState.canRedo
+                                    }
                                 )
                                 SaveActionButton(
                                     isSaving = uiState.isSaving,
@@ -508,6 +473,62 @@ fun KidsBoardScreen(
                             onSizeChanged = viewModel::updateCanvasSize,
                             background = uiState.selectedBackground
                         )
+                    }
+
+                    // Mid Action Bar (Drawing & Editing Tools: Brush Size, Undo, Redo, Clear)
+                    Surface(
+                        modifier = Modifier.padding(bottom = 6.dp),
+                        shape = RoundedCornerShape(32.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                        tonalElevation = 4.dp,
+                        shadowElevation = 4.dp
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            BrushSizeActionButton(
+                                brushSize = uiState.selectedBrushSize,
+                                selectedColor = uiState.selectedColor,
+                                isEraser = uiState.isEraser,
+                                isRainbow = uiState.isRainbow,
+                                onClick = {
+                                    soundManager.playClick()
+                                    viewModel.openBrushSizePicker()
+                                }
+                            )
+                            ChunkyActionButton(
+                                icon = Icons.AutoMirrored.Filled.Undo,
+                                contentDescription = "Undo",
+                                onClick = {
+                                    soundManager.playClick()
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    viewModel.undo()
+                                },
+                                enabled = uiState.canUndo
+                            )
+                            ChunkyActionButton(
+                                icon = Icons.AutoMirrored.Filled.Redo,
+                                contentDescription = "Redo",
+                                onClick = {
+                                    soundManager.playClick()
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    viewModel.redo()
+                                },
+                                enabled = uiState.canRedo
+                            )
+                            ChunkyActionButton(
+                                icon = Icons.Default.Delete,
+                                contentDescription = "Clear Canvas",
+                                onClick = {
+                                    soundManager.playClick()
+                                    viewModel.requestClearCanvas()
+                                },
+                                enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null,
+                                tint = MaterialTheme.colorScheme.error
+                            )
+                        }
                     }
 
                     // Bottom Dock (Margins reclaimed for Colors & Stickers Trays)
