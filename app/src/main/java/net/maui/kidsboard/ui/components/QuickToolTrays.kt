@@ -1,9 +1,11 @@
 package net.maui.kidsboard.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,7 +29,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,11 +42,13 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.PaletteColor
 import net.maui.kidsboard.model.StampRepository
+import net.maui.kidsboard.model.StampSize
 import net.maui.kidsboard.ui.components.sticker.StickerRegistry
 
 val WarmDeskBackground = Color(0xFFF9F6F0)
@@ -214,13 +221,18 @@ fun QuickColorGrid(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun QuickStickerChip(
     emoji: String,
     isSelected: Boolean,
+    selectedStampSize: StampSize = StampSize.DEFAULT,
     onClick: () -> Unit,
+    onSizeSelected: (StampSize) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
+    var showSizeMenu by remember { mutableStateOf(false) }
+
     val background = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
     } else {
@@ -234,26 +246,64 @@ fun QuickStickerChip(
 
     val customSticker = StickerRegistry.find(emoji)
 
-    Box(
-        modifier = modifier
-            .size(42.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(background)
-            .border(borderStroke, RoundedCornerShape(12.dp))
-            .clickable(onClick = onClick)
-            .semantics {
-                contentDescription = customSticker?.contentDescription ?: "$emoji stamp"
-            },
-        contentAlignment = Alignment.Center
-    ) {
-        if (customSticker != null) {
-            customSticker.Icon(modifier = Modifier.size(28.dp))
-        } else {
-            Text(
-                text = emoji,
-                fontSize = 22.sp
-            )
+    Box(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .size(42.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(background)
+                .border(borderStroke, RoundedCornerShape(12.dp))
+                .combinedClickable(
+                    onClick = onClick,
+                    onLongClick = {
+                        onClick()
+                        showSizeMenu = true
+                    },
+                    onLongClickLabel = "Change sticker size"
+                )
+                .semantics {
+                    contentDescription = customSticker?.contentDescription ?: "$emoji stamp"
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            if (customSticker != null) {
+                customSticker.Icon(modifier = Modifier.size(28.dp))
+            } else {
+                Text(
+                    text = emoji,
+                    fontSize = 22.sp
+                )
+            }
+
+            if (isSelected) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(2.dp)
+                        .size(14.dp)
+                        .background(MaterialTheme.colorScheme.primary, CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = selectedStampSize.shortLabel,
+                        fontSize = 8.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
         }
+
+        StickerSizeDropdownMenu(
+            expanded = showSizeMenu,
+            onDismiss = { showSizeMenu = false },
+            emoji = emoji,
+            selectedSize = selectedStampSize,
+            onSizeSelected = { size ->
+                onSizeSelected(size)
+                showSizeMenu = false
+            }
+        )
     }
 }
 
@@ -261,7 +311,9 @@ fun QuickStickerChip(
 fun QuickStickerRow(
     selectedStamp: String,
     isStampActive: Boolean,
+    selectedStampSize: StampSize = StampSize.DEFAULT,
     onStampSelected: (String) -> Unit,
+    onStampSizeSelected: (StampSize) -> Unit = {},
     onOpenFullPicker: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -278,7 +330,12 @@ fun QuickStickerRow(
             QuickStickerChip(
                 emoji = emoji,
                 isSelected = isSelected,
-                onClick = { onStampSelected(emoji) }
+                selectedStampSize = selectedStampSize,
+                onClick = { onStampSelected(emoji) },
+                onSizeSelected = { size ->
+                    onStampSelected(emoji)
+                    onStampSizeSelected(size)
+                }
             )
         }
 
@@ -305,7 +362,9 @@ fun QuickStickerRow(
 fun QuickStickerGrid(
     selectedStamp: String,
     isStampActive: Boolean,
+    selectedStampSize: StampSize = StampSize.DEFAULT,
     onStampSelected: (String) -> Unit,
+    onStampSizeSelected: (StampSize) -> Unit = {},
     onOpenFullPicker: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -326,7 +385,12 @@ fun QuickStickerGrid(
                     QuickStickerChip(
                         emoji = emoji,
                         isSelected = isSelected,
-                        onClick = { onStampSelected(emoji) }
+                        selectedStampSize = selectedStampSize,
+                        onClick = { onStampSelected(emoji) },
+                        onSizeSelected = { size ->
+                            onStampSelected(emoji)
+                            onStampSizeSelected(size)
+                        }
                     )
                 }
             }

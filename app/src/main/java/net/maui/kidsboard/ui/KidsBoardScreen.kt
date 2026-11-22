@@ -229,7 +229,9 @@ fun KidsBoardScreen(
                                 QuickStickerGrid(
                                     selectedStamp = uiState.selectedStamp,
                                     isStampActive = uiState.activeTool == DrawingTool.STAMP,
+                                    selectedStampSize = uiState.selectedStampSize,
                                     onStampSelected = viewModel::selectStamp,
+                                    onStampSizeSelected = viewModel::selectStampSize,
                                     onOpenFullPicker = viewModel::openStampPicker,
                                     modifier = Modifier.weight(1f, fill = false)
                                 )
@@ -358,7 +360,9 @@ fun KidsBoardScreen(
                             QuickStickerRow(
                                 selectedStamp = uiState.selectedStamp,
                                 isStampActive = uiState.activeTool == DrawingTool.STAMP,
+                                selectedStampSize = uiState.selectedStampSize,
                                 onStampSelected = viewModel::selectStamp,
+                                onStampSizeSelected = viewModel::selectStampSize,
                                 onOpenFullPicker = viewModel::openStampPicker
                             )
                         }
@@ -389,7 +393,9 @@ fun KidsBoardScreen(
             if (uiState.isStampPickerOpen) {
                 StampPickerDialog(
                     selectedStamp = uiState.selectedStamp,
+                    selectedStampSize = uiState.selectedStampSize,
                     onStampSelected = viewModel::selectStamp,
+                    onStampSizeSelected = viewModel::selectStampSize,
                     onDismiss = viewModel::closeStampPicker
                 )
             }

@@ -23,6 +23,7 @@ import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.model.PaletteColor
 import net.maui.kidsboard.model.StampRepository
+import net.maui.kidsboard.model.StampSize
 import net.maui.kidsboard.util.DrawingExporter
 import net.maui.kidsboard.viewmodel.DrawingUiState
 import net.maui.kidsboard.viewmodel.DrawingViewModel
@@ -159,6 +160,31 @@ class DrawingViewModelTest {
         assertEquals(BrushSize.Bold.stampSize, stamp.size)
         assertTrue(state.canUndo)
         assertFalse(state.canRedo)
+    }
+
+    @Test
+    fun testSelectStampSize() {
+        viewModel.selectStampSize(StampSize.Jumbo)
+        val state = viewModel.uiState.value
+        assertEquals(StampSize.Jumbo, state.selectedStampSize)
+        assertEquals(StampSize.Jumbo.size, state.stampSize)
+        assertEquals(DrawingTool.STAMP, state.activeTool)
+    }
+
+    @Test
+    fun testSelectStampAndSize() {
+        viewModel.selectStampAndSize("🐶", StampSize.Small)
+        val state = viewModel.uiState.value
+        assertEquals("🐶", state.selectedStamp)
+        assertEquals(StampSize.Small, state.selectedStampSize)
+        assertEquals(StampSize.Small.size, state.stampSize)
+        assertEquals(DrawingTool.STAMP, state.activeTool)
+
+        val position = Offset(100f, 200f)
+        viewModel.addStamp(position)
+        val stamp = viewModel.uiState.value.elements.first() as DrawingStamp
+        assertEquals("🐶", stamp.emoji)
+        assertEquals(StampSize.Small.size, stamp.size)
     }
 
     @Test

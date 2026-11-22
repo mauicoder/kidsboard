@@ -25,6 +25,7 @@ import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.model.PaletteColor
 import net.maui.kidsboard.model.StampRepository
+import net.maui.kidsboard.model.StampSize
 import net.maui.kidsboard.util.CanvasTransformer
 import net.maui.kidsboard.util.DrawingExporter
 
@@ -40,6 +41,8 @@ data class DrawingUiState(
     val selectedColor: Color = ColorPalette.Black,
     val selectedBrushSize: BrushSize = BrushSize.Medium,
     val strokeWidth: Float = BrushSize.Medium.strokeWidth,
+    val selectedStampSize: StampSize = StampSize.DEFAULT,
+    val stampSize: Float = StampSize.DEFAULT.size,
     val isEraser: Boolean = false,
     val isRainbow: Boolean = false,
     val activeTool: DrawingTool = DrawingTool.BRUSH,
@@ -141,9 +144,12 @@ class DrawingViewModel(
 
     fun selectBrushSize(brushSize: BrushSize) {
         _uiState.update { state ->
+            val matchingStampSize = StampSize.fromSize(brushSize.stampSize)
             state.copy(
                 selectedBrushSize = brushSize,
                 strokeWidth = if (state.isEraser) DrawingUiState.ERASER_STROKE_WIDTH else brushSize.strokeWidth,
+                selectedStampSize = matchingStampSize,
+                stampSize = brushSize.stampSize,
                 isBrushSizePickerOpen = false
             )
         }
@@ -159,12 +165,34 @@ class DrawingViewModel(
         }
     }
 
+    fun selectStampSize(stampSize: StampSize) {
+        _uiState.update { state ->
+            state.copy(
+                selectedStampSize = stampSize,
+                stampSize = stampSize.size,
+                activeTool = DrawingTool.STAMP
+            )
+        }
+    }
+
+    fun selectStampAndSize(emoji: String, stampSize: StampSize) {
+        _uiState.update { state ->
+            state.copy(
+                selectedStamp = emoji,
+                selectedStampSize = stampSize,
+                stampSize = stampSize.size,
+                activeTool = DrawingTool.STAMP,
+                isStampPickerOpen = false
+            )
+        }
+    }
+
     fun addStamp(position: Offset) {
         val state = _uiState.value
         val stamp = DrawingStamp(
             emoji = state.selectedStamp,
             position = position,
-            size = state.selectedBrushSize.stampSize
+            size = state.stampSize
         )
         _uiState.update {
             it.copy(
