@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import net.maui.kidsboard.model.StampCategory
 import net.maui.kidsboard.model.StampRepository
+import net.maui.kidsboard.ui.components.sticker.StickerRegistry
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -93,10 +94,9 @@ fun StampPickerDialog(
                                         .clickable { onStampSelected(stamp) },
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    if (stamp == StampRepository.FULL_RAINBOW) {
-                                        FullRainbowStickerIcon(modifier = Modifier.size(36.dp))
-                                    } else if (stamp == "🌈") {
-                                        Rainbow180StickerIcon(modifier = Modifier.size(36.dp))
+                                    val customSticker = StickerRegistry.find(stamp)
+                                    if (customSticker != null) {
+                                        customSticker.Icon(modifier = Modifier.size(36.dp))
                                     } else {
                                         Text(
                                             text = stamp,

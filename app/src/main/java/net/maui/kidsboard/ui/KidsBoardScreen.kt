@@ -1,8 +1,6 @@
 package net.maui.kidsboard.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -18,17 +16,11 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Redo
 import androidx.compose.material.icons.automirrored.filled.Undo
-import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -42,30 +34,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
-import net.maui.kidsboard.model.BrushSize
-import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingTool
+import net.maui.kidsboard.ui.components.BrushSizeActionButton
 import net.maui.kidsboard.ui.components.BrushSizePickerDialog
 import net.maui.kidsboard.ui.components.ChunkyActionButton
 import net.maui.kidsboard.ui.components.ClearConfirmDialog
 import net.maui.kidsboard.ui.components.ColorPickerDialog
-import net.maui.kidsboard.ui.components.DrawingCanvas
+import net.maui.kidsboard.ui.components.DrawingBoardSheet
 import net.maui.kidsboard.ui.components.QuickColorGrid
 import net.maui.kidsboard.ui.components.QuickColorRow
 import net.maui.kidsboard.ui.components.QuickStickerGrid
 import net.maui.kidsboard.ui.components.QuickStickerRow
+import net.maui.kidsboard.ui.components.SaveActionButton
 import net.maui.kidsboard.ui.components.StampPickerDialog
 import net.maui.kidsboard.ui.components.WarmDeskBackground
-import net.maui.kidsboard.ui.components.WarmDeskBorder
 import net.maui.kidsboard.util.DrawingExporter
 import net.maui.kidsboard.viewmodel.DrawingViewModel
 import net.maui.kidsboard.viewmodel.SaveEvent
@@ -168,26 +156,18 @@ fun KidsBoardScreen(
                         modifier = Modifier.size(shortestEdge),
                         contentAlignment = Alignment.Center
                     ) {
-                        Surface(
-                            modifier = Modifier
-                                .size(paperSize)
-                                .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
-                                .clip(RoundedCornerShape(20.dp))
-                                .border(BorderStroke(1.5.dp, WarmDeskBorder), RoundedCornerShape(20.dp)),
-                            color = Color.White
-                        ) {
-                            DrawingCanvas(
-                                elements = uiState.elements,
-                                activeStrokes = uiState.activeStrokes,
-                                activeTool = uiState.activeTool,
-                                onStartStroke = viewModel::startStroke,
-                                onAddPoint = viewModel::addPointToStroke,
-                                onFinishStroke = viewModel::finishStroke,
-                                onFinishAllStrokes = viewModel::finishAllStrokes,
-                                onAddStamp = viewModel::addStamp,
-                                onSizeChanged = viewModel::updateCanvasSize
-                            )
-                        }
+                        DrawingBoardSheet(
+                            paperSize = paperSize,
+                            elements = uiState.elements,
+                            activeStrokes = uiState.activeStrokes,
+                            activeTool = uiState.activeTool,
+                            onStartStroke = viewModel::startStroke,
+                            onAddPoint = viewModel::addPointToStroke,
+                            onFinishStroke = viewModel::finishStroke,
+                            onFinishAllStrokes = viewModel::finishAllStrokes,
+                            onAddStamp = viewModel::addStamp,
+                            onSizeChanged = viewModel::updateCanvasSize
+                        )
                     }
 
                     // Right Dock (Margins reclaimed for Actions & Stickers)
@@ -339,26 +319,18 @@ fun KidsBoardScreen(
                             .fillMaxWidth(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Surface(
-                            modifier = Modifier
-                                .size(paperSize)
-                                .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp))
-                                .clip(RoundedCornerShape(20.dp))
-                                .border(BorderStroke(1.5.dp, WarmDeskBorder), RoundedCornerShape(20.dp)),
-                            color = Color.White
-                        ) {
-                            DrawingCanvas(
-                                elements = uiState.elements,
-                                activeStrokes = uiState.activeStrokes,
-                                activeTool = uiState.activeTool,
-                                onStartStroke = viewModel::startStroke,
-                                onAddPoint = viewModel::addPointToStroke,
-                                onFinishStroke = viewModel::finishStroke,
-                                onFinishAllStrokes = viewModel::finishAllStrokes,
-                                onAddStamp = viewModel::addStamp,
-                                onSizeChanged = viewModel::updateCanvasSize
-                            )
-                        }
+                        DrawingBoardSheet(
+                            paperSize = paperSize,
+                            elements = uiState.elements,
+                            activeStrokes = uiState.activeStrokes,
+                            activeTool = uiState.activeTool,
+                            onStartStroke = viewModel::startStroke,
+                            onAddPoint = viewModel::addPointToStroke,
+                            onFinishStroke = viewModel::finishStroke,
+                            onFinishAllStrokes = viewModel::finishAllStrokes,
+                            onAddStamp = viewModel::addStamp,
+                            onSizeChanged = viewModel::updateCanvasSize
+                        )
                     }
 
                     // Bottom Dock (Margins reclaimed for Colors & Stickers Trays)
@@ -428,93 +400,6 @@ fun KidsBoardScreen(
                     onDismiss = viewModel::dismissClearConfirm
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun BrushSizeActionButton(
-    brushSize: BrushSize,
-    selectedColor: Color,
-    isEraser: Boolean,
-    isRainbow: Boolean = false,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val displayColor = if (isEraser) Color.White else selectedColor
-    val rainbowBrush = Brush.sweepGradient(ColorPalette.RainbowSpectrum)
-    IconButton(
-        onClick = onClick,
-        modifier = modifier
-            .size(44.dp)
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.95f))
-            .border(BorderStroke(1.dp, Color(0x1A000000)), CircleShape)
-    ) {
-        Box(
-            modifier = Modifier.size(36.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Default.Brush,
-                contentDescription = "Brush & Stamp Size",
-                tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(22.dp)
-            )
-            // Active brush size dot indicator
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .size(10.dp)
-                    .clip(CircleShape)
-                    .then(
-                        if (isRainbow && !isEraser) {
-                            Modifier.background(rainbowBrush)
-                        } else {
-                            Modifier.background(displayColor)
-                        }
-                    )
-                    .border(BorderStroke(1.dp, Color(0x33000000)), CircleShape)
-            )
-        }
-    }
-}
-
-@Composable
-fun SaveActionButton(
-    isSaving: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true
-) {
-    IconButton(
-        onClick = onClick,
-        enabled = enabled && !isSaving,
-        modifier = modifier
-            .size(44.dp)
-            .clip(CircleShape)
-            .background(
-                if (enabled) MaterialTheme.colorScheme.primaryContainer
-                else MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-            )
-            .border(
-                BorderStroke(1.dp, if (enabled) MaterialTheme.colorScheme.primary.copy(alpha = 0.4f) else Color(0x1A000000)),
-                CircleShape
-            )
-    ) {
-        if (isSaving) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(20.dp),
-                strokeWidth = 2.5.dp,
-                color = MaterialTheme.colorScheme.primary
-            )
-        } else {
-            Icon(
-                imageVector = Icons.Default.Share,
-                contentDescription = "Save and Share Drawing",
-                tint = if (enabled) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
-                modifier = Modifier.size(22.dp)
-            )
         }
     }
 }

@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.PaletteColor
 import net.maui.kidsboard.model.StampRepository
+import net.maui.kidsboard.ui.components.sticker.StickerRegistry
 
 val WarmDeskBackground = Color(0xFFF9F6F0)
 val WarmDeskSurface = Color(0xFFF2ECE1)
@@ -230,6 +232,8 @@ fun QuickStickerChip(
         BorderStroke(1.dp, Color(0x22000000))
     }
 
+    val customSticker = StickerRegistry.find(emoji)
+
     Box(
         modifier = modifier
             .size(42.dp)
@@ -238,18 +242,12 @@ fun QuickStickerChip(
             .border(borderStroke, RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .semantics {
-                contentDescription = when (emoji) {
-                    StampRepository.FULL_RAINBOW -> "Full Rainbow stamp"
-                    "🌈" -> "Rainbow arch stamp"
-                    else -> "$emoji stamp"
-                }
+                contentDescription = customSticker?.contentDescription ?: "$emoji stamp"
             },
         contentAlignment = Alignment.Center
     ) {
-        if (emoji == StampRepository.FULL_RAINBOW) {
-            FullRainbowStickerIcon(modifier = Modifier.size(28.dp))
-        } else if (emoji == "🌈") {
-            Rainbow180StickerIcon(modifier = Modifier.size(28.dp))
+        if (customSticker != null) {
+            customSticker.Icon(modifier = Modifier.size(28.dp))
         } else {
             Text(
                 text = emoji,
@@ -353,33 +351,3 @@ fun QuickStickerGrid(
     }
 }
 
-@Composable
-fun ChunkyActionButton(
-    icon: ImageVector,
-    contentDescription: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    tint: Color = MaterialTheme.colorScheme.onSurface
-) {
-    IconButton(
-        onClick = onClick,
-        enabled = enabled,
-        modifier = modifier
-            .size(44.dp)
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = if (enabled) 0.95f else 0.5f))
-            .border(BorderStroke(1.dp, Color(0x1A000000)), CircleShape)
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = contentDescription,
-            tint = if (enabled) tint else tint.copy(alpha = 0.38f),
-            modifier = Modifier.size(24.dp)
-        )
-    }
-}
-
-private fun Color.luminance(): Float {
-    return 0.299f * red + 0.587f * green + 0.114f * blue
-}

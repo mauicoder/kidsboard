@@ -18,8 +18,7 @@ import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
-import net.maui.kidsboard.model.StampRepository
-import net.maui.kidsboard.ui.components.FullRainbowStickerRenderer
+import net.maui.kidsboard.ui.components.sticker.StickerRegistry
 
 open class DrawingExporter {
 
@@ -61,63 +60,10 @@ open class DrawingExporter {
                             continue
                         }
 
-                        val stepSize = maxOf(2f, minOf(6f, element.strokeWidth * 0.25f))
-                        var cumulativeDist = 0f
-                        var prevPoint = points[0]
-
-                        fun drawCurve(start: Offset, control: Offset, end: Offset) {
-                            val l1 = kotlin.math.hypot(end.x - start.x, end.y - start.y)
-                            val l2 = kotlin.math.hypot(control.x - start.x, control.y - start.y) +
-                                    kotlin.math.hypot(end.x - control.x, end.y - control.y)
-                            val approxLength = (l1 + l2) / 2f
-                            val steps = maxOf(1, kotlin.math.ceil(approxLength / stepSize).toInt())
-
-                            for (s in 1..steps) {
-                                val t = s.toFloat() / steps
-                                val omt = 1f - t
-                                val x = omt * omt * start.x + 2f * omt * t * control.x + t * t * end.x
-                                val y = omt * omt * start.y + 2f * omt * t * control.y + t * t * end.y
-                                val currPoint = Offset(x, y)
-
-                                val segDist = kotlin.math.hypot(currPoint.x - prevPoint.x, currPoint.y - prevPoint.y)
-                                cumulativeDist += segDist
-                                strokePaint.color = ColorPalette.rainbowColorIntAt(cumulativeDist)
-
-                                canvas.drawLine(prevPoint.x, prevPoint.y, currPoint.x, currPoint.y, strokePaint)
-                                prevPoint = currPoint
-                            }
+                        RainbowStrokeGeometry.forEachSubdivision(points, element.strokeWidth) { p0, p1, dist ->
+                            strokePaint.color = ColorPalette.rainbowColorIntAt(dist)
+                            canvas.drawLine(p0.x, p0.y, p1.x, p1.y, strokePaint)
                         }
-
-                        val firstMid = Offset(
-                            (points[0].x + points[1].x) / 2f,
-                            (points[0].y + points[1].y) / 2f
-                        )
-                        drawCurve(points[0], points[0], firstMid)
-
-                        for (i in 1 until points.size - 1) {
-                            val p0 = points[i]
-                            val p1 = points[i + 1]
-                            val nextMid = Offset((p0.x + p1.x) / 2f, (p0.y + p1.y) / 2f)
-                            val prevMid = if (i == 1) firstMid else Offset(
-                                (points[i - 1].x + p0.x) / 2f,
-                                (points[i - 1].y + p0.y) / 2f
-                            )
-                            drawCurve(prevMid, p0, nextMid)
-                        }
-
-                        val lastMid = if (points.size == 2) {
-                            firstMid
-                        } else {
-                            Offset(
-                                (points[points.size - 2].x + points.last().x) / 2f,
-                                (points[points.size - 2].y + points.last().y) / 2f
-                            )
-                        }
-                        val finalControl = Offset(
-                            (lastMid.x + points.last().x) / 2f,
-                            (lastMid.y + points.last().y) / 2f
-                        )
-                        drawCurve(lastMid, finalControl, points.last())
                         continue
                     }
 
@@ -143,15 +89,9 @@ open class DrawingExporter {
                     canvas.drawPath(path, strokePaint)
                 }
                 is DrawingStamp -> {
-                    if (element.emoji == StampRepository.FULL_RAINBOW) {
-                        FullRainbowStickerRenderer.drawFullRainbowToCanvas(
-                            canvas,
-                            element.position.x,
-                            element.position.y,
-                            element.size
-                        )
-                    } else if (element.emoji == "🌈") {
-                        FullRainbowStickerRenderer.drawRainbow180ToCanvas(
+                    val customSticker = StickerRegistry.find(element.emoji)
+                    if (customSticker != null) {
+                        customSticker.drawToCanvas(
                             canvas,
                             element.position.x,
                             element.position.y,
