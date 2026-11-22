@@ -15,9 +15,13 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import net.maui.kidsboard.model.BrushSize
+import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
+import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
+import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.model.PaletteColor
+import net.maui.kidsboard.model.StampRepository
 import net.maui.kidsboard.util.DrawingExporter
 import net.maui.kidsboard.viewmodel.DrawingUiState
 import net.maui.kidsboard.viewmodel.DrawingViewModel
@@ -43,7 +47,7 @@ class DrawingViewModelTest {
         var exportResult: Result<Uri> = Result.success(mock(Uri::class.java))
         override fun exportToGallery(
             context: Context,
-            strokes: List<DrawingStroke>,
+            elements: List<CanvasElement>,
             width: Int,
             height: Int
         ): Result<Uri> = exportResult
@@ -67,14 +71,18 @@ class DrawingViewModelTest {
         assertEquals(ColorPalette.Black, state.selectedColor)
         assertEquals(BrushSize.Medium, state.selectedBrushSize)
         assertEquals(BrushSize.Medium.strokeWidth, state.strokeWidth)
+        assertEquals(DrawingTool.BRUSH, state.activeTool)
+        assertEquals(StampRepository.DEFAULT_STAMP, state.selectedStamp)
         assertFalse(state.isEraser)
         assertFalse(state.isColorPickerOpen)
         assertFalse(state.isBrushSizePickerOpen)
+        assertFalse(state.isStampPickerOpen)
         assertFalse(state.isClearConfirmOpen)
         assertFalse(state.canUndo)
         assertFalse(state.canRedo)
+        assertTrue(state.elements.isEmpty())
         assertTrue(state.strokes.isEmpty())
-        assertTrue(state.redoStrokes.isEmpty())
+        assertTrue(state.redoElements.isEmpty())
         assertNull(state.currentStroke)
     }
 
@@ -86,6 +94,7 @@ class DrawingViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(ColorPalette.Red, state.selectedColor)
         assertEquals(BrushSize.Medium.strokeWidth, state.strokeWidth)
+        assertEquals(DrawingTool.BRUSH, state.activeTool)
         assertFalse(state.isEraser)
         assertFalse(state.isColorPickerOpen)
     }
@@ -98,6 +107,7 @@ class DrawingViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(ColorPalette.White, state.selectedColor)
         assertEquals(DrawingUiState.ERASER_STROKE_WIDTH, state.strokeWidth)
+        assertEquals(DrawingTool.BRUSH, state.activeTool)
         assertTrue(state.isEraser)
         assertFalse(state.isColorPickerOpen)
     }
@@ -124,6 +134,33 @@ class DrawingViewModelTest {
     }
 
     @Test
+    fun testSelectStamp() {
+        viewModel.selectStamp("🦖")
+
+        val state = viewModel.uiState.value
+        assertEquals("🦖", state.selectedStamp)
+        assertEquals(DrawingTool.STAMP, state.activeTool)
+        assertFalse(state.isStampPickerOpen)
+    }
+
+    @Test
+    fun testAddStamp() {
+        viewModel.selectStamp("🌈")
+        viewModel.selectBrushSize(BrushSize.Bold)
+        val position = Offset(150f, 250f)
+        viewModel.addStamp(position)
+
+        val state = viewModel.uiState.value
+        assertEquals(1, state.elements.size)
+        val stamp = state.elements.first() as DrawingStamp
+        assertEquals("🌈", stamp.emoji)
+        assertEquals(position, stamp.position)
+        assertEquals(BrushSize.Bold.stampSize, stamp.size)
+        assertTrue(state.canUndo)
+        assertFalse(state.canRedo)
+    }
+
+    @Test
     fun testStrokeLifecycle() {
         val startPoint = Offset(10f, 10f)
         viewModel.startStroke(startPoint)
@@ -143,6 +180,7 @@ class DrawingViewModelTest {
 
         state = viewModel.uiState.value
         assertNull(state.currentStroke)
+        assertEquals(1, state.elements.size)
         assertEquals(1, state.strokes.size)
         assertTrue(state.canUndo)
         assertFalse(state.canRedo)
@@ -150,50 +188,59 @@ class DrawingViewModelTest {
     }
 
     @Test
-    fun testUndoAndRedo() {
+    fun testUndoAndRedoWithStrokesAndStamps() {
+        // Draw stroke
         viewModel.startStroke(Offset(1f, 1f))
         viewModel.finishStroke()
 
-        viewModel.startStroke(Offset(2f, 2f))
-        viewModel.finishStroke()
+        // Place stamp
+        viewModel.selectStamp("⭐")
+        viewModel.addStamp(Offset(50f, 50f))
 
-        assertEquals(2, viewModel.uiState.value.strokes.size)
-        assertFalse(viewModel.uiState.value.canRedo)
+        assertEquals(2, viewModel.uiState.value.elements.size)
+        assertTrue(viewModel.uiState.value.elements.last() is DrawingStamp)
 
-        // Undo 1
+        // Undo stamp
         viewModel.undo()
-        assertEquals(1, viewModel.uiState.value.strokes.size)
-        assertEquals(1, viewModel.uiState.value.redoStrokes.size)
+        assertEquals(1, viewModel.uiState.value.elements.size)
+        assertTrue(viewModel.uiState.value.elements.first() is DrawingStroke)
         assertTrue(viewModel.uiState.value.canRedo)
 
-        // Redo 1
+        // Undo stroke
+        viewModel.undo()
+        assertTrue(viewModel.uiState.value.elements.isEmpty())
+
+        // Redo stroke
         viewModel.redo()
-        assertEquals(2, viewModel.uiState.value.strokes.size)
-        assertEquals(0, viewModel.uiState.value.redoStrokes.size)
+        assertEquals(1, viewModel.uiState.value.elements.size)
+        assertTrue(viewModel.uiState.value.elements.first() is DrawingStroke)
+
+        // Redo stamp
+        viewModel.redo()
+        assertEquals(2, viewModel.uiState.value.elements.size)
+        assertTrue(viewModel.uiState.value.elements.last() is DrawingStamp)
         assertFalse(viewModel.uiState.value.canRedo)
     }
 
     @Test
-    fun testNewStrokeClearsRedoHistory() {
+    fun testNewActionClearsRedoHistory() {
         viewModel.startStroke(Offset(1f, 1f))
         viewModel.finishStroke()
 
         viewModel.undo()
-        assertEquals(1, viewModel.uiState.value.redoStrokes.size)
+        assertEquals(1, viewModel.uiState.value.redoElements.size)
 
-        // Draw new stroke
-        viewModel.startStroke(Offset(5f, 5f))
-        viewModel.finishStroke()
+        // Add stamp
+        viewModel.addStamp(Offset(20f, 20f))
 
         // Redo stack should now be cleared
-        assertEquals(0, viewModel.uiState.value.redoStrokes.size)
+        assertEquals(0, viewModel.uiState.value.redoElements.size)
         assertFalse(viewModel.uiState.value.canRedo)
     }
 
     @Test
     fun testClearCanvasConfirmationFlow() {
-        viewModel.startStroke(Offset(1f, 1f))
-        viewModel.finishStroke()
+        viewModel.addStamp(Offset(10f, 10f))
 
         // Request clear
         viewModel.requestClearCanvas()
@@ -202,20 +249,20 @@ class DrawingViewModelTest {
         // Dismiss clear
         viewModel.dismissClearConfirm()
         assertFalse(viewModel.uiState.value.isClearConfirmOpen)
-        assertEquals(1, viewModel.uiState.value.strokes.size)
+        assertEquals(1, viewModel.uiState.value.elements.size)
 
         // Confirm clear
         viewModel.requestClearCanvas()
         viewModel.confirmClearCanvas()
         assertFalse(viewModel.uiState.value.isClearConfirmOpen)
-        assertTrue(viewModel.uiState.value.strokes.isEmpty())
-        assertTrue(viewModel.uiState.value.redoStrokes.isEmpty())
+        assertTrue(viewModel.uiState.value.elements.isEmpty())
+        assertTrue(viewModel.uiState.value.redoElements.isEmpty())
     }
 
     @Test
     fun testSaveDrawingEmitsSuccess() = runTest {
-        viewModel.startStroke(Offset(10f, 10f))
-        viewModel.finishStroke()
+        viewModel.selectStamp("🦄")
+        viewModel.addStamp(Offset(100f, 100f))
         viewModel.updateCanvasSize(IntSize(800, 1200))
 
         val mockContext = mock(Context::class.java)

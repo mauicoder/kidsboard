@@ -43,13 +43,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
+import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.ui.components.BrushSizePickerDialog
 import net.maui.kidsboard.ui.components.ClearConfirmDialog
 import net.maui.kidsboard.ui.components.ColorPickerDialog
 import net.maui.kidsboard.ui.components.DrawingCanvas
+import net.maui.kidsboard.ui.components.StampPickerDialog
 import net.maui.kidsboard.util.DrawingExporter
 import net.maui.kidsboard.viewmodel.DrawingViewModel
 import net.maui.kidsboard.viewmodel.SaveEvent
@@ -96,11 +99,13 @@ fun KidsBoardScreen(
         ) {
             // Fullscreen Canvas
             DrawingCanvas(
-                strokes = uiState.strokes,
+                elements = uiState.elements,
                 currentStroke = uiState.currentStroke,
+                activeTool = uiState.activeTool,
                 onStartStroke = viewModel::startStroke,
                 onAddPoint = viewModel::addPointToStroke,
                 onFinishStroke = viewModel::finishStroke,
+                onAddStamp = viewModel::addStamp,
                 onSizeChanged = viewModel::updateCanvasSize
             )
 
@@ -113,7 +118,7 @@ fun KidsBoardScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
-                // Left Pill: Drawing Tools (Color + Brush Size)
+                // Left Pill: Drawing Tools (Color + Brush Size + Stamps)
                 Surface(
                     shape = RoundedCornerShape(32.dp),
                     color = MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
@@ -125,15 +130,28 @@ fun KidsBoardScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Color Swatch Button
+                        // Color Swatch Button (Brush Mode)
                         val displayColor = if (uiState.isEraser) Color.White else uiState.selectedColor
+                        val isBrushActive = uiState.activeTool == DrawingTool.BRUSH
+                        val brushBorder = if (isBrushActive) {
+                            BorderStroke(2.5.dp, MaterialTheme.colorScheme.primary)
+                        } else {
+                            BorderStroke(1.5.dp, Color(0x33000000))
+                        }
+
                         Box(
                             modifier = Modifier
                                 .size(44.dp)
                                 .clip(CircleShape)
                                 .background(displayColor)
-                                .border(BorderStroke(2.dp, Color(0x33000000)), CircleShape)
-                                .clickable { viewModel.openColorPicker() },
+                                .border(brushBorder, CircleShape)
+                                .clickable {
+                                    if (!isBrushActive) {
+                                        viewModel.selectTool(DrawingTool.BRUSH)
+                                    } else {
+                                        viewModel.openColorPicker()
+                                    }
+                                },
                             contentAlignment = Alignment.Center
                         ) {
                             val iconColor = if (uiState.isEraser || displayColor == Color.White || displayColor == Color(0xFFFFFF00) || displayColor == Color(0xFF00FFFF)) {
@@ -149,7 +167,7 @@ fun KidsBoardScreen(
                             )
                         }
 
-                        // Brush Size Button
+                        // Brush / Stamp Size Button
                         IconButton(
                             onClick = viewModel::openBrushSizePicker
                         ) {
@@ -159,7 +177,7 @@ fun KidsBoardScreen(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Brush,
-                                    contentDescription = "Brush Thickness",
+                                    contentDescription = "Brush & Stamp Size",
                                     tint = MaterialTheme.colorScheme.onSurface
                                 )
                                 // Active brush size dot indicator
@@ -172,6 +190,41 @@ fun KidsBoardScreen(
                                         .border(BorderStroke(1.dp, Color(0x33000000)), CircleShape)
                                 )
                             }
+                        }
+
+                        // Stamp Tool Button
+                        val isStampActive = uiState.activeTool == DrawingTool.STAMP
+                        val stampBackground = if (isStampActive) {
+                            MaterialTheme.colorScheme.primaryContainer
+                        } else {
+                            Color.Transparent
+                        }
+                        val stampBorder = if (isStampActive) {
+                            BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+                        } else {
+                            BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .size(44.dp)
+                                .clip(CircleShape)
+                                .background(stampBackground)
+                                .border(stampBorder, CircleShape)
+                                .clickable {
+                                    if (isStampActive) {
+                                        viewModel.openStampPicker()
+                                    } else {
+                                        viewModel.selectTool(DrawingTool.STAMP)
+                                        viewModel.openStampPicker()
+                                    }
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            androidx.compose.material3.Text(
+                                text = uiState.selectedStamp,
+                                fontSize = 22.sp
+                            )
                         }
                     }
                 }
@@ -213,7 +266,7 @@ fun KidsBoardScreen(
                         // Clear Canvas Button
                         IconButton(
                             onClick = viewModel::requestClearCanvas,
-                            enabled = uiState.strokes.isNotEmpty() || uiState.currentStroke != null
+                            enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Delete,
@@ -224,7 +277,7 @@ fun KidsBoardScreen(
                         // Save & Share Button
                         IconButton(
                             onClick = { viewModel.saveDrawing(context) },
-                            enabled = !uiState.isSaving && (uiState.strokes.isNotEmpty() || uiState.currentStroke != null)
+                            enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
                         ) {
                             if (uiState.isSaving) {
                                 CircularProgressIndicator(
@@ -257,6 +310,14 @@ fun KidsBoardScreen(
                     activeColor = if (uiState.isEraser) Color.White else uiState.selectedColor,
                     onBrushSizeSelected = viewModel::selectBrushSize,
                     onDismiss = viewModel::closeBrushSizePicker
+                )
+            }
+
+            if (uiState.isStampPickerOpen) {
+                StampPickerDialog(
+                    selectedStamp = uiState.selectedStamp,
+                    onStampSelected = viewModel::selectStamp,
+                    onDismiss = viewModel::closeStampPicker
                 )
             }
 

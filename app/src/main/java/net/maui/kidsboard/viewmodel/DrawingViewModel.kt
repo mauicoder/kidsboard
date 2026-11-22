@@ -18,9 +18,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import net.maui.kidsboard.model.BrushSize
+import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
+import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
+import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.model.PaletteColor
+import net.maui.kidsboard.model.StampRepository
 import net.maui.kidsboard.util.DrawingExporter
 
 sealed interface SaveEvent {
@@ -29,21 +33,28 @@ sealed interface SaveEvent {
 }
 
 data class DrawingUiState(
-    val strokes: List<DrawingStroke> = emptyList(),
-    val redoStrokes: List<DrawingStroke> = emptyList(),
+    val elements: List<CanvasElement> = emptyList(),
+    val redoElements: List<CanvasElement> = emptyList(),
     val currentStroke: DrawingStroke? = null,
     val selectedColor: Color = ColorPalette.Black,
     val selectedBrushSize: BrushSize = BrushSize.Medium,
     val strokeWidth: Float = BrushSize.Medium.strokeWidth,
     val isEraser: Boolean = false,
+    val activeTool: DrawingTool = DrawingTool.BRUSH,
+    val selectedStamp: String = StampRepository.DEFAULT_STAMP,
     val isColorPickerOpen: Boolean = false,
     val isBrushSizePickerOpen: Boolean = false,
+    val isStampPickerOpen: Boolean = false,
     val isClearConfirmOpen: Boolean = false,
     val isSaving: Boolean = false,
     val canvasSize: IntSize = IntSize.Zero
 ) {
-    val canUndo: Boolean get() = strokes.isNotEmpty()
-    val canRedo: Boolean get() = redoStrokes.isNotEmpty()
+    val canUndo: Boolean get() = elements.isNotEmpty()
+    val canRedo: Boolean get() = redoElements.isNotEmpty()
+
+    // Backward-compatibility properties
+    val strokes: List<DrawingStroke> get() = elements.filterIsInstance<DrawingStroke>()
+    val redoStrokes: List<DrawingStroke> get() = redoElements.filterIsInstance<DrawingStroke>()
 
     companion object {
         const val ERASER_STROKE_WIDTH = 48f
@@ -67,6 +78,10 @@ class DrawingViewModel(
         }
     }
 
+    fun selectTool(tool: DrawingTool) {
+        _uiState.update { it.copy(activeTool = tool) }
+    }
+
     fun selectColor(paletteColor: PaletteColor) {
         _uiState.update { state ->
             val strokeWidth = if (paletteColor.isEraser) {
@@ -78,6 +93,7 @@ class DrawingViewModel(
                 selectedColor = paletteColor.color,
                 strokeWidth = strokeWidth,
                 isEraser = paletteColor.isEraser,
+                activeTool = DrawingTool.BRUSH,
                 isColorPickerOpen = false
             )
         }
@@ -89,6 +105,31 @@ class DrawingViewModel(
                 selectedBrushSize = brushSize,
                 strokeWidth = if (state.isEraser) DrawingUiState.ERASER_STROKE_WIDTH else brushSize.strokeWidth,
                 isBrushSizePickerOpen = false
+            )
+        }
+    }
+
+    fun selectStamp(emoji: String) {
+        _uiState.update { state ->
+            state.copy(
+                selectedStamp = emoji,
+                activeTool = DrawingTool.STAMP,
+                isStampPickerOpen = false
+            )
+        }
+    }
+
+    fun addStamp(position: Offset) {
+        val state = _uiState.value
+        val stamp = DrawingStamp(
+            emoji = state.selectedStamp,
+            position = position,
+            size = state.selectedBrushSize.stampSize
+        )
+        _uiState.update {
+            it.copy(
+                elements = it.elements + stamp,
+                redoElements = emptyList()
             )
         }
     }
@@ -109,8 +150,17 @@ class DrawingViewModel(
         _uiState.update { it.copy(isBrushSizePickerOpen = false) }
     }
 
+    fun openStampPicker() {
+        _uiState.update { it.copy(isStampPickerOpen = true) }
+    }
+
+    fun closeStampPicker() {
+        _uiState.update { it.copy(isStampPickerOpen = false) }
+    }
+
     fun requestClearCanvas() {
-        if (_uiState.value.strokes.isNotEmpty() || _uiState.value.currentStroke != null) {
+        val state = _uiState.value
+        if (state.elements.isNotEmpty() || state.currentStroke != null) {
             _uiState.update { it.copy(isClearConfirmOpen = true) }
         }
     }
@@ -122,8 +172,8 @@ class DrawingViewModel(
     fun confirmClearCanvas() {
         _uiState.update { state ->
             state.copy(
-                strokes = emptyList(),
-                redoStrokes = emptyList(),
+                elements = emptyList(),
+                redoElements = emptyList(),
                 currentStroke = null,
                 isClearConfirmOpen = false
             )
@@ -153,8 +203,8 @@ class DrawingViewModel(
             val finished = state.currentStroke
             if (finished != null && finished.points.isNotEmpty()) {
                 state.copy(
-                    strokes = state.strokes + finished,
-                    redoStrokes = emptyList(), // Starting a new stroke clears redo history
+                    elements = state.elements + finished,
+                    redoElements = emptyList(), // Starting a new stroke clears redo history
                     currentStroke = null
                 )
             } else {
@@ -165,11 +215,11 @@ class DrawingViewModel(
 
     fun undo() {
         _uiState.update { state ->
-            if (state.strokes.isNotEmpty()) {
-                val lastStroke = state.strokes.last()
+            if (state.elements.isNotEmpty()) {
+                val lastElement = state.elements.last()
                 state.copy(
-                    strokes = state.strokes.dropLast(1),
-                    redoStrokes = state.redoStrokes + lastStroke
+                    elements = state.elements.dropLast(1),
+                    redoElements = state.redoElements + lastElement
                 )
             } else {
                 state
@@ -179,11 +229,11 @@ class DrawingViewModel(
 
     fun redo() {
         _uiState.update { state ->
-            if (state.redoStrokes.isNotEmpty()) {
-                val strokeToRestore = state.redoStrokes.last()
+            if (state.redoElements.isNotEmpty()) {
+                val elementToRestore = state.redoElements.last()
                 state.copy(
-                    strokes = state.strokes + strokeToRestore,
-                    redoStrokes = state.redoStrokes.dropLast(1)
+                    elements = state.elements + elementToRestore,
+                    redoElements = state.redoElements.dropLast(1)
                 )
             } else {
                 state
@@ -193,7 +243,7 @@ class DrawingViewModel(
 
     fun saveDrawing(context: Context) {
         val state = _uiState.value
-        if (state.isSaving || (state.strokes.isEmpty() && state.currentStroke == null)) return
+        if (state.isSaving || (state.elements.isEmpty() && state.currentStroke == null)) return
 
         val width = if (state.canvasSize.width > 0) state.canvasSize.width else 1080
         val height = if (state.canvasSize.height > 0) state.canvasSize.height else 1920
@@ -203,7 +253,7 @@ class DrawingViewModel(
         viewModelScope.launch(ioDispatcher) {
             val result = exporter.exportToGallery(
                 context = context,
-                strokes = state.strokes,
+                elements = state.elements,
                 width = width,
                 height = height
             )

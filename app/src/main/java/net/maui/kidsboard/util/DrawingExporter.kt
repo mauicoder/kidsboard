@@ -13,12 +13,14 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.compose.ui.graphics.toArgb
+import net.maui.kidsboard.model.CanvasElement
+import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 
 open class DrawingExporter {
 
     open fun renderToBitmap(
-        strokes: List<DrawingStroke>,
+        elements: List<CanvasElement>,
         width: Int,
         height: Int
     ): Bitmap {
@@ -28,38 +30,52 @@ open class DrawingExporter {
         // Fill background with white
         canvas.drawColor(AndroidColor.WHITE)
 
-        val paint = Paint().apply {
+        val strokePaint = Paint().apply {
             isAntiAlias = true
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
             strokeJoin = Paint.Join.ROUND
         }
 
-        for (stroke in strokes) {
-            val points = stroke.points
-            if (points.isEmpty()) continue
+        val stampPaint = Paint().apply {
+            isAntiAlias = true
+            textAlign = Paint.Align.CENTER
+        }
 
-            paint.color = stroke.color.toArgb()
-            paint.strokeWidth = stroke.strokeWidth
+        for (element in elements) {
+            when (element) {
+                is DrawingStroke -> {
+                    val points = element.points
+                    if (points.isEmpty()) continue
 
-            if (points.size == 1) {
-                canvas.drawCircle(points[0].x, points[0].y, stroke.strokeWidth / 2f, paint)
-                continue
-            }
+                    strokePaint.color = element.color.toArgb()
+                    strokePaint.strokeWidth = element.strokeWidth
 
-            val path = Path().apply {
-                moveTo(points[0].x, points[0].y)
-                for (i in 1 until points.size) {
-                    val p0 = points[i - 1]
-                    val p1 = points[i]
-                    val midX = (p0.x + p1.x) / 2f
-                    val midY = (p0.y + p1.y) / 2f
-                    quadTo(p0.x, p0.y, midX, midY)
+                    if (points.size == 1) {
+                        canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
+                        continue
+                    }
+
+                    val path = Path().apply {
+                        moveTo(points[0].x, points[0].y)
+                        for (i in 1 until points.size) {
+                            val p0 = points[i - 1]
+                            val p1 = points[i]
+                            val midX = (p0.x + p1.x) / 2f
+                            val midY = (p0.y + p1.y) / 2f
+                            quadTo(p0.x, p0.y, midX, midY)
+                        }
+                        lineTo(points.last().x, points.last().y)
+                    }
+
+                    canvas.drawPath(path, strokePaint)
                 }
-                lineTo(points.last().x, points.last().y)
+                is DrawingStamp -> {
+                    stampPaint.textSize = element.size
+                    val yPos = element.position.y - (stampPaint.descent() + stampPaint.ascent()) / 2f
+                    canvas.drawText(element.emoji, element.position.x, yPos, stampPaint)
+                }
             }
-
-            canvas.drawPath(path, paint)
         }
 
         return bitmap
@@ -67,12 +83,12 @@ open class DrawingExporter {
 
     open fun exportToGallery(
         context: Context,
-        strokes: List<DrawingStroke>,
+        elements: List<CanvasElement>,
         width: Int,
         height: Int
     ): Result<Uri> {
         return runCatching {
-            val bitmap = renderToBitmap(strokes, width, height)
+            val bitmap = renderToBitmap(elements, width, height)
             val filename = "KidsBoard_${System.currentTimeMillis()}.png"
 
             val contentValues = ContentValues().apply {
