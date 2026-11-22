@@ -44,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
 import net.maui.kidsboard.audio.KidsSoundManager
+import net.maui.kidsboard.model.BackgroundCategory
 import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.model.StampRepository
@@ -55,6 +56,7 @@ import net.maui.kidsboard.ui.components.ChunkyActionButton
 import net.maui.kidsboard.ui.components.ClearConfirmDialog
 import net.maui.kidsboard.ui.components.ColorPickerDialog
 import net.maui.kidsboard.ui.components.DrawingBoardSheet
+import net.maui.kidsboard.ui.components.MagicWandActionButton
 import net.maui.kidsboard.ui.components.QuickColorGrid
 import net.maui.kidsboard.ui.components.QuickColorRow
 import net.maui.kidsboard.ui.components.QuickStickerGrid
@@ -289,13 +291,24 @@ fun KidsBoardScreen(
                                                 viewModel.openBackgroundPicker()
                                             }
                                         )
-                                        SoundActionButton(
-                                            isSoundEnabled = uiState.isSoundEnabled,
-                                            onClick = {
-                                                viewModel.toggleSound()
-                                                soundManager.playClick()
-                                            }
-                                        )
+                                        if (uiState.selectedBackground.category == BackgroundCategory.COLORING) {
+                                            MagicWandActionButton(
+                                                isActive = uiState.isStayInsideLines,
+                                                onClick = {
+                                                    soundManager.playStamp(isMagical = true)
+                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                    viewModel.toggleStayInsideLines()
+                                                }
+                                            )
+                                        } else {
+                                            SoundActionButton(
+                                                isSoundEnabled = uiState.isSoundEnabled,
+                                                onClick = {
+                                                    viewModel.toggleSound()
+                                                    soundManager.playClick()
+                                                }
+                                            )
+                                        }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                         ChunkyActionButton(
@@ -383,6 +396,16 @@ fun KidsBoardScreen(
                                         viewModel.openBackgroundPicker()
                                     }
                                 )
+                                if (uiState.selectedBackground.category == BackgroundCategory.COLORING) {
+                                    MagicWandActionButton(
+                                        isActive = uiState.isStayInsideLines,
+                                        onClick = {
+                                            soundManager.playStamp(isMagical = true)
+                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                            viewModel.toggleStayInsideLines()
+                                        }
+                                    )
+                                }
                                 SoundActionButton(
                                     isSoundEnabled = uiState.isSoundEnabled,
                                     onClick = {

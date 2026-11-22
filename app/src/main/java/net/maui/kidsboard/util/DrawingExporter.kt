@@ -17,6 +17,8 @@ import androidx.compose.ui.graphics.toArgb
 import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
+import net.maui.kidsboard.model.ColoringRegion
+import net.maui.kidsboard.model.ColoringRegionManager
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.ui.components.background.CanvasBackgroundRenderer
@@ -38,13 +40,15 @@ open class DrawingExporter {
     ): Bitmap {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
+        val w = width.toFloat()
+        val h = height.toFloat()
 
-        // Render background paper and coloring outlines
-        CanvasBackgroundRenderer.drawToAndroidCanvas(
+        // 1. Render background paper base
+        CanvasBackgroundRenderer.drawPaperBaseToAndroidCanvas(
             canvas = canvas,
             background = background,
-            width = width.toFloat(),
-            height = height.toFloat()
+            width = w,
+            height = h
         )
 
         val strokePaint = Paint().apply {
@@ -59,68 +63,131 @@ open class DrawingExporter {
             textAlign = Paint.Align.CENTER
         }
 
+        // 2. Render user strokes with clipping (clipped strokes stay inside target region)
         for (element in elements) {
-            when (element) {
-                is DrawingStroke -> {
-                    val points = element.points
-                    if (points.isEmpty()) continue
+            if (element is DrawingStroke) {
+                drawClippedStrokeToAndroidCanvas(canvas, element, background, w, h, strokePaint)
+            }
+        }
 
-                    strokePaint.strokeWidth = element.strokeWidth
+        // 3. Render coloring outlines on top of user strokes so lines stay sharp
+        CanvasBackgroundRenderer.drawColoringOutlinesToAndroidCanvas(
+            canvas = canvas,
+            background = background,
+            width = w,
+            height = h
+        )
 
-                    if (element.isRainbow) {
-                        if (points.size == 1) {
-                            strokePaint.color = ColorPalette.rainbowColorIntAt(0f)
-                            canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
-                            continue
-                        }
-
-                        RainbowStrokeGeometry.forEachSubdivision(points, element.strokeWidth) { p0, p1, dist ->
-                            strokePaint.color = ColorPalette.rainbowColorIntAt(dist)
-                            canvas.drawLine(p0.x, p0.y, p1.x, p1.y, strokePaint)
-                        }
-                        continue
-                    }
-
-                    strokePaint.color = element.color.toArgb()
-
-                    if (points.size == 1) {
-                        canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
-                        continue
-                    }
-
-                    val path = Path().apply {
-                        moveTo(points[0].x, points[0].y)
-                        for (i in 1 until points.size) {
-                            val p0 = points[i - 1]
-                            val p1 = points[i]
-                            val midX = (p0.x + p1.x) / 2f
-                            val midY = (p0.y + p1.y) / 2f
-                            quadTo(p0.x, p0.y, midX, midY)
-                        }
-                        lineTo(points.last().x, points.last().y)
-                    }
-
-                    canvas.drawPath(path, strokePaint)
-                }
-                is DrawingStamp -> {
-                    val customSticker = StickerRegistry.find(element.emoji)
-                    if (customSticker != null) {
-                        customSticker.drawToCanvas(
-                            canvas,
-                            element.position.x,
-                            element.position.y,
-                            element.size
-                        )
-                    } else {
-                        stampPaint.textSize = element.size
-                        val yPos = element.position.y - (stampPaint.descent() + stampPaint.ascent()) / 2f
-                        canvas.drawText(element.emoji, element.position.x, yPos, stampPaint)
-                    }
-                }
+        // 4. Render placed stamps/stickers on top
+        for (element in elements) {
+            if (element is DrawingStamp) {
+                drawStampToAndroidCanvas(canvas, element, stampPaint)
             }
         }
 
         return bitmap
+    }
+
+    private fun drawClippedStrokeToAndroidCanvas(
+        canvas: Canvas,
+        stroke: DrawingStroke,
+        background: CanvasBackground,
+        width: Float,
+        height: Float,
+        strokePaint: Paint
+    ) {
+        if (stroke.clipRegionId == null) {
+            drawStrokeToAndroidCanvas(canvas, stroke, strokePaint)
+            return
+        }
+
+        canvas.save()
+        if (stroke.clipRegionId == ColoringRegion.OUTSIDE_REGION_ID) {
+            val unionPath = ColoringRegionManager.getCharacterUnionAndroidPath(background, width, height)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                canvas.clipOutPath(unionPath)
+            } else {
+                val inversePath = Path().apply {
+                    addRect(0f, 0f, width, height, Path.Direction.CW)
+                    op(unionPath, Path.Op.DIFFERENCE)
+                }
+                canvas.clipPath(inversePath)
+            }
+        } else {
+            val region = ColoringRegionManager.getRegionById(background, stroke.clipRegionId)
+            if (region != null) {
+                val regionPath = region.toAndroidPath(width, height)
+                canvas.clipPath(regionPath)
+            }
+        }
+        drawStrokeToAndroidCanvas(canvas, stroke, strokePaint)
+        canvas.restore()
+    }
+
+    private fun drawStrokeToAndroidCanvas(
+        canvas: Canvas,
+        element: DrawingStroke,
+        strokePaint: Paint
+    ) {
+        val points = element.points
+        if (points.isEmpty()) return
+
+        strokePaint.strokeWidth = element.strokeWidth
+
+        if (element.isRainbow) {
+            if (points.size == 1) {
+                strokePaint.color = ColorPalette.rainbowColorIntAt(0f)
+                canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
+                return
+            }
+
+            RainbowStrokeGeometry.forEachSubdivision(points, element.strokeWidth) { p0, p1, dist ->
+                strokePaint.color = ColorPalette.rainbowColorIntAt(dist)
+                canvas.drawLine(p0.x, p0.y, p1.x, p1.y, strokePaint)
+            }
+            return
+        }
+
+        strokePaint.color = element.color.toArgb()
+
+        if (points.size == 1) {
+            canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
+            return
+        }
+
+        val path = Path().apply {
+            moveTo(points[0].x, points[0].y)
+            for (i in 1 until points.size) {
+                val p0 = points[i - 1]
+                val p1 = points[i]
+                val midX = (p0.x + p1.x) / 2f
+                val midY = (p0.y + p1.y) / 2f
+                quadTo(p0.x, p0.y, midX, midY)
+            }
+            lineTo(points.last().x, points.last().y)
+        }
+
+        canvas.drawPath(path, strokePaint)
+    }
+
+    private fun drawStampToAndroidCanvas(
+        canvas: Canvas,
+        element: DrawingStamp,
+        stampPaint: Paint
+    ) {
+        val customSticker = StickerRegistry.find(element.emoji)
+        if (customSticker != null) {
+            customSticker.drawToCanvas(
+                canvas,
+                element.position.x,
+                element.position.y,
+                element.size
+            )
+        } else {
+            stampPaint.textSize = element.size
+            val yPos = element.position.y - (stampPaint.descent() + stampPaint.ascent()) / 2f
+            canvas.drawText(element.emoji, element.position.x, yPos, stampPaint)
+        }
     }
 
     open fun exportToGallery(

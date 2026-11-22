@@ -19,6 +19,7 @@ import net.maui.kidsboard.model.BrushSize
 import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
+import net.maui.kidsboard.model.ColoringRegion
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
@@ -83,6 +84,7 @@ class DrawingViewModelTest {
         assertEquals(DrawingTool.BRUSH, state.activeTool)
         assertEquals(StampRepository.DEFAULT_STAMP, state.selectedStamp)
         assertFalse(state.isEraser)
+        assertFalse(state.isStayInsideLines)
         assertFalse(state.isColorPickerOpen)
         assertFalse(state.isBrushSizePickerOpen)
         assertFalse(state.isStampPickerOpen)
@@ -105,6 +107,7 @@ class DrawingViewModelTest {
         assertEquals(BrushSize.Medium.strokeWidth, state.strokeWidth)
         assertEquals(DrawingTool.BRUSH, state.activeTool)
         assertFalse(state.isEraser)
+        assertFalse(state.isStayInsideLines)
         assertFalse(state.isColorPickerOpen)
     }
 
@@ -733,5 +736,59 @@ class DrawingViewModelTest {
         assertTrue(receivedEvent is SaveEvent.Success)
         assertEquals(CanvasBackground.CuteBear, fakeExporter.lastExportedBackground)
         job.cancel()
+    }
+
+    @Test
+    fun testStayInsideLinesDefaultAndToggle() {
+        assertFalse(viewModel.uiState.value.isStayInsideLines)
+
+        viewModel.toggleStayInsideLines()
+        assertTrue(viewModel.uiState.value.isStayInsideLines)
+
+        viewModel.toggleStayInsideLines()
+        assertFalse(viewModel.uiState.value.isStayInsideLines)
+    }
+
+    @Test
+    fun testStrokeRegionAssignmentWithMagicModeOn() {
+        viewModel.updateCanvasSize(IntSize(1000, 1000))
+        viewModel.selectBackground(CanvasBackground.CuteBear)
+        viewModel.toggleStayInsideLines()
+
+        // Snout Muzzle center (0.50, 0.48) -> 500, 480
+        viewModel.startStroke(1L, Offset(500f, 480f))
+        val snoutStroke = viewModel.uiState.value.activeStrokes[1L]
+        assertNotNull(snoutStroke)
+        assertEquals(105, snoutStroke?.clipRegionId)
+
+        // Point outside the bear figure -> (50, 50)
+        viewModel.startStroke(2L, Offset(50f, 50f))
+        val outsideStroke = viewModel.uiState.value.activeStrokes[2L]
+        assertNotNull(outsideStroke)
+        assertEquals(ColoringRegion.OUTSIDE_REGION_ID, outsideStroke?.clipRegionId)
+    }
+
+    @Test
+    fun testStrokeRegionAssignmentWithMagicModeOff() {
+        viewModel.updateCanvasSize(IntSize(1000, 1000))
+        viewModel.selectBackground(CanvasBackground.CuteBear)
+        // Magic mode is OFF by default
+
+        viewModel.startStroke(1L, Offset(500f, 480f))
+        val stroke = viewModel.uiState.value.activeStrokes[1L]
+        assertNotNull(stroke)
+        assertNull(stroke?.clipRegionId)
+    }
+
+    @Test
+    fun testStrokeRegionAssignmentOnPlainPaperIgnored() {
+        viewModel.updateCanvasSize(IntSize(1000, 1000))
+        viewModel.selectBackground(CanvasBackground.PlainWhite)
+        viewModel.toggleStayInsideLines() // Magic mode ON, but paper is PlainWhite
+
+        viewModel.startStroke(1L, Offset(500f, 480f))
+        val stroke = viewModel.uiState.value.activeStrokes[1L]
+        assertNotNull(stroke)
+        assertNull(stroke?.clipRegionId)
     }
 }

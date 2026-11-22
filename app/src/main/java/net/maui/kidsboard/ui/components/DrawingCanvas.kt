@@ -11,12 +11,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.input.pointer.pointerInput
@@ -25,6 +27,8 @@ import androidx.compose.ui.unit.IntSize
 import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
+import net.maui.kidsboard.model.ColoringRegion
+import net.maui.kidsboard.model.ColoringRegionManager
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
@@ -119,21 +123,56 @@ fun DrawingCanvas(
                 }
             }
     ) {
-        // Draw background paper style and coloring template outlines
+        // 1. Draw background paper style base
         CanvasBackgroundRenderer.run {
-            drawCanvasBackground(background)
+            drawPaperBase(background)
         }
 
-        // Draw committed elements in chronological order
+        // 2. Draw user strokes with clipping (so strokes stay inside their tapped region)
         elements.forEach { element ->
-            when (element) {
-                is DrawingStroke -> drawStroke(element)
-                is DrawingStamp -> drawStamp(element, stampPaint)
+            if (element is DrawingStroke) {
+                drawClippedStroke(element, background)
             }
         }
 
-        // Draw all active in-progress multi-touch strokes
+        // 3. Draw template black outlines on top of user strokes so lines stay crisp and sharp
+        CanvasBackgroundRenderer.run {
+            drawColoringOutlines(background)
+        }
+
+        // 4. Draw placed stamps/stickers on top
+        elements.forEach { element ->
+            if (element is DrawingStamp) {
+                drawStamp(element, stampPaint)
+            }
+        }
+
+        // 5. Draw active in-progress multi-touch strokes (clipped in real-time)
         activeStrokes.values.forEach { stroke ->
+            drawClippedStroke(stroke, background)
+        }
+    }
+}
+
+private fun DrawScope.drawClippedStroke(stroke: DrawingStroke, background: CanvasBackground) {
+    if (stroke.clipRegionId == null) {
+        drawStroke(stroke)
+        return
+    }
+
+    if (stroke.clipRegionId == ColoringRegion.OUTSIDE_REGION_ID) {
+        val unionPath = ColoringRegionManager.getCharacterUnionComposePath(background, size.width, size.height)
+        clipPath(unionPath, clipOp = ClipOp.Difference) {
+            drawStroke(stroke)
+        }
+    } else {
+        val region = ColoringRegionManager.getRegionById(background, stroke.clipRegionId)
+        if (region != null) {
+            val regionPath = region.toComposePath(size.width, size.height)
+            clipPath(regionPath, clipOp = ClipOp.Intersect) {
+                drawStroke(stroke)
+            }
+        } else {
             drawStroke(stroke)
         }
     }

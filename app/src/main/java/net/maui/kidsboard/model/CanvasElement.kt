@@ -16,7 +16,8 @@ data class DrawingStroke(
     val color: Color,
     val strokeWidth: Float,
     val isEraser: Boolean = false,
-    val isRainbow: Boolean = false
+    val isRainbow: Boolean = false,
+    val clipRegionId: Int? = null
 ) : CanvasElement
 
 /**

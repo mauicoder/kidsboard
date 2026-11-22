@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.filled.AutoFixHigh
 import androidx.compose.material.icons.filled.AutoStories
 import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.Share
@@ -171,4 +172,40 @@ fun CanvasStyleActionButton(
         modifier = modifier,
         tint = MaterialTheme.colorScheme.primary
     )
+}
+
+@Composable
+fun MagicWandActionButton(
+    isActive: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val activeBackgroundColor = Color(0xFFFFE082)
+    val inactiveBackgroundColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f)
+    val activeBorderColor = Color(0xFFFFB300)
+    val inactiveBorderColor = Color(0x1A000000)
+    val activeTint = Color(0xFFE65100)
+    val inactiveTint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+
+    IconButton(
+        onClick = onClick,
+        modifier = modifier
+            .size(44.dp)
+            .clip(CircleShape)
+            .background(if (isActive) activeBackgroundColor else inactiveBackgroundColor)
+            .border(
+                BorderStroke(
+                    if (isActive) 1.5.dp else 1.dp,
+                    if (isActive) activeBorderColor else inactiveBorderColor
+                ),
+                CircleShape
+            )
+    ) {
+        Icon(
+            imageVector = Icons.Default.AutoFixHigh,
+            contentDescription = if (isActive) "Magic Stay Inside Lines (Enabled)" else "Magic Stay Inside Lines (Disabled)",
+            tint = if (isActive) activeTint else inactiveTint,
+            modifier = Modifier.size(24.dp)
+        )
+    }
 }

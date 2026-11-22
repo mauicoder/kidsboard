@@ -19,10 +19,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import net.maui.kidsboard.data.SoundPreferences
+import net.maui.kidsboard.model.BackgroundCategory
 import net.maui.kidsboard.model.BrushSize
 import net.maui.kidsboard.model.CanvasBackground
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
+import net.maui.kidsboard.model.ColoringRegion
+import net.maui.kidsboard.model.ColoringRegionManager
 import net.maui.kidsboard.model.DrawingStamp
 import net.maui.kidsboard.model.DrawingStroke
 import net.maui.kidsboard.model.DrawingTool
@@ -57,6 +60,7 @@ data class DrawingUiState(
     val isClearConfirmOpen: Boolean = false,
     val isSaving: Boolean = false,
     val isSoundEnabled: Boolean = true,
+    val isStayInsideLines: Boolean = false,
     val selectedBackground: CanvasBackground = CanvasBackground.PlainWhite,
     val canvasSize: IntSize = IntSize.Zero,
     val contentWidth: Float = 0f,
@@ -288,6 +292,10 @@ class DrawingViewModel(
         }
     }
 
+    fun toggleStayInsideLines() {
+        _uiState.update { it.copy(isStayInsideLines = !it.isStayInsideLines) }
+    }
+
     fun requestClearCanvas() {
         val state = _uiState.value
         if (state.elements.isNotEmpty() || state.activeStrokes.isNotEmpty()) {
@@ -316,12 +324,28 @@ class DrawingViewModel(
 
     fun startStroke(pointerId: Long, point: Offset) {
         val state = _uiState.value
+        val width = if (state.contentWidth > 0f) state.contentWidth else state.canvasSize.width.toFloat()
+        val height = if (state.contentHeight > 0f) state.contentHeight else state.canvasSize.height.toFloat()
+
+        val clipRegionId = if (state.isStayInsideLines &&
+            state.selectedBackground.category == BackgroundCategory.COLORING &&
+            width > 0f && height > 0f
+        ) {
+            val normX = (point.x / width).coerceIn(0f, 1f)
+            val normY = (point.y / height).coerceIn(0f, 1f)
+            val region = ColoringRegionManager.findRegionAt(state.selectedBackground, normX, normY)
+            region?.id ?: ColoringRegion.OUTSIDE_REGION_ID
+        } else {
+            null
+        }
+
         val stroke = DrawingStroke(
             points = listOf(point),
             color = if (state.isEraser) state.selectedBackground.baseColor else state.selectedColor,
             strokeWidth = state.strokeWidth,
             isEraser = state.isEraser,
-            isRainbow = state.isRainbow
+            isRainbow = state.isRainbow,
+            clipRegionId = clipRegionId
         )
         _uiState.update { it.copy(activeStrokes = it.activeStrokes + (pointerId to stroke)) }
     }

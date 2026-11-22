@@ -366,7 +366,7 @@ object ColoringOutlineTemplates {
         )
     }
 
-    private fun starElement(cx: Float, cy: Float, size: Float): OutlineElement {
+    internal fun starElement(cx: Float, cy: Float, size: Float): OutlineElement {
         val half = size / 2f
         val quarter = size / 4f
         return OutlineElement.Path(

@@ -36,11 +36,15 @@ object CanvasBackgroundRenderer {
     // --- COMPOSE DRAWSCOPE RENDERING ---
 
     fun DrawScope.drawCanvasBackground(background: CanvasBackground) {
+        drawPaperBase(background)
+        drawColoringOutlines(background)
+    }
+
+    fun DrawScope.drawPaperBase(background: CanvasBackground) {
         val width = size.width
         val height = size.height
         if (width <= 0f || height <= 0f) return
 
-        // 1. Draw Paper Background
         when (background) {
             CanvasBackground.PlainWhite -> {
                 drawRect(color = Color.White, size = size)
@@ -107,8 +111,13 @@ object CanvasBackgroundRenderer {
                 drawRect(color = Color.White, size = size)
             }
         }
+    }
 
-        // 2. Draw Outline Templates (if applicable)
+    fun DrawScope.drawColoringOutlines(background: CanvasBackground) {
+        val width = size.width
+        val height = size.height
+        if (width <= 0f || height <= 0f) return
+
         if (background.category == BackgroundCategory.COLORING) {
             val elements = ColoringOutlineTemplates.getTemplate(background)
             val strokeWidth = (width / 100f).coerceIn(3.5f, 7.5f)
@@ -202,6 +211,16 @@ object CanvasBackgroundRenderer {
         width: Float,
         height: Float
     ) {
+        drawPaperBaseToAndroidCanvas(canvas, background, width, height)
+        drawColoringOutlinesToAndroidCanvas(canvas, background, width, height)
+    }
+
+    fun drawPaperBaseToAndroidCanvas(
+        canvas: Canvas,
+        background: CanvasBackground,
+        width: Float,
+        height: Float
+    ) {
         if (width <= 0f || height <= 0f) return
 
         val bgPaint = AndroidPaint().apply {
@@ -216,7 +235,6 @@ object CanvasBackgroundRenderer {
             strokeJoin = AndroidPaint.Join.ROUND
         }
 
-        // 1. Draw Paper Base
         when (background) {
             CanvasBackground.PlainWhite -> {
                 bgPaint.color = AndroidColor.WHITE
@@ -273,61 +291,68 @@ object CanvasBackgroundRenderer {
                 canvas.drawRect(0f, 0f, width, height, bgPaint)
             }
         }
+    }
 
-        // 2. Draw Outline Templates
-        if (background.category == BackgroundCategory.COLORING) {
-            val elements = ColoringOutlineTemplates.getTemplate(background)
-            val strokeWidth = (width / 100f).coerceIn(3.5f, 7.5f)
-            val outlineColor = (if (background.isDark) ChalkOutlineColor else OutlineColor).toArgb()
+    fun drawColoringOutlinesToAndroidCanvas(
+        canvas: Canvas,
+        background: CanvasBackground,
+        width: Float,
+        height: Float
+    ) {
+        if (width <= 0f || height <= 0f) return
+        if (background.category != BackgroundCategory.COLORING) return
 
-            val strokePaint = AndroidPaint().apply {
-                isAntiAlias = true
-                style = AndroidPaint.Style.STROKE
-                color = outlineColor
-                this.strokeWidth = strokeWidth
-                strokeCap = AndroidPaint.Cap.ROUND
-                strokeJoin = AndroidPaint.Join.ROUND
-            }
+        val strokeWidth = (width / 100f).coerceIn(3.5f, 7.5f)
+        val outlineColor = (if (background.isDark) ChalkOutlineColor else OutlineColor).toArgb()
 
-            val fillPaint = AndroidPaint().apply {
-                isAntiAlias = true
-                style = AndroidPaint.Style.FILL
-                color = outlineColor
-            }
+        val strokePaint = AndroidPaint().apply {
+            isAntiAlias = true
+            style = AndroidPaint.Style.STROKE
+            color = outlineColor
+            this.strokeWidth = strokeWidth
+            strokeCap = AndroidPaint.Cap.ROUND
+            strokeJoin = AndroidPaint.Join.ROUND
+        }
 
-            val ovalRect = AndroidRectF()
+        val fillPaint = AndroidPaint().apply {
+            isAntiAlias = true
+            style = AndroidPaint.Style.FILL
+            color = outlineColor
+        }
 
-            for (element in elements) {
-                when (element) {
-                    is OutlineElement.Circle -> {
-                        val cx = element.cx * width
-                        val cy = element.cy * height
-                        val r = element.radius * width
-                        if (element.isFilled) {
-                            canvas.drawCircle(cx, cy, r, fillPaint)
-                        } else {
-                            canvas.drawCircle(cx, cy, r, strokePaint)
-                        }
+        val ovalRect = AndroidRectF()
+        val elements = ColoringOutlineTemplates.getTemplate(background)
+
+        for (element in elements) {
+            when (element) {
+                is OutlineElement.Circle -> {
+                    val cx = element.cx * width
+                    val cy = element.cy * height
+                    val r = element.radius * width
+                    if (element.isFilled) {
+                        canvas.drawCircle(cx, cy, r, fillPaint)
+                    } else {
+                        canvas.drawCircle(cx, cy, r, strokePaint)
                     }
-                    is OutlineElement.Oval -> {
-                        val left = (element.cx - element.rx) * width
-                        val top = (element.cy - element.ry) * height
-                        val right = (element.cx + element.rx) * width
-                        val bottom = (element.cy + element.ry) * height
-                        ovalRect.set(left, top, right, bottom)
-                        if (element.isFilled) {
-                            canvas.drawOval(ovalRect, fillPaint)
-                        } else {
-                            canvas.drawOval(ovalRect, strokePaint)
-                        }
+                }
+                is OutlineElement.Oval -> {
+                    val left = (element.cx - element.rx) * width
+                    val top = (element.cy - element.ry) * height
+                    val right = (element.cx + element.rx) * width
+                    val bottom = (element.cy + element.ry) * height
+                    ovalRect.set(left, top, right, bottom)
+                    if (element.isFilled) {
+                        canvas.drawOval(ovalRect, fillPaint)
+                    } else {
+                        canvas.drawOval(ovalRect, strokePaint)
                     }
-                    is OutlineElement.Path -> {
-                        val path = buildAndroidPath(element.actions, width, height, element.isClosed)
-                        if (element.isFilled) {
-                            canvas.drawPath(path, fillPaint)
-                        } else {
-                            canvas.drawPath(path, strokePaint)
-                        }
+                }
+                is OutlineElement.Path -> {
+                    val path = buildAndroidPath(element.actions, width, height, element.isClosed)
+                    if (element.isFilled) {
+                        canvas.drawPath(path, fillPaint)
+                    } else {
+                        canvas.drawPath(path, strokePaint)
                     }
                 }
             }
