@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -40,6 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -92,28 +94,42 @@ fun KidsBoardScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) { contentPadding ->
-        Box(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
+                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
+            contentAlignment = Alignment.Center
         ) {
-            // Fullscreen Canvas
-            DrawingCanvas(
-                elements = uiState.elements,
-                activeStrokes = uiState.activeStrokes,
-                activeTool = uiState.activeTool,
-                onStartStroke = viewModel::startStroke,
-                onAddPoint = viewModel::addPointToStroke,
-                onFinishStroke = viewModel::finishStroke,
-                onFinishAllStrokes = viewModel::finishAllStrokes,
-                onAddStamp = viewModel::addStamp,
-                onSizeChanged = viewModel::updateCanvasSize
-            )
+            val canvasSide = minOf(maxWidth, maxHeight)
+
+            // Kid-friendly "Drawing Board" Paper Sheet
+            Surface(
+                modifier = Modifier
+                    .size(canvasSide)
+                    .padding(8.dp)
+                    .shadow(elevation = 6.dp, shape = RoundedCornerShape(16.dp))
+                    .clip(RoundedCornerShape(16.dp)),
+                color = Color.White
+            ) {
+                DrawingCanvas(
+                    elements = uiState.elements,
+                    activeStrokes = uiState.activeStrokes,
+                    activeTool = uiState.activeTool,
+                    onStartStroke = viewModel::startStroke,
+                    onAddPoint = viewModel::addPointToStroke,
+                    onFinishStroke = viewModel::finishStroke,
+                    onFinishAllStrokes = viewModel::finishAllStrokes,
+                    onAddStamp = viewModel::addStamp,
+                    onSizeChanged = viewModel::updateCanvasSize
+                )
+            }
 
             // Split Top Floating Toolbar
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .align(Alignment.TopCenter)
                     .padding(WindowInsets.safeDrawing.asPaddingValues())
                     .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,

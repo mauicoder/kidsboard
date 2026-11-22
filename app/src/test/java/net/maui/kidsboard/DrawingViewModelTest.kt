@@ -424,4 +424,37 @@ class DrawingViewModelTest {
         assertEquals(500f, stroke.points[0].y, 0.01f)
         assertEquals(10f, stroke.strokeWidth, 0.01f)
     }
+
+    @Test
+    fun testSquareCanvasPreservesExactCoordinatesOnOrientationChange() {
+        // Square canvas 1080 x 1080 (min(width, height) in both orientations)
+        viewModel.updateCanvasSize(IntSize(1080, 1080))
+
+        viewModel.selectBrushSize(BrushSize(label = "Medium", strokeWidth = 14f, previewSizeDp = 10.dp, stampSize = 80f))
+        viewModel.startStroke(Offset(250f, 400f))
+        viewModel.addPointToStroke(Offset(300f, 450f))
+        viewModel.finishStroke()
+
+        viewModel.selectStamp("🎨")
+        viewModel.addStamp(Offset(600f, 700f))
+
+        // Device rotates between Portrait and Landscape: canvas remains 1080 x 1080
+        viewModel.updateCanvasSize(IntSize(1080, 1080))
+
+        val state = viewModel.uiState.value
+        assertEquals(IntSize(1080, 1080), state.canvasSize)
+
+        val stroke = state.elements[0] as DrawingStroke
+        val stamp = state.elements[1] as DrawingStamp
+
+        assertEquals(250f, stroke.points[0].x, 0.01f)
+        assertEquals(400f, stroke.points[0].y, 0.01f)
+        assertEquals(300f, stroke.points[1].x, 0.01f)
+        assertEquals(450f, stroke.points[1].y, 0.01f)
+        assertEquals(14f, stroke.strokeWidth, 0.01f)
+
+        assertEquals(600f, stamp.position.x, 0.01f)
+        assertEquals(700f, stamp.position.y, 0.01f)
+        assertEquals(80f, stamp.size, 0.01f)
+    }
 }

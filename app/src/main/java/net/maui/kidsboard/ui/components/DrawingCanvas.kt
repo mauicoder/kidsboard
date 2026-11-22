@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -50,6 +51,7 @@ fun DrawingCanvas(
     Canvas(
         modifier = modifier
             .fillMaxSize()
+            .clipToBounds()
             .background(backgroundColor)
             .onSizeChanged { size ->
                 onSizeChanged(size)
@@ -59,10 +61,15 @@ fun DrawingCanvas(
                     val firstDown = awaitFirstDown(requireUnconsumed = false)
                     firstDown.consume()
 
+                    val clampedFirstPos = Offset(
+                        x = firstDown.position.x.coerceIn(0f, size.width.toFloat()),
+                        y = firstDown.position.y.coerceIn(0f, size.height.toFloat())
+                    )
+
                     if (activeTool == DrawingTool.STAMP) {
-                        onAddStamp(firstDown.position)
+                        onAddStamp(clampedFirstPos)
                     } else {
-                        onStartStroke(firstDown.id.value, firstDown.position)
+                        onStartStroke(firstDown.id.value, clampedFirstPos)
                     }
 
                     do {
@@ -71,17 +78,25 @@ fun DrawingCanvas(
                             if (!change.previousPressed && change.pressed) {
                                 // Additional finger touched down
                                 change.consume()
+                                val clampedPos = Offset(
+                                    x = change.position.x.coerceIn(0f, size.width.toFloat()),
+                                    y = change.position.y.coerceIn(0f, size.height.toFloat())
+                                )
                                 if (activeTool == DrawingTool.STAMP) {
-                                    onAddStamp(change.position)
+                                    onAddStamp(clampedPos)
                                 } else {
-                                    onStartStroke(change.id.value, change.position)
+                                    onStartStroke(change.id.value, clampedPos)
                                 }
                             } else if (change.previousPressed && change.pressed) {
                                 // Finger dragged/moved
                                 if (activeTool == DrawingTool.BRUSH) {
                                     if (change.position != change.previousPosition) {
                                         change.consume()
-                                        onAddPoint(change.id.value, change.position)
+                                        val clampedPos = Offset(
+                                            x = change.position.x.coerceIn(0f, size.width.toFloat()),
+                                            y = change.position.y.coerceIn(0f, size.height.toFloat())
+                                        )
+                                        onAddPoint(change.id.value, clampedPos)
                                     }
                                 }
                             } else if (change.previousPressed && !change.pressed) {
