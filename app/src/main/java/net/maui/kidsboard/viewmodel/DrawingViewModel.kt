@@ -35,7 +35,7 @@ sealed interface SaveEvent {
 data class DrawingUiState(
     val elements: List<CanvasElement> = emptyList(),
     val redoElements: List<CanvasElement> = emptyList(),
-    val currentStroke: DrawingStroke? = null,
+    val activeStrokes: Map<Long, DrawingStroke> = emptyMap(),
     val selectedColor: Color = ColorPalette.Black,
     val selectedBrushSize: BrushSize = BrushSize.Medium,
     val strokeWidth: Float = BrushSize.Medium.strokeWidth,
@@ -53,6 +53,7 @@ data class DrawingUiState(
     val canRedo: Boolean get() = redoElements.isNotEmpty()
 
     // Backward-compatibility properties
+    val currentStroke: DrawingStroke? get() = activeStrokes.values.firstOrNull()
     val strokes: List<DrawingStroke> get() = elements.filterIsInstance<DrawingStroke>()
     val redoStrokes: List<DrawingStroke> get() = redoElements.filterIsInstance<DrawingStroke>()
 
@@ -160,7 +161,7 @@ class DrawingViewModel(
 
     fun requestClearCanvas() {
         val state = _uiState.value
-        if (state.elements.isNotEmpty() || state.currentStroke != null) {
+        if (state.elements.isNotEmpty() || state.activeStrokes.isNotEmpty()) {
             _uiState.update { it.copy(isClearConfirmOpen = true) }
         }
     }
@@ -174,13 +175,13 @@ class DrawingViewModel(
             state.copy(
                 elements = emptyList(),
                 redoElements = emptyList(),
-                currentStroke = null,
+                activeStrokes = emptyMap(),
                 isClearConfirmOpen = false
             )
         }
     }
 
-    fun startStroke(point: Offset) {
+    fun startStroke(pointerId: Long, point: Offset) {
         val state = _uiState.value
         val stroke = DrawingStroke(
             points = listOf(point),
@@ -188,28 +189,54 @@ class DrawingViewModel(
             strokeWidth = state.strokeWidth,
             isEraser = state.isEraser
         )
-        _uiState.update { it.copy(currentStroke = stroke) }
+        _uiState.update { it.copy(activeStrokes = it.activeStrokes + (pointerId to stroke)) }
     }
 
-    fun addPointToStroke(point: Offset) {
+    fun startStroke(point: Offset) {
+        startStroke(0L, point)
+    }
+
+    fun addPointToStroke(pointerId: Long, point: Offset) {
         _uiState.update { state ->
-            val current = state.currentStroke ?: return@update state
-            state.copy(currentStroke = current.copy(points = current.points + point))
+            val current = state.activeStrokes[pointerId] ?: return@update state
+            val updated = current.copy(points = current.points + point)
+            state.copy(activeStrokes = state.activeStrokes + (pointerId to updated))
         }
     }
 
-    fun finishStroke() {
+    fun addPointToStroke(point: Offset) {
+        addPointToStroke(0L, point)
+    }
+
+    fun finishStroke(pointerId: Long) {
         _uiState.update { state ->
-            val finished = state.currentStroke
+            val finished = state.activeStrokes[pointerId]
+            val remaining = state.activeStrokes - pointerId
             if (finished != null && finished.points.isNotEmpty()) {
                 state.copy(
                     elements = state.elements + finished,
                     redoElements = emptyList(), // Starting a new stroke clears redo history
-                    currentStroke = null
+                    activeStrokes = remaining
                 )
             } else {
-                state.copy(currentStroke = null)
+                state.copy(activeStrokes = remaining)
             }
+        }
+    }
+
+    fun finishStroke() {
+        finishStroke(0L)
+    }
+
+    fun finishAllStrokes() {
+        _uiState.update { state ->
+            if (state.activeStrokes.isEmpty()) return@update state
+            val validFinished = state.activeStrokes.values.filter { it.points.isNotEmpty() }
+            state.copy(
+                elements = state.elements + validFinished,
+                redoElements = if (validFinished.isNotEmpty()) emptyList() else state.redoElements,
+                activeStrokes = emptyMap()
+            )
         }
     }
 
@@ -243,7 +270,7 @@ class DrawingViewModel(
 
     fun saveDrawing(context: Context) {
         val state = _uiState.value
-        if (state.isSaving || (state.elements.isEmpty() && state.currentStroke == null)) return
+        if (state.isSaving || (state.elements.isEmpty() && state.activeStrokes.isEmpty())) return
 
         val width = if (state.canvasSize.width > 0) state.canvasSize.width else 1080
         val height = if (state.canvasSize.height > 0) state.canvasSize.height else 1920

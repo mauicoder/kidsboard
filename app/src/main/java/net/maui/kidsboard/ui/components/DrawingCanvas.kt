@@ -29,11 +29,12 @@ import net.maui.kidsboard.model.DrawingTool
 @Composable
 fun DrawingCanvas(
     elements: List<CanvasElement>,
-    currentStroke: DrawingStroke?,
+    activeStrokes: Map<Long, DrawingStroke>,
     activeTool: DrawingTool,
-    onStartStroke: (Offset) -> Unit,
-    onAddPoint: (Offset) -> Unit,
-    onFinishStroke: () -> Unit,
+    onStartStroke: (Long, Offset) -> Unit,
+    onAddPoint: (Long, Offset) -> Unit,
+    onFinishStroke: (Long) -> Unit,
+    onFinishAllStrokes: () -> Unit,
     onAddStamp: (Offset) -> Unit,
     modifier: Modifier = Modifier,
     onSizeChanged: (IntSize) -> Unit = {},
@@ -54,29 +55,47 @@ fun DrawingCanvas(
                 onSizeChanged(size)
             }
             .pointerInput(activeTool) {
-                if (activeTool == DrawingTool.STAMP) {
-                    awaitEachGesture {
-                        val down = awaitFirstDown()
-                        down.consume()
-                        onAddStamp(down.position)
-                        do {
-                            val event = awaitPointerEvent()
-                        } while (event.changes.any { it.pressed })
+                awaitEachGesture {
+                    val firstDown = awaitFirstDown(requireUnconsumed = false)
+                    firstDown.consume()
+
+                    if (activeTool == DrawingTool.STAMP) {
+                        onAddStamp(firstDown.position)
+                    } else {
+                        onStartStroke(firstDown.id.value, firstDown.position)
                     }
-                } else {
-                    awaitEachGesture {
-                        val down = awaitFirstDown()
-                        down.consume()
-                        onStartStroke(down.position)
-                        do {
-                            val event = awaitPointerEvent()
-                            val change = event.changes.firstOrNull() ?: break
-                            if (change.pressed) {
+
+                    do {
+                        val event = awaitPointerEvent()
+                        for (change in event.changes) {
+                            if (!change.previousPressed && change.pressed) {
+                                // Additional finger touched down
                                 change.consume()
-                                onAddPoint(change.position)
+                                if (activeTool == DrawingTool.STAMP) {
+                                    onAddStamp(change.position)
+                                } else {
+                                    onStartStroke(change.id.value, change.position)
+                                }
+                            } else if (change.previousPressed && change.pressed) {
+                                // Finger dragged/moved
+                                if (activeTool == DrawingTool.BRUSH) {
+                                    if (change.position != change.previousPosition) {
+                                        change.consume()
+                                        onAddPoint(change.id.value, change.position)
+                                    }
+                                }
+                            } else if (change.previousPressed && !change.pressed) {
+                                // Finger lifted
+                                change.consume()
+                                if (activeTool == DrawingTool.BRUSH) {
+                                    onFinishStroke(change.id.value)
+                                }
                             }
-                        } while (event.changes.any { it.pressed })
-                        onFinishStroke()
+                        }
+                    } while (event.changes.any { it.pressed })
+
+                    if (activeTool == DrawingTool.BRUSH) {
+                        onFinishAllStrokes()
                     }
                 }
             }
@@ -89,8 +108,8 @@ fun DrawingCanvas(
             }
         }
 
-        // Draw current in-progress stroke
-        currentStroke?.let { stroke ->
+        // Draw all active in-progress multi-touch strokes
+        activeStrokes.values.forEach { stroke ->
             drawStroke(stroke)
         }
     }

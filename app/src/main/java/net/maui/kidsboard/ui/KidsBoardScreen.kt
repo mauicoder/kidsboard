@@ -100,11 +100,12 @@ fun KidsBoardScreen(
             // Fullscreen Canvas
             DrawingCanvas(
                 elements = uiState.elements,
-                currentStroke = uiState.currentStroke,
+                activeStrokes = uiState.activeStrokes,
                 activeTool = uiState.activeTool,
                 onStartStroke = viewModel::startStroke,
                 onAddPoint = viewModel::addPointToStroke,
                 onFinishStroke = viewModel::finishStroke,
+                onFinishAllStrokes = viewModel::finishAllStrokes,
                 onAddStamp = viewModel::addStamp,
                 onSizeChanged = viewModel::updateCanvasSize
             )

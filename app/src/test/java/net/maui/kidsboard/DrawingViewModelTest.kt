@@ -279,4 +279,67 @@ class DrawingViewModelTest {
         assertTrue(receivedEvent is SaveEvent.Success)
         job.cancel()
     }
+
+    @Test
+    fun testMultiTouchSimultaneousStrokes() {
+        val finger1 = 1L
+        val finger2 = 2L
+
+        viewModel.startStroke(finger1, Offset(10f, 10f))
+        viewModel.startStroke(finger2, Offset(100f, 100f))
+
+        var state = viewModel.uiState.value
+        assertEquals(2, state.activeStrokes.size)
+        assertTrue(state.elements.isEmpty())
+
+        viewModel.addPointToStroke(finger1, Offset(20f, 20f))
+        viewModel.addPointToStroke(finger2, Offset(110f, 110f))
+
+        state = viewModel.uiState.value
+        assertEquals(2, state.activeStrokes[finger1]?.points?.size)
+        assertEquals(2, state.activeStrokes[finger2]?.points?.size)
+
+        // Lift finger 1
+        viewModel.finishStroke(finger1)
+        state = viewModel.uiState.value
+        assertEquals(1, state.elements.size)
+        assertEquals(1, state.activeStrokes.size)
+        assertNotNull(state.activeStrokes[finger2])
+
+        // Lift finger 2
+        viewModel.finishStroke(finger2)
+        state = viewModel.uiState.value
+        assertEquals(2, state.elements.size)
+        assertTrue(state.activeStrokes.isEmpty())
+    }
+
+    @Test
+    fun testFinishAllStrokesCommitsActivePointers() {
+        viewModel.startStroke(10L, Offset(5f, 5f))
+        viewModel.startStroke(20L, Offset(50f, 50f))
+        viewModel.startStroke(30L, Offset(100f, 100f))
+
+        assertEquals(3, viewModel.uiState.value.activeStrokes.size)
+        assertTrue(viewModel.uiState.value.elements.isEmpty())
+
+        viewModel.finishAllStrokes()
+
+        val state = viewModel.uiState.value
+        assertTrue(state.activeStrokes.isEmpty())
+        assertEquals(3, state.elements.size)
+        assertTrue(state.canUndo)
+    }
+
+    @Test
+    fun testClearCanvasClearsActiveStrokes() {
+        viewModel.startStroke(1L, Offset(10f, 10f))
+        viewModel.startStroke(2L, Offset(20f, 20f))
+
+        viewModel.requestClearCanvas()
+        assertTrue(viewModel.uiState.value.isClearConfirmOpen)
+
+        viewModel.confirmClearCanvas()
+        assertTrue(viewModel.uiState.value.activeStrokes.isEmpty())
+        assertTrue(viewModel.uiState.value.elements.isEmpty())
+    }
 }
