@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 34
+    namespace = 'net.maui.kidsboard'
+    compileSdk = 34
 
     defaultConfig {
-        applicationId "net.maui.kidsboard"
-        minSdkVersion 14
-        targetSdkVersion 34
+        applicationId = "net.maui.kidsboard"
+        minSdk = 14
+        targetSdk = 34
     }
 
     buildTypes {
@@ -15,14 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    if (project.android.hasProperty("namespace")) {
-        namespace("net.maui.kidsboard")
-    }
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
 }
