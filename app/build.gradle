@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     namespace = 'net.maui.kidsboard'
-    compileSdk = 34
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "net.maui.kidsboard"
@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.24.0'
 }
