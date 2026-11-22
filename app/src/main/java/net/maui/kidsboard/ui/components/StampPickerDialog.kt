@@ -95,6 +95,8 @@ fun StampPickerDialog(
                                 ) {
                                     if (stamp == StampRepository.FULL_RAINBOW) {
                                         FullRainbowStickerIcon(modifier = Modifier.size(36.dp))
+                                    } else if (stamp == "🌈") {
+                                        Rainbow180StickerIcon(modifier = Modifier.size(36.dp))
                                     } else {
                                         Text(
                                             text = stamp,

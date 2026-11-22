@@ -629,4 +629,36 @@ class DrawingViewModelTest {
         assertTrue(receivedEvent is SaveEvent.Success)
         job.cancel()
     }
+
+    @Test
+    fun testRainbow180StampSelectionAndSave() = runTest {
+        viewModel.selectStamp("🌈")
+
+        val state = viewModel.uiState.value
+        assertEquals("🌈", state.selectedStamp)
+        assertEquals(DrawingTool.STAMP, state.activeTool)
+
+        viewModel.addStamp(Offset(150f, 250f))
+
+        val updatedState = viewModel.uiState.value
+        assertEquals(1, updatedState.elements.size)
+        val stamp = updatedState.elements.first() as DrawingStamp
+        assertEquals("🌈", stamp.emoji)
+        assertEquals(150f, stamp.position.x, 0.01f)
+        assertEquals(250f, stamp.position.y, 0.01f)
+
+        // Verify save flow with 180° rainbow stamp
+        val mockContext = mock(Context::class.java)
+        var receivedEvent: SaveEvent? = null
+        val job = launch {
+            receivedEvent = viewModel.saveEvents.first()
+        }
+
+        viewModel.saveDrawing(mockContext)
+        advanceUntilIdle()
+
+        assertNotNull(receivedEvent)
+        assertTrue(receivedEvent is SaveEvent.Success)
+        job.cancel()
+    }
 }

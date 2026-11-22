@@ -137,6 +137,10 @@ private fun DrawScope.drawStamp(stamp: DrawingStamp, paint: Paint) {
         with(FullRainbowStickerRenderer) {
             drawFullRainbow(stamp.position, stamp.size)
         }
+    } else if (stamp.emoji == "🌈") {
+        with(FullRainbowStickerRenderer) {
+            drawRainbow180(stamp.position, stamp.size)
+        }
     } else {
         paint.textSize = stamp.size
         val yPos = stamp.position.y - (paint.descent() + paint.ascent()) / 2f

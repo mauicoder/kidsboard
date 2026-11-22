@@ -17,8 +17,9 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 
 /**
- * High-quality, kid-friendly Full 360° Circular Rainbow Sticker with a cheerful smiling sun,
- * fluffy clouds, and twinkling magical sparkle stars.
+ * High-quality, kid-friendly Rainbow Stickers:
+ * 1. Full 360° Circular Rainbow Sticker with a cheerful smiling sun, fluffy clouds, and twinkling magical sparkle stars.
+ * 2. 180° Symmetrical Rainbow Arch Sticker spanning from cloud to cloud with 7 ROYGBIV bands and sparkles.
  */
 object FullRainbowStickerRenderer {
 
@@ -295,6 +296,228 @@ object FullRainbowStickerRenderer {
         drawSparkleToCanvas(cx + radius * 0.65f, cy - radius * 0.60f, radius * 0.14f)
         drawSparkleToCanvas(cx - radius * 0.62f, cy - radius * 0.48f, radius * 0.10f)
     }
+
+    /**
+     * Symmetrical 180° Rainbow Arch spanning cloud-to-cloud with 7 ROYGBIV bands and sparkles.
+     */
+    fun DrawScope.drawRainbow180(center: Offset, size: Float) {
+        val radius = size / 2f
+        val archCenter = Offset(center.x, center.y + radius * 0.28f)
+        val outerR = radius * 0.88f
+        val bandSpan = radius * 0.46f
+        val bandWidth = bandSpan / 7f
+
+        // 1. Soft arch drop shadow / outer glow
+        val shadowWidth = bandWidth + 2f
+        drawArc(
+            color = Color(0x12000000),
+            startAngle = 180f,
+            sweepAngle = 180f,
+            useCenter = false,
+            topLeft = Offset(archCenter.x - outerR - 1.5f, archCenter.y - outerR - 1.5f),
+            size = Size((outerR + 1.5f) * 2f, (outerR + 1.5f) * 2f),
+            style = Stroke(width = shadowWidth, cap = StrokeCap.Round)
+        )
+
+        // 2. 7 Symmetrical ROYGBIV Bands (180° arcs)
+        for (i in RainbowColors.indices) {
+            val r = outerR - (i * bandWidth) - (bandWidth / 2f)
+            drawArc(
+                color = RainbowColors[i],
+                startAngle = 180f,
+                sweepAngle = 180f,
+                useCenter = false,
+                topLeft = Offset(archCenter.x - r, archCenter.y - r),
+                size = Size(r * 2f, r * 2f),
+                style = Stroke(width = bandWidth + 0.8f, cap = StrokeCap.Butt)
+            )
+        }
+
+        // 3. Cute Puffy Clouds on Left and Right Bases
+        val midBandR = outerR - (bandSpan / 2f)
+        fun drawCloud(cloudCenter: Offset) {
+            val cr = radius * 0.18f
+            val shadowColor = Color(0x18000000)
+
+            // Cloud base shadow
+            drawCircle(shadowColor, cr * 0.95f, Offset(cloudCenter.x - cr * 0.85f, cloudCenter.y + cr * 0.20f))
+            drawCircle(shadowColor, cr * 1.30f, Offset(cloudCenter.x, cloudCenter.y - cr * 0.22f))
+            drawCircle(shadowColor, cr * 0.95f, Offset(cloudCenter.x + cr * 0.85f, cloudCenter.y + cr * 0.20f))
+
+            // White cloud puffs
+            drawCircle(Color.White, cr * 0.90f, Offset(cloudCenter.x - cr * 0.85f, cloudCenter.y + cr * 0.08f))
+            drawCircle(Color.White, cr * 1.25f, Offset(cloudCenter.x, cloudCenter.y - cr * 0.26f))
+            drawCircle(Color.White, cr * 0.90f, Offset(cloudCenter.x + cr * 0.85f, cloudCenter.y + cr * 0.08f))
+            drawCircle(Color.White, cr * 0.80f, Offset(cloudCenter.x, cloudCenter.y + cr * 0.18f))
+
+            // Cloud cute eyes
+            val eyeR = cr * 0.13f
+            val eyeColor = Color(0xFF5D4037)
+            drawCircle(eyeColor, eyeR, Offset(cloudCenter.x - cr * 0.32f, cloudCenter.y - cr * 0.12f))
+            drawCircle(eyeColor, eyeR, Offset(cloudCenter.x + cr * 0.32f, cloudCenter.y - cr * 0.12f))
+
+            // Cloud rosy cheeks
+            val cheekR = cr * 0.16f
+            val cheekColor = Color(0x55FF4081)
+            drawCircle(cheekColor, cheekR, Offset(cloudCenter.x - cr * 0.54f, cloudCenter.y + cr * 0.02f))
+            drawCircle(cheekColor, cheekR, Offset(cloudCenter.x + cr * 0.54f, cloudCenter.y + cr * 0.02f))
+
+            // Cloud happy smile
+            val cMouthW = cr * 0.44f
+            val cMouthH = cr * 0.28f
+            drawArc(
+                color = eyeColor,
+                startAngle = 10f,
+                sweepAngle = 160f,
+                useCenter = false,
+                topLeft = Offset(cloudCenter.x - cMouthW / 2f, cloudCenter.y - cr * 0.04f),
+                size = Size(cMouthW, cMouthH),
+                style = Stroke(width = maxOf(1.2f, radius * 0.018f), cap = StrokeCap.Round)
+            )
+        }
+
+        val cloudY = archCenter.y + radius * 0.08f
+        drawCloud(Offset(center.x - midBandR, cloudY))
+        drawCloud(Offset(center.x + midBandR, cloudY))
+
+        // 4. Magical Twinkling Stars
+        fun drawSparkle(sparkleCenter: Offset, sparkleSize: Float) {
+            val sparkleColor = Color(0xFFFFD700)
+            val strokeW = maxOf(1.5f, sparkleSize * 0.22f)
+            drawLine(
+                color = sparkleColor,
+                start = Offset(sparkleCenter.x - sparkleSize, sparkleCenter.y),
+                end = Offset(sparkleCenter.x + sparkleSize, sparkleCenter.y),
+                strokeWidth = strokeW,
+                cap = StrokeCap.Round
+            )
+            drawLine(
+                color = sparkleColor,
+                start = Offset(sparkleCenter.x, sparkleCenter.y - sparkleSize),
+                end = Offset(sparkleCenter.x, sparkleCenter.y + sparkleSize),
+                strokeWidth = strokeW,
+                cap = StrokeCap.Round
+            )
+            drawCircle(Color.White, strokeW * 0.7f, sparkleCenter)
+        }
+
+        drawSparkle(Offset(center.x - radius * 0.55f, center.y - radius * 0.40f), radius * 0.13f)
+        drawSparkle(Offset(center.x + radius * 0.58f, center.y - radius * 0.32f), radius * 0.15f)
+        drawSparkle(Offset(center.x + radius * 0.06f, center.y - radius * 0.72f), radius * 0.11f)
+    }
+
+    fun drawRainbow180ToCanvas(canvas: AndroidCanvas, cx: Float, cy: Float, size: Float) {
+        val radius = size / 2f
+        val archCenterX = cx
+        val archCenterY = cy + radius * 0.28f
+        val outerR = radius * 0.88f
+        val bandSpan = radius * 0.46f
+        val bandWidth = bandSpan / 7f
+
+        val fillPaint = AndroidPaint().apply {
+            isAntiAlias = true
+            style = AndroidPaint.Style.FILL
+        }
+
+        val strokePaint = AndroidPaint().apply {
+            isAntiAlias = true
+            style = AndroidPaint.Style.STROKE
+        }
+
+        // 1. Soft arch drop shadow
+        val shadowWidth = bandWidth + 2f
+        strokePaint.strokeWidth = shadowWidth
+        strokePaint.strokeCap = AndroidPaint.Cap.ROUND
+        strokePaint.color = 0x12000000
+        val shadowRect = RectF(
+            archCenterX - outerR - 1.5f,
+            archCenterY - outerR - 1.5f,
+            archCenterX + outerR + 1.5f,
+            archCenterY + outerR + 1.5f
+        )
+        canvas.drawArc(shadowRect, 180f, 180f, false, strokePaint)
+
+        // 2. 7 Symmetrical ROYGBIV Bands (180° arcs)
+        strokePaint.strokeWidth = bandWidth + 0.8f
+        strokePaint.strokeCap = AndroidPaint.Cap.BUTT
+        for (i in AndroidRainbowColors.indices) {
+            val r = outerR - (i * bandWidth) - (bandWidth / 2f)
+            strokePaint.color = AndroidRainbowColors[i]
+            val bandRect = RectF(
+                archCenterX - r,
+                archCenterY - r,
+                archCenterX + r,
+                archCenterY + r
+            )
+            canvas.drawArc(bandRect, 180f, 180f, false, strokePaint)
+        }
+
+        // 3. Cute Puffy Clouds on Left and Right Bases
+        val midBandR = outerR - (bandSpan / 2f)
+        fun drawCloudToCanvas(cloudX: Float, cloudY: Float) {
+            val cr = radius * 0.18f
+
+            // Shadow
+            fillPaint.color = 0x18000000
+            canvas.drawCircle(cloudX - cr * 0.85f, cloudY + cr * 0.20f, cr * 0.95f, fillPaint)
+            canvas.drawCircle(cloudX, cloudY - cr * 0.22f, cr * 1.30f, fillPaint)
+            canvas.drawCircle(cloudX + cr * 0.85f, cloudY + cr * 0.20f, cr * 0.95f, fillPaint)
+
+            // White puffs
+            fillPaint.color = AndroidColor.WHITE
+            canvas.drawCircle(cloudX - cr * 0.85f, cloudY + cr * 0.08f, cr * 0.90f, fillPaint)
+            canvas.drawCircle(cloudX, cloudY - cr * 0.26f, cr * 1.25f, fillPaint)
+            canvas.drawCircle(cloudX + cr * 0.85f, cloudY + cr * 0.08f, cr * 0.90f, fillPaint)
+            canvas.drawCircle(cloudX, cloudY + cr * 0.18f, cr * 0.80f, fillPaint)
+
+            // Cute eyes
+            val eyeR = cr * 0.13f
+            fillPaint.color = 0xFF5D4037.toInt()
+            canvas.drawCircle(cloudX - cr * 0.32f, cloudY - cr * 0.12f, eyeR, fillPaint)
+            canvas.drawCircle(cloudX + cr * 0.32f, cloudY - cr * 0.12f, eyeR, fillPaint)
+
+            // Rosy cheeks
+            val cheekR = cr * 0.16f
+            fillPaint.color = 0x55FF4081.toInt()
+            canvas.drawCircle(cloudX - cr * 0.54f, cloudY + cr * 0.02f, cheekR, fillPaint)
+            canvas.drawCircle(cloudX + cr * 0.54f, cloudY + cr * 0.02f, cheekR, fillPaint)
+
+            // Happy smile
+            val cMouthW = cr * 0.44f
+            val cMouthH = cr * 0.28f
+            val cMouthRect = RectF(
+                cloudX - cMouthW / 2f,
+                cloudY - cr * 0.04f,
+                cloudX + cMouthW / 2f,
+                cloudY - cr * 0.04f + cMouthH
+            )
+            strokePaint.color = 0xFF5D4037.toInt()
+            strokePaint.strokeWidth = maxOf(1.2f, radius * 0.018f)
+            strokePaint.strokeCap = AndroidPaint.Cap.ROUND
+            canvas.drawArc(cMouthRect, 10f, 160f, false, strokePaint)
+        }
+
+        val cloudY = archCenterY + radius * 0.08f
+        drawCloudToCanvas(cx - midBandR, cloudY)
+        drawCloudToCanvas(cx + midBandR, cloudY)
+
+        // 4. Sparkle Stars
+        fun drawSparkleToCanvas(spX: Float, spY: Float, spSize: Float) {
+            strokePaint.color = 0xFFFFD700.toInt()
+            val strokeW = maxOf(1.5f, spSize * 0.22f)
+            strokePaint.strokeWidth = strokeW
+            strokePaint.strokeCap = AndroidPaint.Cap.ROUND
+            canvas.drawLine(spX - spSize, spY, spX + spSize, spY, strokePaint)
+            canvas.drawLine(spX, spY - spSize, spX, spY + spSize, strokePaint)
+
+            fillPaint.color = AndroidColor.WHITE
+            canvas.drawCircle(spX, spY, strokeW * 0.7f, fillPaint)
+        }
+
+        drawSparkleToCanvas(cx - radius * 0.55f, cy - radius * 0.40f, radius * 0.13f)
+        drawSparkleToCanvas(cx + radius * 0.58f, cy - radius * 0.32f, radius * 0.15f)
+        drawSparkleToCanvas(cx + radius * 0.06f, cy - radius * 0.72f, radius * 0.11f)
+    }
 }
 
 @Composable
@@ -306,6 +529,19 @@ fun FullRainbowStickerIcon(
         val centerOffset = Offset(size.width / 2f, size.height / 2f)
         with(FullRainbowStickerRenderer) {
             drawFullRainbow(centerOffset, sizeMin)
+        }
+    }
+}
+
+@Composable
+fun Rainbow180StickerIcon(
+    modifier: Modifier = Modifier
+) {
+    Canvas(modifier = modifier) {
+        val sizeMin = minOf(size.width, size.height)
+        val centerOffset = Offset(size.width / 2f, size.height / 2f)
+        with(FullRainbowStickerRenderer) {
+            drawRainbow180(centerOffset, sizeMin)
         }
     }
 }

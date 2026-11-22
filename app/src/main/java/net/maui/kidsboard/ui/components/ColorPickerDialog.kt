@@ -118,10 +118,7 @@ fun ColorSwatch(
         contentAlignment = Alignment.Center
     ) {
         if (paletteColor.isRainbow) {
-            Text(
-                text = "🌈",
-                fontSize = 24.sp
-            )
+            Rainbow180StickerIcon(modifier = Modifier.size(28.dp))
         } else if (isSelected) {
             Icon(
                 imageVector = Icons.Default.Check,

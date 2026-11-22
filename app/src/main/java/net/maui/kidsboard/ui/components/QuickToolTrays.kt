@@ -84,10 +84,7 @@ fun QuickColorSwatch(
         contentAlignment = Alignment.Center
     ) {
         if (paletteColor.isRainbow) {
-            Text(
-                text = "🌈",
-                fontSize = 18.sp
-            )
+            Rainbow180StickerIcon(modifier = Modifier.size(22.dp))
         } else if (paletteColor.isEraser) {
             Icon(
                 imageVector = Icons.Default.AutoFixHigh,
@@ -241,12 +238,18 @@ fun QuickStickerChip(
             .border(borderStroke, RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .semantics {
-                contentDescription = if (emoji == StampRepository.FULL_RAINBOW) "Full Rainbow stamp" else "$emoji stamp"
+                contentDescription = when (emoji) {
+                    StampRepository.FULL_RAINBOW -> "Full Rainbow stamp"
+                    "🌈" -> "Rainbow arch stamp"
+                    else -> "$emoji stamp"
+                }
             },
         contentAlignment = Alignment.Center
     ) {
         if (emoji == StampRepository.FULL_RAINBOW) {
             FullRainbowStickerIcon(modifier = Modifier.size(28.dp))
+        } else if (emoji == "🌈") {
+            Rainbow180StickerIcon(modifier = Modifier.size(28.dp))
         } else {
             Text(
                 text = emoji,

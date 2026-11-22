@@ -150,6 +150,13 @@ open class DrawingExporter {
                             element.position.y,
                             element.size
                         )
+                    } else if (element.emoji == "🌈") {
+                        FullRainbowStickerRenderer.drawRainbow180ToCanvas(
+                            canvas,
+                            element.position.x,
+                            element.position.y,
+                            element.size
+                        )
                     } else {
                         stampPaint.textSize = element.size
                         val yPos = element.position.y - (stampPaint.descent() + stampPaint.ascent()) / 2f
