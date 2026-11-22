@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntSize
 import net.maui.kidsboard.model.DrawingStroke
 
 @Composable
@@ -24,12 +26,16 @@ fun DrawingCanvas(
     onAddPoint: (Offset) -> Unit,
     onFinishStroke: () -> Unit,
     modifier: Modifier = Modifier,
+    onSizeChanged: (IntSize) -> Unit = {},
     backgroundColor: Color = Color.White
 ) {
     Canvas(
         modifier = modifier
             .fillMaxSize()
             .background(backgroundColor)
+            .onSizeChanged { size ->
+                onSizeChanged(size)
+            }
             .pointerInput(Unit) {
                 detectDragGestures(
                     onDragStart = { offset ->

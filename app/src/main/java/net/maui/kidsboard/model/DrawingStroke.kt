@@ -2,6 +2,8 @@ package net.maui.kidsboard.model
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 /**
  * Represents a stroke drawn on the canvas.
@@ -21,6 +23,24 @@ data class PaletteColor(
     val name: String,
     val isEraser: Boolean = false
 )
+
+/**
+ * Preset brush thicknesses for young artists.
+ */
+data class BrushSize(
+    val label: String,
+    val strokeWidth: Float,
+    val previewSizeDp: Dp
+) {
+    companion object {
+        val Fine = BrushSize(label = "Fine", strokeWidth = 6f, previewSizeDp = 10.dp)
+        val Medium = BrushSize(label = "Medium", strokeWidth = 14f, previewSizeDp = 18.dp)
+        val Bold = BrushSize(label = "Bold", strokeWidth = 26f, previewSizeDp = 28.dp)
+        val Chunky = BrushSize(label = "Extra Chunky", strokeWidth = 45f, previewSizeDp = 38.dp)
+
+        val allSizes: List<BrushSize> = listOf(Fine, Medium, Bold, Chunky)
+    }
+}
 
 object ColorPalette {
     val White = Color(0xFFFFFFFF)
