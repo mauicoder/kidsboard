@@ -6,6 +6,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import net.maui.kidsboard.data.SoundPreferences
 import net.maui.kidsboard.model.BrushSize
 import net.maui.kidsboard.model.CanvasElement
 import net.maui.kidsboard.model.ColorPalette
@@ -52,6 +54,7 @@ data class DrawingUiState(
     val isStampPickerOpen: Boolean = false,
     val isClearConfirmOpen: Boolean = false,
     val isSaving: Boolean = false,
+    val isSoundEnabled: Boolean = true,
     val canvasSize: IntSize = IntSize.Zero,
     val contentWidth: Float = 0f,
     val contentHeight: Float = 0f,
@@ -73,14 +76,32 @@ data class DrawingUiState(
 
 class DrawingViewModel(
     private val exporter: DrawingExporter = DrawingExporter(),
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val soundPreferences: SoundPreferences? = null
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(DrawingUiState())
+    private val _uiState = MutableStateFlow(
+        DrawingUiState(isSoundEnabled = soundPreferences?.isSoundEnabled ?: true)
+    )
     val uiState: StateFlow<DrawingUiState> = _uiState.asStateFlow()
 
     private val _saveEvents = MutableSharedFlow<SaveEvent>()
     val saveEvents: SharedFlow<SaveEvent> = _saveEvents.asSharedFlow()
+
+    fun toggleSound() {
+        _uiState.update { state ->
+            val newState = !state.isSoundEnabled
+            soundPreferences?.isSoundEnabled = newState
+            state.copy(isSoundEnabled = newState)
+        }
+    }
+
+    fun setSoundEnabled(enabled: Boolean) {
+        _uiState.update { state ->
+            soundPreferences?.isSoundEnabled = enabled
+            state.copy(isSoundEnabled = enabled)
+        }
+    }
 
     fun updateCanvasSize(newSize: IntSize) {
         if (newSize.width <= 0 || newSize.height <= 0) return
@@ -363,6 +384,17 @@ class DrawingViewModel(
                 onSuccess = { uri -> _saveEvents.emit(SaveEvent.Success(uri)) },
                 onFailure = { error -> _saveEvents.emit(SaveEvent.Error(error.localizedMessage ?: "Failed to save")) }
             )
+        }
+    }
+
+    companion object {
+        fun provideFactory(context: Context): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return DrawingViewModel(
+                    soundPreferences = SoundPreferences(context.applicationContext)
+                ) as T
+            }
         }
     }
 }

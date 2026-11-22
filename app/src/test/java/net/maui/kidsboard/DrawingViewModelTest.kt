@@ -188,6 +188,23 @@ class DrawingViewModelTest {
     }
 
     @Test
+    fun testToggleSound() {
+        assertTrue(viewModel.uiState.value.isSoundEnabled)
+        viewModel.toggleSound()
+        assertFalse(viewModel.uiState.value.isSoundEnabled)
+        viewModel.toggleSound()
+        assertTrue(viewModel.uiState.value.isSoundEnabled)
+    }
+
+    @Test
+    fun testSetSoundEnabled() {
+        viewModel.setSoundEnabled(false)
+        assertFalse(viewModel.uiState.value.isSoundEnabled)
+        viewModel.setSoundEnabled(true)
+        assertTrue(viewModel.uiState.value.isSoundEnabled)
+    }
+
+    @Test
     fun testStrokeLifecycle() {
         val startPoint = Offset(10f, 10f)
         viewModel.startStroke(startPoint)

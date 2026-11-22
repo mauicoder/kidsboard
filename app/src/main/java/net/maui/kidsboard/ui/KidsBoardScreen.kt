@@ -29,18 +29,23 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
+import net.maui.kidsboard.audio.KidsSoundManager
 import net.maui.kidsboard.model.DrawingTool
+import net.maui.kidsboard.model.StampRepository
 import net.maui.kidsboard.ui.components.BrushSizeActionButton
 import net.maui.kidsboard.ui.components.BrushSizePickerDialog
 import net.maui.kidsboard.ui.components.ChunkyActionButton
@@ -52,6 +57,7 @@ import net.maui.kidsboard.ui.components.QuickColorRow
 import net.maui.kidsboard.ui.components.QuickStickerGrid
 import net.maui.kidsboard.ui.components.QuickStickerRow
 import net.maui.kidsboard.ui.components.SaveActionButton
+import net.maui.kidsboard.ui.components.SoundActionButton
 import net.maui.kidsboard.ui.components.StampPickerDialog
 import net.maui.kidsboard.ui.components.WarmDeskBackground
 import net.maui.kidsboard.util.DrawingExporter
@@ -60,11 +66,25 @@ import net.maui.kidsboard.viewmodel.SaveEvent
 
 @Composable
 fun KidsBoardScreen(
-    viewModel: DrawingViewModel = viewModel()
+    viewModel: DrawingViewModel = viewModel(
+        factory = DrawingViewModel.provideFactory(LocalContext.current)
+    )
 ) {
     val context = LocalContext.current
+    val haptic = LocalHapticFeedback.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    val soundManager = remember(context) { KidsSoundManager(context) }
+    DisposableEffect(soundManager) {
+        onDispose {
+            soundManager.release()
+        }
+    }
+
+    LaunchedEffect(uiState.isSoundEnabled) {
+        soundManager.isSoundEnabled = uiState.isSoundEnabled
+    }
 
     LaunchedEffect(viewModel) {
         viewModel.saveEvents.collectLatest { event ->
@@ -105,12 +125,12 @@ fun KidsBoardScreen(
             val paperSize = (shortestEdge - (paperPadding * 2)).coerceAtLeast(180.dp)
 
             if (isLandscape) {
-                // LANDSCAPE: Left Dock (Colors/Brush) | Center (1:1 Paper) | Right Dock (Actions/Stickers)
+                // LANDSCAPE: Left Dock (Colors/Brush/Sound) | Center (1:1 Paper) | Right Dock (Actions/Stickers)
                 Row(
                     modifier = Modifier.fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Left Dock (Margins reclaimed for Colors & Brush)
+                    // Left Dock (Margins reclaimed for Colors, Brush & Sound)
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -131,20 +151,41 @@ fun KidsBoardScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.SpaceBetween
                             ) {
-                                BrushSizeActionButton(
-                                    brushSize = uiState.selectedBrushSize,
-                                    selectedColor = uiState.selectedColor,
-                                    isEraser = uiState.isEraser,
-                                    isRainbow = uiState.isRainbow,
-                                    onClick = viewModel::openBrushSizePicker
-                                )
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    BrushSizeActionButton(
+                                        brushSize = uiState.selectedBrushSize,
+                                        selectedColor = uiState.selectedColor,
+                                        isEraser = uiState.isEraser,
+                                        isRainbow = uiState.isRainbow,
+                                        onClick = {
+                                            soundManager.playClick()
+                                            viewModel.openBrushSizePicker()
+                                        }
+                                    )
+                                    SoundActionButton(
+                                        isSoundEnabled = uiState.isSoundEnabled,
+                                        onClick = {
+                                            viewModel.toggleSound()
+                                            soundManager.playClick()
+                                        }
+                                    )
+                                }
 
                                 QuickColorGrid(
                                     selectedColor = uiState.selectedColor,
                                     isEraser = uiState.isEraser,
                                     isRainbow = uiState.isRainbow,
-                                    onColorSelected = viewModel::selectColor,
-                                    onOpenFullPicker = viewModel::openColorPicker,
+                                    onColorSelected = { color ->
+                                        soundManager.playClick()
+                                        viewModel.selectColor(color)
+                                    },
+                                    onOpenFullPicker = {
+                                        soundManager.playClick()
+                                        viewModel.openColorPicker()
+                                    },
                                     modifier = Modifier.weight(1f, fill = false)
                                 )
                             }
@@ -161,11 +202,30 @@ fun KidsBoardScreen(
                             elements = uiState.elements,
                             activeStrokes = uiState.activeStrokes,
                             activeTool = uiState.activeTool,
-                            onStartStroke = viewModel::startStroke,
+                            onStartStroke = { pointerId, point ->
+                                soundManager.startDrawingLoop()
+                                viewModel.startStroke(pointerId, point)
+                            },
                             onAddPoint = viewModel::addPointToStroke,
-                            onFinishStroke = viewModel::finishStroke,
-                            onFinishAllStrokes = viewModel::finishAllStrokes,
-                            onAddStamp = viewModel::addStamp,
+                            onFinishStroke = { pointerId ->
+                                viewModel.finishStroke(pointerId)
+                                if (viewModel.uiState.value.activeStrokes.isEmpty()) {
+                                    soundManager.stopDrawingLoop()
+                                }
+                            },
+                            onFinishAllStrokes = {
+                                viewModel.finishAllStrokes()
+                                soundManager.stopDrawingLoop()
+                            },
+                            onAddStamp = { position ->
+                                val isMagical = uiState.selectedStamp == StampRepository.FULL_RAINBOW ||
+                                    uiState.selectedStamp == "🌈" ||
+                                    uiState.selectedStamp == "✨" ||
+                                    uiState.selectedStamp == "⭐"
+                                soundManager.playStamp(isMagical = isMagical)
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                viewModel.addStamp(position)
+                            },
                             onSizeChanged = viewModel::updateCanvasSize
                         )
                     }
@@ -200,13 +260,21 @@ fun KidsBoardScreen(
                                         ChunkyActionButton(
                                             icon = Icons.AutoMirrored.Filled.Undo,
                                             contentDescription = "Undo",
-                                            onClick = viewModel::undo,
+                                            onClick = {
+                                                soundManager.playClick()
+                                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                viewModel.undo()
+                                            },
                                             enabled = uiState.canUndo
                                         )
                                         ChunkyActionButton(
                                             icon = Icons.AutoMirrored.Filled.Redo,
                                             contentDescription = "Redo",
-                                            onClick = viewModel::redo,
+                                            onClick = {
+                                                soundManager.playClick()
+                                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                viewModel.redo()
+                                            },
                                             enabled = uiState.canRedo
                                         )
                                     }
@@ -214,13 +282,19 @@ fun KidsBoardScreen(
                                         ChunkyActionButton(
                                             icon = Icons.Default.Delete,
                                             contentDescription = "Clear Canvas",
-                                            onClick = viewModel::requestClearCanvas,
+                                            onClick = {
+                                                soundManager.playClick()
+                                                viewModel.requestClearCanvas()
+                                            },
                                             enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null,
                                             tint = MaterialTheme.colorScheme.error
                                         )
                                         SaveActionButton(
                                             isSaving = uiState.isSaving,
-                                            onClick = { viewModel.saveDrawing(context) },
+                                            onClick = {
+                                                soundManager.playClick()
+                                                viewModel.saveDrawing(context)
+                                            },
                                             enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
                                         )
                                     }
@@ -230,9 +304,18 @@ fun KidsBoardScreen(
                                     selectedStamp = uiState.selectedStamp,
                                     isStampActive = uiState.activeTool == DrawingTool.STAMP,
                                     selectedStampSize = uiState.selectedStampSize,
-                                    onStampSelected = viewModel::selectStamp,
-                                    onStampSizeSelected = viewModel::selectStampSize,
-                                    onOpenFullPicker = viewModel::openStampPicker,
+                                    onStampSelected = { stamp ->
+                                        soundManager.playClick()
+                                        viewModel.selectStamp(stamp)
+                                    },
+                                    onStampSizeSelected = { size ->
+                                        soundManager.playClick()
+                                        viewModel.selectStampSize(size)
+                                    },
+                                    onOpenFullPicker = {
+                                        soundManager.playClick()
+                                        viewModel.openStampPicker()
+                                    },
                                     modifier = Modifier.weight(1f, fill = false)
                                 )
                             }
@@ -240,12 +323,12 @@ fun KidsBoardScreen(
                     }
                 }
             } else {
-                // PORTRAIT: Top Dock (Actions) | Center (1:1 Paper) | Bottom Dock (Colors & Stickers)
+                // PORTRAIT: Top Dock (Actions, Brush & Sound) | Center (1:1 Paper) | Bottom Dock (Colors & Stickers)
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Top Dock (Actions & Brush Size)
+                    // Top Dock (Actions, Brush Size & Sound)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -270,12 +353,25 @@ fun KidsBoardScreen(
                                     selectedColor = uiState.selectedColor,
                                     isEraser = uiState.isEraser,
                                     isRainbow = uiState.isRainbow,
-                                    onClick = viewModel::openBrushSizePicker
+                                    onClick = {
+                                        soundManager.playClick()
+                                        viewModel.openBrushSizePicker()
+                                    }
+                                )
+                                SoundActionButton(
+                                    isSoundEnabled = uiState.isSoundEnabled,
+                                    onClick = {
+                                        viewModel.toggleSound()
+                                        soundManager.playClick()
+                                    }
                                 )
                                 ChunkyActionButton(
                                     icon = Icons.Default.Delete,
                                     contentDescription = "Clear Canvas",
-                                    onClick = viewModel::requestClearCanvas,
+                                    onClick = {
+                                        soundManager.playClick()
+                                        viewModel.requestClearCanvas()
+                                    },
                                     enabled = uiState.elements.isNotEmpty() || uiState.currentStroke != null,
                                     tint = MaterialTheme.colorScheme.error
                                 )
@@ -296,18 +392,29 @@ fun KidsBoardScreen(
                                 ChunkyActionButton(
                                     icon = Icons.AutoMirrored.Filled.Undo,
                                     contentDescription = "Undo",
-                                    onClick = viewModel::undo,
+                                    onClick = {
+                                        soundManager.playClick()
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                        viewModel.undo()
+                                    },
                                     enabled = uiState.canUndo
                                 )
                                 ChunkyActionButton(
                                     icon = Icons.AutoMirrored.Filled.Redo,
                                     contentDescription = "Redo",
-                                    onClick = viewModel::redo,
+                                    onClick = {
+                                        soundManager.playClick()
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                        viewModel.redo()
+                                    },
                                     enabled = uiState.canRedo
                                 )
                                 SaveActionButton(
                                     isSaving = uiState.isSaving,
-                                    onClick = { viewModel.saveDrawing(context) },
+                                    onClick = {
+                                        soundManager.playClick()
+                                        viewModel.saveDrawing(context)
+                                    },
                                     enabled = !uiState.isSaving && (uiState.elements.isNotEmpty() || uiState.currentStroke != null)
                                 )
                             }
@@ -326,11 +433,30 @@ fun KidsBoardScreen(
                             elements = uiState.elements,
                             activeStrokes = uiState.activeStrokes,
                             activeTool = uiState.activeTool,
-                            onStartStroke = viewModel::startStroke,
+                            onStartStroke = { pointerId, point ->
+                                soundManager.startDrawingLoop()
+                                viewModel.startStroke(pointerId, point)
+                            },
                             onAddPoint = viewModel::addPointToStroke,
-                            onFinishStroke = viewModel::finishStroke,
-                            onFinishAllStrokes = viewModel::finishAllStrokes,
-                            onAddStamp = viewModel::addStamp,
+                            onFinishStroke = { pointerId ->
+                                viewModel.finishStroke(pointerId)
+                                if (viewModel.uiState.value.activeStrokes.isEmpty()) {
+                                    soundManager.stopDrawingLoop()
+                                }
+                            },
+                            onFinishAllStrokes = {
+                                viewModel.finishAllStrokes()
+                                soundManager.stopDrawingLoop()
+                            },
+                            onAddStamp = { position ->
+                                val isMagical = uiState.selectedStamp == StampRepository.FULL_RAINBOW ||
+                                    uiState.selectedStamp == "🌈" ||
+                                    uiState.selectedStamp == "✨" ||
+                                    uiState.selectedStamp == "⭐"
+                                soundManager.playStamp(isMagical = isMagical)
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                viewModel.addStamp(position)
+                            },
                             onSizeChanged = viewModel::updateCanvasSize
                         )
                     }
@@ -354,16 +480,31 @@ fun KidsBoardScreen(
                                 selectedColor = uiState.selectedColor,
                                 isEraser = uiState.isEraser,
                                 isRainbow = uiState.isRainbow,
-                                onColorSelected = viewModel::selectColor,
-                                onOpenFullPicker = viewModel::openColorPicker
+                                onColorSelected = { color ->
+                                    soundManager.playClick()
+                                    viewModel.selectColor(color)
+                                },
+                                onOpenFullPicker = {
+                                    soundManager.playClick()
+                                    viewModel.openColorPicker()
+                                }
                             )
                             QuickStickerRow(
                                 selectedStamp = uiState.selectedStamp,
                                 isStampActive = uiState.activeTool == DrawingTool.STAMP,
                                 selectedStampSize = uiState.selectedStampSize,
-                                onStampSelected = viewModel::selectStamp,
-                                onStampSizeSelected = viewModel::selectStampSize,
-                                onOpenFullPicker = viewModel::openStampPicker
+                                onStampSelected = { stamp ->
+                                    soundManager.playClick()
+                                    viewModel.selectStamp(stamp)
+                                },
+                                onStampSizeSelected = { size ->
+                                    soundManager.playClick()
+                                    viewModel.selectStampSize(size)
+                                },
+                                onOpenFullPicker = {
+                                    soundManager.playClick()
+                                    viewModel.openStampPicker()
+                                }
                             )
                         }
                     }
@@ -375,8 +516,14 @@ fun KidsBoardScreen(
                 ColorPickerDialog(
                     selectedColor = uiState.selectedColor,
                     isRainbow = uiState.isRainbow,
-                    onColorSelected = viewModel::selectColor,
-                    onDismiss = viewModel::closeColorPicker
+                    onColorSelected = { color ->
+                        soundManager.playClick()
+                        viewModel.selectColor(color)
+                    },
+                    onDismiss = {
+                        soundManager.playClick()
+                        viewModel.closeColorPicker()
+                    }
                 )
             }
 
@@ -385,8 +532,14 @@ fun KidsBoardScreen(
                     selectedBrushSize = uiState.selectedBrushSize,
                     activeColor = if (uiState.isEraser) Color.White else uiState.selectedColor,
                     isRainbow = uiState.isRainbow,
-                    onBrushSizeSelected = viewModel::selectBrushSize,
-                    onDismiss = viewModel::closeBrushSizePicker
+                    onBrushSizeSelected = { size ->
+                        soundManager.playClick()
+                        viewModel.selectBrushSize(size)
+                    },
+                    onDismiss = {
+                        soundManager.playClick()
+                        viewModel.closeBrushSizePicker()
+                    }
                 )
             }
 
@@ -394,16 +547,32 @@ fun KidsBoardScreen(
                 StampPickerDialog(
                     selectedStamp = uiState.selectedStamp,
                     selectedStampSize = uiState.selectedStampSize,
-                    onStampSelected = viewModel::selectStamp,
-                    onStampSizeSelected = viewModel::selectStampSize,
-                    onDismiss = viewModel::closeStampPicker
+                    onStampSelected = { stamp ->
+                        soundManager.playClick()
+                        viewModel.selectStamp(stamp)
+                    },
+                    onStampSizeSelected = { size ->
+                        soundManager.playClick()
+                        viewModel.selectStampSize(size)
+                    },
+                    onDismiss = {
+                        soundManager.playClick()
+                        viewModel.closeStampPicker()
+                    }
                 )
             }
 
             if (uiState.isClearConfirmOpen) {
                 ClearConfirmDialog(
-                    onConfirm = viewModel::confirmClearCanvas,
-                    onDismiss = viewModel::dismissClearConfirm
+                    onConfirm = {
+                        soundManager.playClearWhoosh()
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        viewModel.confirmClearCanvas()
+                    },
+                    onDismiss = {
+                        soundManager.playClick()
+                        viewModel.dismissClearConfirm()
+                    }
                 )
             }
         }
