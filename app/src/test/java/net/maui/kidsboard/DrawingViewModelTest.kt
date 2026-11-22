@@ -457,4 +457,86 @@ class DrawingViewModelTest {
         assertEquals(700f, stamp.position.y, 0.01f)
         assertEquals(80f, stamp.size, 0.01f)
     }
+
+    @Test
+    fun testSelectRainbowPaletteColorActivatesRainbowBrush() {
+        viewModel.selectColor(ColorPalette.Rainbow)
+
+        val state = viewModel.uiState.value
+        assertTrue("Rainbow mode should be active", state.isRainbow)
+        assertFalse(state.isEraser)
+        assertEquals(DrawingTool.BRUSH, state.activeTool)
+        assertFalse(state.isColorPickerOpen)
+    }
+
+    @Test
+    fun testRainbowStrokeCreatedAndPersistsInElements() {
+        viewModel.selectColor(ColorPalette.Rainbow)
+        viewModel.startStroke(Offset(50f, 50f))
+
+        val activeStroke = viewModel.uiState.value.currentStroke
+        assertNotNull(activeStroke)
+        assertTrue(activeStroke!!.isRainbow)
+
+        viewModel.addPointToStroke(Offset(100f, 150f))
+        viewModel.finishStroke()
+
+        val state = viewModel.uiState.value
+        assertEquals(1, state.elements.size)
+        val stroke = state.elements.first() as DrawingStroke
+        assertTrue(stroke.isRainbow)
+        assertEquals(2, stroke.points.size)
+    }
+
+    @Test
+    fun testSelectingStandardColorDisablesRainbowMode() {
+        viewModel.selectColor(ColorPalette.Rainbow)
+        assertTrue(viewModel.uiState.value.isRainbow)
+
+        val blue = PaletteColor(ColorPalette.Blue, "Blue")
+        viewModel.selectColor(blue)
+
+        val state = viewModel.uiState.value
+        assertFalse(state.isRainbow)
+        assertEquals(ColorPalette.Blue, state.selectedColor)
+
+        viewModel.startStroke(Offset(10f, 20f))
+        val stroke = viewModel.uiState.value.currentStroke
+        assertNotNull(stroke)
+        assertFalse(stroke!!.isRainbow)
+        assertEquals(ColorPalette.Blue, stroke.color)
+    }
+
+    @Test
+    fun testSelectingEraserDisablesRainbowMode() {
+        viewModel.selectColor(ColorPalette.Rainbow)
+        assertTrue(viewModel.uiState.value.isRainbow)
+
+        val eraser = PaletteColor(ColorPalette.White, "Eraser", isEraser = true)
+        viewModel.selectColor(eraser)
+
+        val state = viewModel.uiState.value
+        assertFalse(state.isRainbow)
+        assertTrue(state.isEraser)
+        assertEquals(DrawingTool.BRUSH, state.activeTool)
+    }
+
+    @Test
+    fun testMultiTouchRainbowStrokes() {
+        viewModel.selectColor(ColorPalette.Rainbow)
+
+        viewModel.startStroke(1L, Offset(10f, 10f))
+        viewModel.startStroke(2L, Offset(200f, 200f))
+
+        val activeStrokes = viewModel.uiState.value.activeStrokes
+        assertEquals(2, activeStrokes.size)
+        assertTrue(activeStrokes[1L]!!.isRainbow)
+        assertTrue(activeStrokes[2L]!!.isRainbow)
+
+        viewModel.finishAllStrokes()
+        val elements = viewModel.uiState.value.elements
+        assertEquals(2, elements.size)
+        assertTrue((elements[0] as DrawingStroke).isRainbow)
+        assertTrue((elements[1] as DrawingStroke).isRainbow)
+    }
 }

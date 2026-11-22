@@ -44,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -51,6 +52,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
 import net.maui.kidsboard.model.BrushSize
+import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.DrawingTool
 import net.maui.kidsboard.ui.components.BrushSizePickerDialog
 import net.maui.kidsboard.ui.components.ChunkyActionButton
@@ -145,12 +147,14 @@ fun KidsBoardScreen(
                                     brushSize = uiState.selectedBrushSize,
                                     selectedColor = uiState.selectedColor,
                                     isEraser = uiState.isEraser,
+                                    isRainbow = uiState.isRainbow,
                                     onClick = viewModel::openBrushSizePicker
                                 )
 
                                 QuickColorGrid(
                                     selectedColor = uiState.selectedColor,
                                     isEraser = uiState.isEraser,
+                                    isRainbow = uiState.isRainbow,
                                     onColorSelected = viewModel::selectColor,
                                     onOpenFullPicker = viewModel::openColorPicker,
                                     modifier = Modifier.weight(1f, fill = false)
@@ -283,6 +287,7 @@ fun KidsBoardScreen(
                                     brushSize = uiState.selectedBrushSize,
                                     selectedColor = uiState.selectedColor,
                                     isEraser = uiState.isEraser,
+                                    isRainbow = uiState.isRainbow,
                                     onClick = viewModel::openBrushSizePicker
                                 )
                                 ChunkyActionButton(
@@ -374,6 +379,7 @@ fun KidsBoardScreen(
                             QuickColorRow(
                                 selectedColor = uiState.selectedColor,
                                 isEraser = uiState.isEraser,
+                                isRainbow = uiState.isRainbow,
                                 onColorSelected = viewModel::selectColor,
                                 onOpenFullPicker = viewModel::openColorPicker
                             )
@@ -392,6 +398,7 @@ fun KidsBoardScreen(
             if (uiState.isColorPickerOpen) {
                 ColorPickerDialog(
                     selectedColor = uiState.selectedColor,
+                    isRainbow = uiState.isRainbow,
                     onColorSelected = viewModel::selectColor,
                     onDismiss = viewModel::closeColorPicker
                 )
@@ -401,6 +408,7 @@ fun KidsBoardScreen(
                 BrushSizePickerDialog(
                     selectedBrushSize = uiState.selectedBrushSize,
                     activeColor = if (uiState.isEraser) Color.White else uiState.selectedColor,
+                    isRainbow = uiState.isRainbow,
                     onBrushSizeSelected = viewModel::selectBrushSize,
                     onDismiss = viewModel::closeBrushSizePicker
                 )
@@ -429,10 +437,12 @@ fun BrushSizeActionButton(
     brushSize: BrushSize,
     selectedColor: Color,
     isEraser: Boolean,
+    isRainbow: Boolean = false,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val displayColor = if (isEraser) Color.White else selectedColor
+    val rainbowBrush = Brush.sweepGradient(ColorPalette.RainbowSpectrum)
     IconButton(
         onClick = onClick,
         modifier = modifier
@@ -457,7 +467,13 @@ fun BrushSizeActionButton(
                     .align(Alignment.BottomEnd)
                     .size(10.dp)
                     .clip(CircleShape)
-                    .background(displayColor)
+                    .then(
+                        if (isRainbow && !isEraser) {
+                            Modifier.background(rainbowBrush)
+                        } else {
+                            Modifier.background(displayColor)
+                        }
+                    )
                     .border(BorderStroke(1.dp, Color(0x33000000)), CircleShape)
             )
         }

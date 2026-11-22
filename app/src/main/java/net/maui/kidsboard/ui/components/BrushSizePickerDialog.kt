@@ -22,16 +22,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.maui.kidsboard.model.BrushSize
+import net.maui.kidsboard.model.ColorPalette
 
 @Composable
 fun BrushSizePickerDialog(
     selectedBrushSize: BrushSize,
     activeColor: Color,
+    isRainbow: Boolean = false,
     onBrushSizeSelected: (BrushSize) -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -78,11 +81,18 @@ fun BrushSizePickerDialog(
                             modifier = Modifier.size(56.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
+                                val rainbowBrush = Brush.sweepGradient(ColorPalette.RainbowSpectrum)
                                 Box(
                                     modifier = Modifier
                                         .size(preset.previewSizeDp)
                                         .clip(CircleShape)
-                                        .background(activeColor)
+                                        .then(
+                                            if (isRainbow && activeColor != Color.White) {
+                                                Modifier.background(rainbowBrush)
+                                            } else {
+                                                Modifier.background(activeColor)
+                                            }
+                                        )
                                         .border(
                                             BorderStroke(1.dp, Color(0x33000000)),
                                             CircleShape

@@ -142,6 +142,11 @@ private fun DrawScope.drawStroke(stroke: DrawingStroke) {
     val points = stroke.points
     if (points.isEmpty()) return
 
+    if (stroke.isRainbow) {
+        drawRainbowStroke(stroke)
+        return
+    }
+
     if (points.size == 1) {
         drawCircle(
             color = stroke.color,
@@ -172,4 +177,42 @@ private fun DrawScope.drawStroke(stroke: DrawingStroke) {
             join = StrokeJoin.Round
         )
     )
+}
+
+private fun DrawScope.drawRainbowStroke(stroke: DrawingStroke) {
+    val points = stroke.points
+    if (points.isEmpty()) return
+
+    if (points.size == 1) {
+        drawCircle(
+            color = Color(0xFFFF0000),
+            radius = stroke.strokeWidth / 2f,
+            center = points.first()
+        )
+        return
+    }
+
+    var cumulativeDist = 0f
+    val cycleLength = 300f
+
+    for (i in 1 until points.size) {
+        val p0 = points[i - 1]
+        val p1 = points[i]
+        val dx = p1.x - p0.x
+        val dy = p1.y - p0.y
+        val dist = kotlin.math.hypot(dx, dy)
+
+        val hue = (cumulativeDist / cycleLength * 360f) % 360f
+        val color = Color(android.graphics.Color.HSVToColor(floatArrayOf(hue, 1f, 1f)))
+
+        drawLine(
+            color = color,
+            start = p0,
+            end = p1,
+            strokeWidth = stroke.strokeWidth,
+            cap = StrokeCap.Round
+        )
+
+        cumulativeDist += dist
+    }
 }

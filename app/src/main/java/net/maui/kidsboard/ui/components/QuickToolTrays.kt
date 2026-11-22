@@ -27,9 +27,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.contentDescription
@@ -60,17 +62,32 @@ fun QuickColorSwatch(
         BorderStroke(1.5.dp, Color(0x22000000))
     }
 
+    val rainbowBrush = remember {
+        Brush.sweepGradient(ColorPalette.RainbowSpectrum)
+    }
+
+    val backgroundModifier = if (paletteColor.isRainbow) {
+        Modifier.background(rainbowBrush)
+    } else {
+        Modifier.background(paletteColor.color)
+    }
+
     Box(
         modifier = modifier
             .size(42.dp)
             .clip(CircleShape)
-            .background(paletteColor.color)
+            .then(backgroundModifier)
             .border(borderStroke, CircleShape)
             .clickable(onClick = onClick)
             .semantics { contentDescription = paletteColor.name },
         contentAlignment = Alignment.Center
     ) {
-        if (paletteColor.isEraser) {
+        if (paletteColor.isRainbow) {
+            Text(
+                text = "🌈",
+                fontSize = 18.sp
+            )
+        } else if (paletteColor.isEraser) {
             Icon(
                 imageVector = Icons.Default.AutoFixHigh,
                 contentDescription = "Eraser",
@@ -92,6 +109,7 @@ fun QuickColorSwatch(
 fun QuickColorRow(
     selectedColor: Color,
     isEraser: Boolean,
+    isRainbow: Boolean,
     onColorSelected: (PaletteColor) -> Unit,
     onOpenFullPicker: () -> Unit,
     modifier: Modifier = Modifier
@@ -105,7 +123,13 @@ fun QuickColorRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         ColorPalette.allColors.forEach { paletteColor ->
-            val isSelected = if (paletteColor.isEraser) isEraser else (!isEraser && paletteColor.color == selectedColor)
+            val isSelected = if (paletteColor.isEraser) {
+                isEraser
+            } else if (paletteColor.isRainbow) {
+                isRainbow
+            } else {
+                !isEraser && !isRainbow && paletteColor.color == selectedColor
+            }
             QuickColorSwatch(
                 paletteColor = paletteColor,
                 isSelected = isSelected,
@@ -136,6 +160,7 @@ fun QuickColorRow(
 fun QuickColorGrid(
     selectedColor: Color,
     isEraser: Boolean,
+    isRainbow: Boolean,
     onColorSelected: (PaletteColor) -> Unit,
     onOpenFullPicker: () -> Unit,
     modifier: Modifier = Modifier
@@ -154,7 +179,13 @@ fun QuickColorGrid(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 pair.forEach { paletteColor ->
-                    val isSelected = if (paletteColor.isEraser) isEraser else (!isEraser && paletteColor.color == selectedColor)
+                    val isSelected = if (paletteColor.isEraser) {
+                        isEraser
+                    } else if (paletteColor.isRainbow) {
+                        isRainbow
+                    } else {
+                        !isEraser && !isRainbow && paletteColor.color == selectedColor
+                    }
                     QuickColorSwatch(
                         paletteColor = paletteColor,
                         isSelected = isSelected,

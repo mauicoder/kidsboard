@@ -48,8 +48,34 @@ open class DrawingExporter {
                     val points = element.points
                     if (points.isEmpty()) continue
 
-                    strokePaint.color = element.color.toArgb()
                     strokePaint.strokeWidth = element.strokeWidth
+
+                    if (element.isRainbow) {
+                        if (points.size == 1) {
+                            strokePaint.color = AndroidColor.RED
+                            canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)
+                            continue
+                        }
+
+                        var cumulativeDist = 0f
+                        val cycleLength = 300f
+                        for (i in 1 until points.size) {
+                            val p0 = points[i - 1]
+                            val p1 = points[i]
+                            val dx = p1.x - p0.x
+                            val dy = p1.y - p0.y
+                            val dist = kotlin.math.hypot(dx, dy)
+
+                            val hue = (cumulativeDist / cycleLength * 360f) % 360f
+                            strokePaint.color = AndroidColor.HSVToColor(floatArrayOf(hue, 1f, 1f))
+                            canvas.drawLine(p0.x, p0.y, p1.x, p1.y, strokePaint)
+
+                            cumulativeDist += dist
+                        }
+                        continue
+                    }
+
+                    strokePaint.color = element.color.toArgb()
 
                     if (points.size == 1) {
                         canvas.drawCircle(points[0].x, points[0].y, element.strokeWidth / 2f, strokePaint)

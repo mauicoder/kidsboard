@@ -40,6 +40,7 @@ data class DrawingUiState(
     val selectedBrushSize: BrushSize = BrushSize.Medium,
     val strokeWidth: Float = BrushSize.Medium.strokeWidth,
     val isEraser: Boolean = false,
+    val isRainbow: Boolean = false,
     val activeTool: DrawingTool = DrawingTool.BRUSH,
     val selectedStamp: String = StampRepository.DEFAULT_STAMP,
     val isColorPickerOpen: Boolean = false,
@@ -173,6 +174,7 @@ class DrawingViewModel(
                 selectedColor = paletteColor.color,
                 strokeWidth = strokeWidth,
                 isEraser = paletteColor.isEraser,
+                isRainbow = paletteColor.isRainbow,
                 activeTool = DrawingTool.BRUSH,
                 isColorPickerOpen = false
             )
@@ -270,7 +272,8 @@ class DrawingViewModel(
             points = listOf(point),
             color = if (state.isEraser) Color.White else state.selectedColor,
             strokeWidth = state.strokeWidth,
-            isEraser = state.isEraser
+            isEraser = state.isEraser,
+            isRainbow = state.isRainbow
         )
         _uiState.update { it.copy(activeStrokes = it.activeStrokes + (pointerId to stroke)) }
     }

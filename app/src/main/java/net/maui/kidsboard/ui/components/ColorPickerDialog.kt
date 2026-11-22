@@ -24,10 +24,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import net.maui.kidsboard.model.ColorPalette
 import net.maui.kidsboard.model.PaletteColor
 
@@ -35,7 +37,8 @@ import net.maui.kidsboard.model.PaletteColor
 fun ColorPickerDialog(
     selectedColor: Color,
     onColorSelected: (PaletteColor) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    isRainbow: Boolean = false
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -53,16 +56,21 @@ fun ColorPickerDialog(
                     .padding(vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // 12 colors arranged in 3 rows of 4 columns
+                // Colors arranged in rows of 4 columns
                 ColorPalette.allColors.chunked(4).forEach { rowColors ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         rowColors.forEach { paletteColor ->
+                            val isSelected = if (paletteColor.isRainbow) {
+                                isRainbow
+                            } else {
+                                !isRainbow && paletteColor.color == selectedColor
+                            }
                             ColorSwatch(
                                 paletteColor = paletteColor,
-                                isSelected = paletteColor.color == selectedColor,
+                                isSelected = isSelected,
                                 onClick = { onColorSelected(paletteColor) }
                             )
                         }
@@ -88,11 +96,19 @@ fun ColorSwatch(
     val isLight = paletteColor.color.luminance() > 0.5f
     val checkColor = if (isLight) Color.Black else Color.White
 
+    val rainbowBrush = Brush.sweepGradient(ColorPalette.RainbowSpectrum)
+
+    val backgroundModifier = if (paletteColor.isRainbow) {
+        Modifier.background(rainbowBrush)
+    } else {
+        Modifier.background(paletteColor.color)
+    }
+
     Box(
         modifier = modifier
             .size(56.dp)
             .clip(CircleShape)
-            .background(paletteColor.color)
+            .then(backgroundModifier)
             .border(
                 BorderStroke(2.dp, Color(0x33000000)),
                 CircleShape
@@ -101,7 +117,12 @@ fun ColorSwatch(
             .semantics { contentDescription = paletteColor.name },
         contentAlignment = Alignment.Center
     ) {
-        if (isSelected) {
+        if (paletteColor.isRainbow) {
+            Text(
+                text = "🌈",
+                fontSize = 24.sp
+            )
+        } else if (isSelected) {
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = null,

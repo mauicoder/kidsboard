@@ -17,7 +17,8 @@ data class DrawingStroke(
     val points: List<Offset>,
     val color: Color,
     val strokeWidth: Float,
-    val isEraser: Boolean = false
+    val isEraser: Boolean = false,
+    val isRainbow: Boolean = false
 ) : CanvasElement
 
 /**
@@ -43,7 +44,8 @@ enum class DrawingTool {
 data class PaletteColor(
     val color: Color,
     val name: String,
-    val isEraser: Boolean = false
+    val isEraser: Boolean = false,
+    val isRainbow: Boolean = false
 )
 
 /**
@@ -79,18 +81,31 @@ object ColorPalette {
     val Brown = Color(0xFF835C3B)
     val Coffee = Color(0xFF6F4E37)
 
+    val RainbowSpectrum: List<Color> = listOf(
+        Color(0xFFFF0000), // Red
+        Color(0xFFFF7F00), // Orange
+        Color(0xFFFFFF00), // Yellow
+        Color(0xFF00FF00), // Green
+        Color(0xFF00FFFF), // Cyan
+        Color(0xFF0000FF), // Blue
+        Color(0xFF8B00FF)  // Violet
+    )
+
+    val Rainbow = PaletteColor(Color.Transparent, "Rainbow", isRainbow = true)
+
     val allColors: List<PaletteColor> = listOf(
-        PaletteColor(Black, "Black"),
-        PaletteColor(DarkBlue, "Dark Blue"),
-        PaletteColor(Blue, "Blue"),
-        PaletteColor(Cyan, "Cyan"),
-        PaletteColor(Green, "Green"),
-        PaletteColor(Yellow, "Yellow"),
-        PaletteColor(Orange, "Orange"),
+        Rainbow,
         PaletteColor(Red, "Red"),
+        PaletteColor(Orange, "Orange"),
+        PaletteColor(Yellow, "Yellow"),
+        PaletteColor(Green, "Green"),
+        PaletteColor(Cyan, "Cyan"),
+        PaletteColor(Blue, "Blue"),
+        PaletteColor(DarkBlue, "Dark Blue"),
         PaletteColor(Magenta, "Magenta"),
         PaletteColor(Brown, "Brown"),
         PaletteColor(Coffee, "Coffee"),
+        PaletteColor(Black, "Black"),
         PaletteColor(White, "Eraser", isEraser = true)
     )
 }
