@@ -3,6 +3,21 @@
 
     <string name="app_name">KidsBoard</string>
     <string name="action_settings">Settings</string>
-    <string name="color_btn_label">color</string>
+    <string name="color_btn_label">Color Palette</string>
+    <string name="choose_color_title">Choose a Color</string>
+
+    <!-- Color descriptions for accessibility -->
+    <string name="color_black">Black</string>
+    <string name="color_dark_blue">Dark Blue</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_green">Green</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_coffee">Coffee</string>
+    <string name="color_white_eraser">Eraser</string>
 
 </resources>

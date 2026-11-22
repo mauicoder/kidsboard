@@ -11,6 +11,7 @@
     <style name="ColorDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="android:windowAnimationStyle">@style/ColorDialogAnimation</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="ColorDialogAnimation">
