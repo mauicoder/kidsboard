@@ -4,31 +4,31 @@ ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:2:1-24:12
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:2:1-24:12
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:2:1-24:12
-MERGED from [com.android.support:support-v4:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/154d02058119fe15e93ffc7995a7f586/transformed/support-v4-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/36ca4c6c124e4d9568bfcfeb32ac8379/transformed/support-media-compat-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/3ba54a21b922b219b3763550aeced384/transformed/support-fragment-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9fc0b8c568e77cdbae4236cba0a5b8e7/transformed/support-core-ui-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/50289bd11aa311d364d265ce0703724e/transformed/support-core-utils-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:loader:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/dd061f91c17767308f9071b7d8bdbd56/transformed/loader-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:viewpager:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/20a98293fce45503e3421fda70121f89/transformed/viewpager-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/6b1f129a15cd63c8a13e5e951e3de1d9/transformed/coordinatorlayout-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:drawerlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/db5de9063283e40c1a529b092d53b26d/transformed/drawerlayout-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/ba3cbb8596839816b37415f91e2d3994/transformed/slidingpanelayout-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customview:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9b4dda027776a6e906a861b2123c7925/transformed/customview-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/960a81dd6e4c95c60fa01d609d901630/transformed/swiperefreshlayout-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/d2bfaaab119a34fe7c3f8d4c74f5f112/transformed/asynclayoutinflater-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/b04c66420939b2331e790ae91a0f1ada/transformed/support-compat-28.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/573f40ec9dd5fd9fe139a605dfdb766f/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:17:1-25:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/377ed543cb4d5cf48b6ab15321eb841e/transformed/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:documentfile:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/a57f2dc72c4a969fed1308eba24ab699/transformed/documentfile-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/68acee8ef2e483d3634f9249b6f7584c/transformed/localbroadcastmanager-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:print:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9b08b35ad63e09de2c6c8de0f5dedf59/transformed/print-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:interpolator:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/db195752efe88b6955ed2ca838a18e99/transformed/interpolator-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:cursoradapter:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/75ccd8ed6656f60d7953bcf7e4244839/transformed/cursoradapter-28.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/6ffeff4328201a64ec44537a821894f6/transformed/viewmodel-1.1.1/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/761462abfa47a50f527611ebea670fd4/transformed/livedata-1.1.1/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/e17b9d7de4801425333ff64e5e42d49c/transformed/livedata-core-1.1.1/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/1c492f42ee1bc7a8756404c70155a82f/transformed/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/aaa726beda5d7a550128ff9a4e69fb70/transformed/support-v4-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b5e95a302083eb45d16c66ec4e4cd197/transformed/support-media-compat-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ec7827af7f426e1bb615cabf979c7333/transformed/support-fragment-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3d099b4ac02365786765b8245b7c9101/transformed/support-core-ui-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/49ba4ac0aa38589a62b18848688ef370/transformed/support-core-utils-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/5e24bf6600f904f7bbfb513190574551/transformed/loader-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ee0a98708eec0d149250930da2a89879/transformed/viewpager-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/53f2a29b6c0b94cf4b7c64789e5a4aad/transformed/coordinatorlayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3743a96e103963fd8b7855299b5c57a0/transformed/drawerlayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/753b0df2f9f813c2d90c7cfe8018e6f3/transformed/slidingpanelayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/1f788c5c21168198a40c646376776baf/transformed/customview-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/72d8722948e2ed613a1e12da3f0f5a60/transformed/swiperefreshlayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/2f42ef68596293ad1808554d211bdaaa/transformed/asynclayoutinflater-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/01a9e5cdff6d0a58349262bc655efe59/transformed/support-compat-28.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ae2aaaa44939cdd64be322d634b9d158/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/87d536fb7e70cbc329d3ab659f614684/transformed/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/028a29595243e4acde9da0a7d676a3fa/transformed/documentfile-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/25a2a5e5535cf93434f1ced19280f672/transformed/localbroadcastmanager-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/dd5166d017bad80fbc9c15e61c859f32/transformed/print-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/54da420a3bd3d6cf669f9ca417297d5f/transformed/interpolator-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/fd3d3dbd569f48d96bcfc38d2776dcf3/transformed/cursoradapter-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3270228405840e421eaffa2b1aad58dc/transformed/viewmodel-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/a2e58e605c65c64879cd238854d99e50/transformed/livedata-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/2b782db3cbf1763516c24bcc7c853f59/transformed/livedata-core-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/d63910f7973bea8151207846325b3110/transformed/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
 	package
 		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:3:5-33
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
@@ -43,14 +43,14 @@ MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/t
 application
 ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:7:5-22:19
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:7:5-22:19
-MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/b04c66420939b2331e790ae91a0f1ada/transformed/support-compat-28.0.0/AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/b04c66420939b2331e790ae91a0f1ada/transformed/support-compat-28.0.0/AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/573f40ec9dd5fd9fe139a605dfdb766f/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/573f40ec9dd5fd9fe139a605dfdb766f/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/01a9e5cdff6d0a58349262bc655efe59/transformed/support-compat-28.0.0/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/01a9e5cdff6d0a58349262bc655efe59/transformed/support-compat-28.0.0/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ae2aaaa44939cdd64be322d634b9d158/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ae2aaaa44939cdd64be322d634b9d158/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:22:5-23:19
 	android:extractNativeLibs
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 	android:appComponentFactory
-		ADDED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/b04c66420939b2331e790ae91a0f1ada/transformed/support-compat-28.0.0/AndroidManifest.xml:22:18-91
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/01a9e5cdff6d0a58349262bc655efe59/transformed/support-compat-28.0.0/AndroidManifest.xml:22:18-91
 	android:label
 		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:10:9-41
 	android:icon
@@ -81,56 +81,56 @@ uses-sdk
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
-MERGED from [com.android.support:support-v4:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/154d02058119fe15e93ffc7995a7f586/transformed/support-v4-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/154d02058119fe15e93ffc7995a7f586/transformed/support-v4-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/36ca4c6c124e4d9568bfcfeb32ac8379/transformed/support-media-compat-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/36ca4c6c124e4d9568bfcfeb32ac8379/transformed/support-media-compat-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/3ba54a21b922b219b3763550aeced384/transformed/support-fragment-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/3ba54a21b922b219b3763550aeced384/transformed/support-fragment-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9fc0b8c568e77cdbae4236cba0a5b8e7/transformed/support-core-ui-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9fc0b8c568e77cdbae4236cba0a5b8e7/transformed/support-core-ui-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/50289bd11aa311d364d265ce0703724e/transformed/support-core-utils-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/50289bd11aa311d364d265ce0703724e/transformed/support-core-utils-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/dd061f91c17767308f9071b7d8bdbd56/transformed/loader-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/dd061f91c17767308f9071b7d8bdbd56/transformed/loader-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/20a98293fce45503e3421fda70121f89/transformed/viewpager-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/20a98293fce45503e3421fda70121f89/transformed/viewpager-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/6b1f129a15cd63c8a13e5e951e3de1d9/transformed/coordinatorlayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/6b1f129a15cd63c8a13e5e951e3de1d9/transformed/coordinatorlayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/db5de9063283e40c1a529b092d53b26d/transformed/drawerlayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/db5de9063283e40c1a529b092d53b26d/transformed/drawerlayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/ba3cbb8596839816b37415f91e2d3994/transformed/slidingpanelayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/ba3cbb8596839816b37415f91e2d3994/transformed/slidingpanelayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9b4dda027776a6e906a861b2123c7925/transformed/customview-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9b4dda027776a6e906a861b2123c7925/transformed/customview-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/960a81dd6e4c95c60fa01d609d901630/transformed/swiperefreshlayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/960a81dd6e4c95c60fa01d609d901630/transformed/swiperefreshlayout-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/d2bfaaab119a34fe7c3f8d4c74f5f112/transformed/asynclayoutinflater-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/d2bfaaab119a34fe7c3f8d4c74f5f112/transformed/asynclayoutinflater-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/b04c66420939b2331e790ae91a0f1ada/transformed/support-compat-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/b04c66420939b2331e790ae91a0f1ada/transformed/support-compat-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/573f40ec9dd5fd9fe139a605dfdb766f/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/573f40ec9dd5fd9fe139a605dfdb766f/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/377ed543cb4d5cf48b6ab15321eb841e/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/377ed543cb4d5cf48b6ab15321eb841e/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/a57f2dc72c4a969fed1308eba24ab699/transformed/documentfile-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/a57f2dc72c4a969fed1308eba24ab699/transformed/documentfile-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/68acee8ef2e483d3634f9249b6f7584c/transformed/localbroadcastmanager-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/68acee8ef2e483d3634f9249b6f7584c/transformed/localbroadcastmanager-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9b08b35ad63e09de2c6c8de0f5dedf59/transformed/print-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/9b08b35ad63e09de2c6c8de0f5dedf59/transformed/print-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/db195752efe88b6955ed2ca838a18e99/transformed/interpolator-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/db195752efe88b6955ed2ca838a18e99/transformed/interpolator-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/75ccd8ed6656f60d7953bcf7e4244839/transformed/cursoradapter-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] /Users/maui/.gradle/caches/9.1.0/transforms/75ccd8ed6656f60d7953bcf7e4244839/transformed/cursoradapter-28.0.0/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/6ffeff4328201a64ec44537a821894f6/transformed/viewmodel-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/6ffeff4328201a64ec44537a821894f6/transformed/viewmodel-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/761462abfa47a50f527611ebea670fd4/transformed/livedata-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/761462abfa47a50f527611ebea670fd4/transformed/livedata-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/e17b9d7de4801425333ff64e5e42d49c/transformed/livedata-core-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/e17b9d7de4801425333ff64e5e42d49c/transformed/livedata-core-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/1c492f42ee1bc7a8756404c70155a82f/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.1.0/transforms/1c492f42ee1bc7a8756404c70155a82f/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/aaa726beda5d7a550128ff9a4e69fb70/transformed/support-v4-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/aaa726beda5d7a550128ff9a4e69fb70/transformed/support-v4-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b5e95a302083eb45d16c66ec4e4cd197/transformed/support-media-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b5e95a302083eb45d16c66ec4e4cd197/transformed/support-media-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ec7827af7f426e1bb615cabf979c7333/transformed/support-fragment-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ec7827af7f426e1bb615cabf979c7333/transformed/support-fragment-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3d099b4ac02365786765b8245b7c9101/transformed/support-core-ui-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3d099b4ac02365786765b8245b7c9101/transformed/support-core-ui-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/49ba4ac0aa38589a62b18848688ef370/transformed/support-core-utils-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/49ba4ac0aa38589a62b18848688ef370/transformed/support-core-utils-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/5e24bf6600f904f7bbfb513190574551/transformed/loader-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/5e24bf6600f904f7bbfb513190574551/transformed/loader-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ee0a98708eec0d149250930da2a89879/transformed/viewpager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ee0a98708eec0d149250930da2a89879/transformed/viewpager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/53f2a29b6c0b94cf4b7c64789e5a4aad/transformed/coordinatorlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/53f2a29b6c0b94cf4b7c64789e5a4aad/transformed/coordinatorlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3743a96e103963fd8b7855299b5c57a0/transformed/drawerlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3743a96e103963fd8b7855299b5c57a0/transformed/drawerlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/753b0df2f9f813c2d90c7cfe8018e6f3/transformed/slidingpanelayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/753b0df2f9f813c2d90c7cfe8018e6f3/transformed/slidingpanelayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/1f788c5c21168198a40c646376776baf/transformed/customview-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/1f788c5c21168198a40c646376776baf/transformed/customview-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/72d8722948e2ed613a1e12da3f0f5a60/transformed/swiperefreshlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/72d8722948e2ed613a1e12da3f0f5a60/transformed/swiperefreshlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/2f42ef68596293ad1808554d211bdaaa/transformed/asynclayoutinflater-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/2f42ef68596293ad1808554d211bdaaa/transformed/asynclayoutinflater-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/01a9e5cdff6d0a58349262bc655efe59/transformed/support-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/01a9e5cdff6d0a58349262bc655efe59/transformed/support-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ae2aaaa44939cdd64be322d634b9d158/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/ae2aaaa44939cdd64be322d634b9d158/transformed/versionedparcelable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/87d536fb7e70cbc329d3ab659f614684/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/87d536fb7e70cbc329d3ab659f614684/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/028a29595243e4acde9da0a7d676a3fa/transformed/documentfile-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/028a29595243e4acde9da0a7d676a3fa/transformed/documentfile-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/25a2a5e5535cf93434f1ced19280f672/transformed/localbroadcastmanager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/25a2a5e5535cf93434f1ced19280f672/transformed/localbroadcastmanager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/dd5166d017bad80fbc9c15e61c859f32/transformed/print-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/dd5166d017bad80fbc9c15e61c859f32/transformed/print-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/54da420a3bd3d6cf669f9ca417297d5f/transformed/interpolator-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/54da420a3bd3d6cf669f9ca417297d5f/transformed/interpolator-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/fd3d3dbd569f48d96bcfc38d2776dcf3/transformed/cursoradapter-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/fd3d3dbd569f48d96bcfc38d2776dcf3/transformed/cursoradapter-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3270228405840e421eaffa2b1aad58dc/transformed/viewmodel-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3270228405840e421eaffa2b1aad58dc/transformed/viewmodel-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/a2e58e605c65c64879cd238854d99e50/transformed/livedata-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/a2e58e605c65c64879cd238854d99e50/transformed/livedata-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/2b782db3cbf1763516c24bcc7c853f59/transformed/livedata-core-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/2b782db3cbf1763516c24bcc7c853f59/transformed/livedata-core-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/d63910f7973bea8151207846325b3110/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/d63910f7973bea8151207846325b3110/transformed/runtime-1.1.1/AndroidManifest.xml:20:5-44
 	android:targetSdkVersion
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
