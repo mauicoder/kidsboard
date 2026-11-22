@@ -4,48 +4,79 @@ ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:2:1-22:12
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:2:1-22:12
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:2:1-22:12
-MERGED from [androidx.databinding:viewbinding:9.5.2] /Users/maui/.gradle/caches/9.6.0/transforms/71c76c1a21a7df88fe5d6dbd2cb1c563/transformed/viewbinding-9.5.2/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/828a3b1e2dd94213f53a21119feefe8d/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/c7565310949ab8ba0d000731d20b7f1e/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/707be46757dc9e936b3c9ecad623f4f7/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/b41bc03c40f0097b197b2254c5cec3d1/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/0a8eb55978d8340c7fcb5255a63153bd/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.fragment:fragment:1.5.4] /Users/maui/.gradle/caches/9.6.0/transforms/ff38beefc163d195c256d2e1ffdc98f9/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/c2de885115a7bfd5c25753fbddb93150/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.activity:activity:1.8.0] /Users/maui/.gradle/caches/9.6.0/transforms/7fd95ce9d28b2b0e65881dbbe0bd48cb/transformed/activity-1.8.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/93de13728154d319ef3a97f4661d2b6d/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/04ec90182afa60dd347737ece963b3d0/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.5.0] /Users/maui/.gradle/caches/9.6.0/transforms/18e9d70b623d2bd827e9c3fbf0e2aa58/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/caa2b10f8db6118384c8f13489ac95b8/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/b8126bd488aa2b1b0de6a0a14fb0ffa8/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/592ddc80948603e0e87c62733053db24/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9110d894d581a3d75d05d532ffc95c29/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/21ec00ff7212c13bc926c4a730c6a659/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b98615d7e32e0bade8d8c77ff918c7ae/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/201fb9a555dad9805f717614b086a48b/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.customview:customview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/04e02f0307538d2914b02953d8894ecb/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
-MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a6a2856ba0516e80c5df0e08de387ea/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/f920e57f77aa09ce54b3b986a9eaf457/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/c87a70879014ab44d9f6bb5a07424d01/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/b80ae4e70d0a81fd9d9c75536d13d2cc/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/fe80777734883fa1e6c18c1a2add99f2/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/7d1ea11be4571b735f0459c4cace8429/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core-ktx:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/bbaf543b9b97b5d9dbaec0018a11fbd0/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/maui/.gradle/caches/9.6.0/transforms/128a30afd177a97cc040443e6f0cad75/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/cf6f223287f855a26169a43156950ee3/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/c94f70ad99f4578eb7de01f1ef85fd9b/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/fbc1db92fcf8a79737c140f967c38f25/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/maui/.gradle/caches/9.6.0/transforms/1897770bdb4e53f2bf9f2d8c52b2e32d/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.tracing:tracing:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/175cd0acca53143d85725c5f1b365bc5/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b76d5b6c553ef93bfa66bef00c7b289c/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/4885738bc94ec0bd383c41bab46f6380/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f36258a40494f9e97cef0f77bff73a3c/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/1518606ae5a27023ef1fbac267065a49/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/aa7f1f4a2c540c53abe1caf0adcae937/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/3be99558d13b63ed4b28d794132decfd/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/db8c108943bcd0c0e12aad23be9e11a9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/09d8b7fdd7ab2617307dfb14f9d190a2/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/3b24a66089425a3854ad2a4792a392c7/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9b8996e96ec5ae7981692d843e23a48c/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/maui/.gradle/caches/9.6.0/transforms/00a17c456a8b10b94e0ccd085652fd41/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/8bc58281ee214c95f604bd55f213070e/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/b5e4f8cb27362232c5de43912c0cbdcf/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/fa55c53c8c221f951527ae273419f121/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/ca55ff98a304bea3051807b33a5c6916/transformed/material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c4c59895281d2878a3f40f045bfddbdd/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/5ddae0fc6f52e737acdb80ab8093ab7d/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/909012a8a4801871b5e033e3781fb7d6/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/9c37bd1094316099922bbfb7d2beb2a6/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/f10490928b190b52b27bbe9db81e1108/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/a1b7a03a84e5d58d477d3e45f9f3f6f5/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/f7e5366c72054f91c5fa44bd845d46c8/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/aacc6787c966233d7e263699e0b7856d/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c60fac9ed0c866c3e1c9f1e53da6f938/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/771e0a3a55c14c4db9e0396244626d5a/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/062008058597f153f6dfb806a43b85d6/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/6442b7610dc9c1c38adfa6178665e2eb/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.activity:activity-compose:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/43b8ac2521533662902682cbdf83c812/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.transition:transition:1.5.0] /Users/maui/.gradle/caches/9.6.0/transforms/25b753770a72877b036df9b69b44c5ce/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/43b7f0c245884645b1f9f463ecac0dc7/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/488822b7f87097d8251367ccb94ca801/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/be61cae5f58879125ec1ba3d75440432/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/a271b38830cdc01328b19113afa402da/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/66a3d76d5564977b6aedb1890a55c16a/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/7ab575c346abd9cae332ee694590d54e/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3aa25662b41d810b241164f2f910ac59/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/94805b8060dc30b649b2f134da1433be/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/2c866f590f85f52dab2c5943211c2e81/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3e25f42208e98797ae9a6ab322793905/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/8ab6075303d490a77d0ddf86ba2f00e2/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/1cbd9cff4d14e9060774b279aaf1f4ad/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3d683b3ab95ed3afa2b8509613cb2fe6/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/e48b97ab5512e79a89018037c8f09b50/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/5799112cf6909aa4671b854404a82ec5/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/a7b7bce80dda5b77ff917f4fe83d3eb7/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/fc0b44d4402756dfd7b81391541bc377/transformed/material-icons-extended-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c4f9b68b8461d02c88cca348843ff8a9/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/0a3ed4d0cf011b783f4ea13baa6459b2/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/f44de8ff8524d21e7a1a58b8ca7014a0/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/74391027e31cef506a693b192fd808a6/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/b83567df877de5b068829168d8bb07b0/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/8c35a9da3915341a08621fd4da4cf8cf/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f917163e1ff8f79e2794f4f0e8433f9c/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/fd146059dad2a512dfeedcd21c27f3a0/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/e7f1cdafb68a8508b36d7656c61fa8ec/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f8683e5cdb39741b580d004a175dd91d/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/bc8ed4fe171c02a8001c4921c93cc06e/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3220fb414bbff93da5fcbc99c8946da7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/57d86cebbe212bbdc8e0ed3de4d1c5f3/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/3cb249d377300025b9f0390a80026fe9/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/5530ad1341a04133a3109c673250bb55/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/maui/.gradle/caches/9.6.0/transforms/72823a711ad14201418c84e5c2ccdd79/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/29382fcf16eda6ea49310e6fc6770d26/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3de231b824a5f2596b064955d47c7168/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9ba0330fd0284b514111d1d0cb667520/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/492ba4560dcbbdaff4c7be1e9b24b77b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/c07c4c1523c02afc6f8f168426966a2b/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/8878f1a6ffcc0e498dd75d7287156c0f/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/36f1f74b2acfb5fba7b8014301475bea/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3aa972d9e3ab2b76c13c9baebd0fc6b6/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/maui/.gradle/caches/9.6.0/transforms/cfb40461d8a24a8532decf3f99f0e467/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
 	package
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -59,26 +90,28 @@ MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transf
 application
 ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:6:5-20:19
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:6:5-20:19
-MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/828a3b1e2dd94213f53a21119feefe8d/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/828a3b1e2dd94213f53a21119feefe8d/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/707be46757dc9e936b3c9ecad623f4f7/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/707be46757dc9e936b3c9ecad623f4f7/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
-MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
-MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/fbc1db92fcf8a79737c140f967c38f25/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/fbc1db92fcf8a79737c140f967c38f25/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/aa7f1f4a2c540c53abe1caf0adcae937/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/aa7f1f4a2c540c53abe1caf0adcae937/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/db8c108943bcd0c0e12aad23be9e11a9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/db8c108943bcd0c0e12aad23be9e11a9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/492ba4560dcbbdaff4c7be1e9b24b77b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/492ba4560dcbbdaff4c7be1e9b24b77b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:label
 		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:9:9-41
 	android:icon
@@ -107,181 +140,249 @@ uses-sdk
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
-MERGED from [androidx.databinding:viewbinding:9.5.2] /Users/maui/.gradle/caches/9.6.0/transforms/71c76c1a21a7df88fe5d6dbd2cb1c563/transformed/viewbinding-9.5.2/AndroidManifest.xml:5:5-44
-MERGED from [androidx.databinding:viewbinding:9.5.2] /Users/maui/.gradle/caches/9.6.0/transforms/71c76c1a21a7df88fe5d6dbd2cb1c563/transformed/viewbinding-9.5.2/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/828a3b1e2dd94213f53a21119feefe8d/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/828a3b1e2dd94213f53a21119feefe8d/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/c7565310949ab8ba0d000731d20b7f1e/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/c7565310949ab8ba0d000731d20b7f1e/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/707be46757dc9e936b3c9ecad623f4f7/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/707be46757dc9e936b3c9ecad623f4f7/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/b41bc03c40f0097b197b2254c5cec3d1/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/b41bc03c40f0097b197b2254c5cec3d1/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/0a8eb55978d8340c7fcb5255a63153bd/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/0a8eb55978d8340c7fcb5255a63153bd/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.5.4] /Users/maui/.gradle/caches/9.6.0/transforms/ff38beefc163d195c256d2e1ffdc98f9/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.5.4] /Users/maui/.gradle/caches/9.6.0/transforms/ff38beefc163d195c256d2e1ffdc98f9/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/c2de885115a7bfd5c25753fbddb93150/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/c2de885115a7bfd5c25753fbddb93150/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.activity:activity:1.8.0] /Users/maui/.gradle/caches/9.6.0/transforms/7fd95ce9d28b2b0e65881dbbe0bd48cb/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.8.0] /Users/maui/.gradle/caches/9.6.0/transforms/7fd95ce9d28b2b0e65881dbbe0bd48cb/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/93de13728154d319ef3a97f4661d2b6d/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/93de13728154d319ef3a97f4661d2b6d/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/04ec90182afa60dd347737ece963b3d0/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/04ec90182afa60dd347737ece963b3d0/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.5.0] /Users/maui/.gradle/caches/9.6.0/transforms/18e9d70b623d2bd827e9c3fbf0e2aa58/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.transition:transition:1.5.0] /Users/maui/.gradle/caches/9.6.0/transforms/18e9d70b623d2bd827e9c3fbf0e2aa58/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/caa2b10f8db6118384c8f13489ac95b8/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/caa2b10f8db6118384c8f13489ac95b8/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/b8126bd488aa2b1b0de6a0a14fb0ffa8/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/b8126bd488aa2b1b0de6a0a14fb0ffa8/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/592ddc80948603e0e87c62733053db24/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/592ddc80948603e0e87c62733053db24/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9110d894d581a3d75d05d532ffc95c29/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9110d894d581a3d75d05d532ffc95c29/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/21ec00ff7212c13bc926c4a730c6a659/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/21ec00ff7212c13bc926c4a730c6a659/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b98615d7e32e0bade8d8c77ff918c7ae/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b98615d7e32e0bade8d8c77ff918c7ae/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/201fb9a555dad9805f717614b086a48b/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/201fb9a555dad9805f717614b086a48b/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/04e02f0307538d2914b02953d8894ecb/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/04e02f0307538d2914b02953d8894ecb/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a6a2856ba0516e80c5df0e08de387ea/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a6a2856ba0516e80c5df0e08de387ea/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/f920e57f77aa09ce54b3b986a9eaf457/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/f920e57f77aa09ce54b3b986a9eaf457/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/c87a70879014ab44d9f6bb5a07424d01/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/c87a70879014ab44d9f6bb5a07424d01/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/b80ae4e70d0a81fd9d9c75536d13d2cc/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/b80ae4e70d0a81fd9d9c75536d13d2cc/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/fe80777734883fa1e6c18c1a2add99f2/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/fe80777734883fa1e6c18c1a2add99f2/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/7d1ea11be4571b735f0459c4cace8429/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/7d1ea11be4571b735f0459c4cace8429/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core-ktx:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/bbaf543b9b97b5d9dbaec0018a11fbd0/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/bbaf543b9b97b5d9dbaec0018a11fbd0/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/maui/.gradle/caches/9.6.0/transforms/128a30afd177a97cc040443e6f0cad75/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/maui/.gradle/caches/9.6.0/transforms/128a30afd177a97cc040443e6f0cad75/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/cf6f223287f855a26169a43156950ee3/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/cf6f223287f855a26169a43156950ee3/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/c94f70ad99f4578eb7de01f1ef85fd9b/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/c94f70ad99f4578eb7de01f1ef85fd9b/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/fbc1db92fcf8a79737c140f967c38f25/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/fbc1db92fcf8a79737c140f967c38f25/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/maui/.gradle/caches/9.6.0/transforms/1897770bdb4e53f2bf9f2d8c52b2e32d/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/maui/.gradle/caches/9.6.0/transforms/1897770bdb4e53f2bf9f2d8c52b2e32d/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.tracing:tracing:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/175cd0acca53143d85725c5f1b365bc5/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.tracing:tracing:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/175cd0acca53143d85725c5f1b365bc5/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b76d5b6c553ef93bfa66bef00c7b289c/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/b76d5b6c553ef93bfa66bef00c7b289c/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/4885738bc94ec0bd383c41bab46f6380/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/4885738bc94ec0bd383c41bab46f6380/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f36258a40494f9e97cef0f77bff73a3c/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f36258a40494f9e97cef0f77bff73a3c/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/1518606ae5a27023ef1fbac267065a49/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/1518606ae5a27023ef1fbac267065a49/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/aa7f1f4a2c540c53abe1caf0adcae937/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/maui/.gradle/caches/9.6.0/transforms/aa7f1f4a2c540c53abe1caf0adcae937/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/3be99558d13b63ed4b28d794132decfd/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/3be99558d13b63ed4b28d794132decfd/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/db8c108943bcd0c0e12aad23be9e11a9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/db8c108943bcd0c0e12aad23be9e11a9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/09d8b7fdd7ab2617307dfb14f9d190a2/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/maui/.gradle/caches/9.6.0/transforms/09d8b7fdd7ab2617307dfb14f9d190a2/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/3b24a66089425a3854ad2a4792a392c7/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/3b24a66089425a3854ad2a4792a392c7/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9b8996e96ec5ae7981692d843e23a48c/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9b8996e96ec5ae7981692d843e23a48c/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/maui/.gradle/caches/9.6.0/transforms/00a17c456a8b10b94e0ccd085652fd41/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/maui/.gradle/caches/9.6.0/transforms/00a17c456a8b10b94e0ccd085652fd41/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/8bc58281ee214c95f604bd55f213070e/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/8bc58281ee214c95f604bd55f213070e/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/b5e4f8cb27362232c5de43912c0cbdcf/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/b5e4f8cb27362232c5de43912c0cbdcf/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/fa55c53c8c221f951527ae273419f121/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/fa55c53c8c221f951527ae273419f121/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/ca55ff98a304bea3051807b33a5c6916/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/ca55ff98a304bea3051807b33a5c6916/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c4c59895281d2878a3f40f045bfddbdd/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c4c59895281d2878a3f40f045bfddbdd/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/5ddae0fc6f52e737acdb80ab8093ab7d/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/5ddae0fc6f52e737acdb80ab8093ab7d/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/909012a8a4801871b5e033e3781fb7d6/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/909012a8a4801871b5e033e3781fb7d6/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/9c37bd1094316099922bbfb7d2beb2a6/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/9c37bd1094316099922bbfb7d2beb2a6/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/f10490928b190b52b27bbe9db81e1108/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/f10490928b190b52b27bbe9db81e1108/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/a1b7a03a84e5d58d477d3e45f9f3f6f5/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/a1b7a03a84e5d58d477d3e45f9f3f6f5/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/f7e5366c72054f91c5fa44bd845d46c8/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/f7e5366c72054f91c5fa44bd845d46c8/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/aacc6787c966233d7e263699e0b7856d/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/aacc6787c966233d7e263699e0b7856d/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c60fac9ed0c866c3e1c9f1e53da6f938/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c60fac9ed0c866c3e1c9f1e53da6f938/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/771e0a3a55c14c4db9e0396244626d5a/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/771e0a3a55c14c4db9e0396244626d5a/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/062008058597f153f6dfb806a43b85d6/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/062008058597f153f6dfb806a43b85d6/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/6442b7610dc9c1c38adfa6178665e2eb/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/6442b7610dc9c1c38adfa6178665e2eb/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/43b8ac2521533662902682cbdf83c812/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /Users/maui/.gradle/caches/9.6.0/transforms/43b8ac2521533662902682cbdf83c812/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /Users/maui/.gradle/caches/9.6.0/transforms/25b753770a72877b036df9b69b44c5ce/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /Users/maui/.gradle/caches/9.6.0/transforms/25b753770a72877b036df9b69b44c5ce/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/43b7f0c245884645b1f9f463ecac0dc7/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/43b7f0c245884645b1f9f463ecac0dc7/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/488822b7f87097d8251367ccb94ca801/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/488822b7f87097d8251367ccb94ca801/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/be61cae5f58879125ec1ba3d75440432/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/be61cae5f58879125ec1ba3d75440432/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/a271b38830cdc01328b19113afa402da/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/a271b38830cdc01328b19113afa402da/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/66a3d76d5564977b6aedb1890a55c16a/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/maui/.gradle/caches/9.6.0/transforms/66a3d76d5564977b6aedb1890a55c16a/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/7ab575c346abd9cae332ee694590d54e/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/7ab575c346abd9cae332ee694590d54e/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3aa25662b41d810b241164f2f910ac59/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3aa25662b41d810b241164f2f910ac59/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/94805b8060dc30b649b2f134da1433be/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/94805b8060dc30b649b2f134da1433be/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/2c866f590f85f52dab2c5943211c2e81/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/2c866f590f85f52dab2c5943211c2e81/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3e25f42208e98797ae9a6ab322793905/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3e25f42208e98797ae9a6ab322793905/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/8ab6075303d490a77d0ddf86ba2f00e2/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/8ab6075303d490a77d0ddf86ba2f00e2/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/1cbd9cff4d14e9060774b279aaf1f4ad/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/1cbd9cff4d14e9060774b279aaf1f4ad/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3d683b3ab95ed3afa2b8509613cb2fe6/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/3d683b3ab95ed3afa2b8509613cb2fe6/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/e48b97ab5512e79a89018037c8f09b50/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/e48b97ab5512e79a89018037c8f09b50/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/5799112cf6909aa4671b854404a82ec5/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/5799112cf6909aa4671b854404a82ec5/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/a7b7bce80dda5b77ff917f4fe83d3eb7/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/a7b7bce80dda5b77ff917f4fe83d3eb7/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/fc0b44d4402756dfd7b81391541bc377/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/fc0b44d4402756dfd7b81391541bc377/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c4f9b68b8461d02c88cca348843ff8a9/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/c4f9b68b8461d02c88cca348843ff8a9/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/0a3ed4d0cf011b783f4ea13baa6459b2/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/0a3ed4d0cf011b783f4ea13baa6459b2/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/f44de8ff8524d21e7a1a58b8ca7014a0/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/f44de8ff8524d21e7a1a58b8ca7014a0/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/74391027e31cef506a693b192fd808a6/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/74391027e31cef506a693b192fd808a6/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/b83567df877de5b068829168d8bb07b0/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/b83567df877de5b068829168d8bb07b0/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/8c35a9da3915341a08621fd4da4cf8cf/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/8c35a9da3915341a08621fd4da4cf8cf/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f917163e1ff8f79e2794f4f0e8433f9c/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f917163e1ff8f79e2794f4f0e8433f9c/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/fd146059dad2a512dfeedcd21c27f3a0/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/fd146059dad2a512dfeedcd21c27f3a0/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/e7f1cdafb68a8508b36d7656c61fa8ec/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/maui/.gradle/caches/9.6.0/transforms/e7f1cdafb68a8508b36d7656c61fa8ec/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f8683e5cdb39741b580d004a175dd91d/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/f8683e5cdb39741b580d004a175dd91d/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/bc8ed4fe171c02a8001c4921c93cc06e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/maui/.gradle/caches/9.6.0/transforms/bc8ed4fe171c02a8001c4921c93cc06e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3220fb414bbff93da5fcbc99c8946da7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3220fb414bbff93da5fcbc99c8946da7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/57d86cebbe212bbdc8e0ed3de4d1c5f3/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/57d86cebbe212bbdc8e0ed3de4d1c5f3/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/3cb249d377300025b9f0390a80026fe9/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/3cb249d377300025b9f0390a80026fe9/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/5530ad1341a04133a3109c673250bb55/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/5530ad1341a04133a3109c673250bb55/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/maui/.gradle/caches/9.6.0/transforms/72823a711ad14201418c84e5c2ccdd79/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/maui/.gradle/caches/9.6.0/transforms/72823a711ad14201418c84e5c2ccdd79/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/29382fcf16eda6ea49310e6fc6770d26/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/29382fcf16eda6ea49310e6fc6770d26/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3de231b824a5f2596b064955d47c7168/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3de231b824a5f2596b064955d47c7168/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9ba0330fd0284b514111d1d0cb667520/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/9ba0330fd0284b514111d1d0cb667520/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/492ba4560dcbbdaff4c7be1e9b24b77b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/492ba4560dcbbdaff4c7be1e9b24b77b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/c07c4c1523c02afc6f8f168426966a2b/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/c07c4c1523c02afc6f8f168426966a2b/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/8878f1a6ffcc0e498dd75d7287156c0f/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/8878f1a6ffcc0e498dd75d7287156c0f/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/36f1f74b2acfb5fba7b8014301475bea/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/36f1f74b2acfb5fba7b8014301475bea/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3aa972d9e3ab2b76c13c9baebd0fc6b6/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/maui/.gradle/caches/9.6.0/transforms/3aa972d9e3ab2b76c13c9baebd0fc6b6/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/maui/.gradle/caches/9.6.0/transforms/cfb40461d8a24a8532decf3f99f0e467/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/maui/.gradle/caches/9.6.0/transforms/cfb40461d8a24a8532decf3f99f0e467/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 	android:targetSdkVersion
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/maui/.gradle/caches/9.6.0/transforms/8e908ef498e70e9a09d60554831ca6eb/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
 provider#androidx.startup.InitializationProvider
-ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/3a1e8729604e32dc7060db655be7a05f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/9.6.0/transforms/07fa022639c50a8e19693e60b588009e/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
 	tools:node
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:28:13-31
 	android:authorities
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:26:13-68
 	android:exported
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-meta-data#androidx.emoji2.text.EmojiCompatInitializer
-ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-	android:value
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
-	android:name
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/00a53e383ab3e95c283a13f04c24af5e/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
-	android:protectionLevel
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
-	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
-permission#net.maui.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
-	android:protectionLevel
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
-	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
-uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
-uses-permission#net.maui.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/b5a065ce52bfdf292777b685fcaec16d/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:25:13-67
 meta-data#androidx.lifecycle.ProcessLifecycleInitializer
-ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/maui/.gradle/caches/9.6.0/transforms/4c3cff05f44cb7c77220ede3c223745d/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/maui/.gradle/caches/9.6.0/transforms/c952b7667cb3a05d8ce70181c93d7f17/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/maui/.gradle/caches/9.6.0/transforms/484e7dfcec3f40ea4b2dfab1441f1e60/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#net.maui.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#net.maui.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 meta-data#androidx.profileinstaller.ProfileInstallerInitializer
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
 receiver#androidx.profileinstaller.ProfileInstallReceiver
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
 	android:enabled
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
 	android:exported
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
 	android:permission
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
 	android:directBootAware
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
 intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
 action#androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
 intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
 action#androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
 intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
 action#androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
 intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
 action#androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/9c907b520911404865c833827a94c87f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/maui/.gradle/caches/9.6.0/transforms/3501afa8a2301af86ba8f528385c9cbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92

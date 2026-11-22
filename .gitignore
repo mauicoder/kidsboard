@@ -14,3 +14,6 @@ build/
 /local.properties
 .DS_Store
 /captures
+
+*.hprof
+.kotlin/

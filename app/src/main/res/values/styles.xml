@@ -1,22 +1,9 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Application theme using MaterialComponents -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/dark_blue</item>
-        <item name="colorAccent">@color/orange</item>
-    </style>
-
-    <!-- Dialog style -->
-    <style name="ColorDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
-        <item name="android:windowAnimationStyle">@style/ColorDialogAnimation</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-
-    <style name="ColorDialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/incoming</item>
-        <item name="android:windowExitAnimation">@anim/outgoing</item>
+    <!-- Application theme using Material3 NoActionBar -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
 </resources>
