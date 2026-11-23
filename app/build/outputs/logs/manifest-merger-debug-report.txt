@@ -120,12 +120,12 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/maui/.gradle/caches/
 		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:7:9-35
 	android:theme
 		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:10:9-40
-activity#net.maui.kidsboard.MainActivity
+activity#dev.mauicoder.kidsboard.MainActivity
 ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:11:9-19:20
 	android:exported
 		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:13:13-36
 	android:name
-		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:12:13-59
+		ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:12:13-64
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/maui/StudioProjects/kidsboard/app/src/main/AndroidManifest.xml:14:13-18:29
 action#android.intent.action.MAIN
@@ -330,7 +330,7 @@ ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transfor
 		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
-permission#net.maui.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#dev.mauicoder.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
@@ -340,7 +340,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
-uses-permission#net.maui.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#dev.mauicoder.kidsboard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.13.1] /Users/maui/.gradle/caches/9.6.0/transforms/208306c4033215148c23f436466cb6f7/transformed/core-1.13.1/AndroidManifest.xml:26:22-94

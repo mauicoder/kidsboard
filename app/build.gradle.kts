@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "net.maui.kidsboard"
+    namespace = "dev.mauicoder.kidsboard"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "net.maui.kidsboard"
+        applicationId = "dev.mauicoder.kidsboard"
         minSdk = 21
         targetSdk = 35
         versionCode = 1
